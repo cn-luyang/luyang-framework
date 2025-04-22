@@ -22,6 +22,8 @@
 
     <modules>
         <module>dependencies</module>
+        <module>luyang-framework-starter-web</module>
+
     </modules>
 
     <dependencyManagement>

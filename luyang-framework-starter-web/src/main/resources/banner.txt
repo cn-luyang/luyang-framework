@@ -1,0 +1,8 @@
+${AnsiColor.BRIGHT_MAGENTA} ,--.                                        ${AnsiColor.BLUE}  ,---.                                                         ,--.
+${AnsiColor.BRIGHT_MAGENTA} |  |,--.,--.,--. ,--.,--,--.,--,--,  ,---.  ${AnsiColor.BLUE} /  .-',--.--. ,--,--.,--,--,--. ,---. ,--.   ,--. ,---. ,--.--.|  |,-.
+${AnsiColor.BRIGHT_MAGENTA} |  ||  ||  | \  '  /' ,-.  ||      \| .-. | ${AnsiColor.BLUE} |  `-,|  .--'' ,-.  ||        || .-. :|  |.'.|  || .-. ||  .--'|     /
+${AnsiColor.BRIGHT_MAGENTA} |  |'  ''  '  \   ' \ '-'  ||  ||  |' '-' ' ${AnsiColor.BLUE} |  .-'|  |   \ '-'  ||  |  |  |\   --.|   .'.   |' '-' '|  |   |  \  \
+${AnsiColor.BRIGHT_MAGENTA} `--' `----' .-'  /   `--`--'`--''--'.`-  /  ${AnsiColor.BLUE} `--'  `--'    `--`--'`--`--`--' `----''--'   '--' `---' `--'   `--'`--'
+${AnsiColor.BRIGHT_MAGENTA}             `---'                   `---'
+
+${AnsiColor.BLUE}:: LUYANG :: ${spring.application.name} :: Running SpringBoot ${spring-boot.version} ::
