@@ -11,7 +11,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>luyang-framework-base-utils</artifactId>
+    <artifactId>luyang-framework-base-util</artifactId>
 
     <dependencies>
         <dependency>
