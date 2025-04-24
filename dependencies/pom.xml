@@ -14,6 +14,10 @@
         <revision>0.0.1-SNAPSH0T</revision>
         <!-- SpringBoot SpringCloud SpringCloudAlibaba 版本 https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.511d1d28E6mG9S -->
         <spring-boot-dependencies.version>3.4.0</spring-boot-dependencies.version>
+
+        <redisson-spring-boot-starter.version>3.45.1</redisson-spring-boot-starter.version>
+
+        <hutool-all.version>5.8.37</hutool-all.version>
     </properties>
 
     <dependencyManagement>
@@ -37,6 +41,18 @@
                         <artifactId>spring-boot-starter-tomcat</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool-all.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
