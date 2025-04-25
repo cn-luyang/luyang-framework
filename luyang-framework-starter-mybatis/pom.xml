@@ -11,13 +11,9 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>luyang-framework-starter-redisson</artifactId>
+    <artifactId>luyang-framework-starter-mybatis</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.luyang</groupId>
-            <artifactId>luyang-framework-starter-base</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>

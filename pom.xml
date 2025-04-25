@@ -23,6 +23,7 @@
     <modules>
         <module>dependencies</module>
         <module>luyang-framework-starter-base</module>
+        <module>luyang-framework-starter-mybatis</module>
         <module>luyang-framework-starter-redisson</module>
         <module>luyang-framework-starter-security</module>
         <module>luyang-framework-starter-web</module>
