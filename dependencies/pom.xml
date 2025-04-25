@@ -54,6 +54,27 @@
                 <artifactId>hutool-core</artifactId>
                 <version>${hutool-all.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.luyang</groupId>
+                <artifactId>luyang-framework-starter-base</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.luyang</groupId>
+                <artifactId>luyang-framework-starter-redisson</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.luyang</groupId>
+                <artifactId>luyang-framework-starter-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.luyang</groupId>
+                <artifactId>luyang-framework-starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
