@@ -13,8 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ResultEnum implements IBaseEnum<String>{
 
-	SUCCESS("0", "操作成功"),
-	FAILURE("500", "服务器内部错误");
+	SUCCESS("0", "Success"),
+	FAILURE("500", "Failure");
 
 	private final String code;
 	private final String message;

@@ -1,6 +1,5 @@
-package com.luyang.framework.starter.base.util;
+package com.luyang.framework.starter.web.util;
 
-import cn.hutool.core.util.ArrayUtil;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContextAware;
@@ -35,7 +34,7 @@ public class SpringUtil implements ApplicationContextInitializer<ConfigurableApp
 	 */
 	public static ListableBeanFactory getBeanFactory() {
 		return Optional.ofNullable(applicationContext)
-			.orElseThrow(() -> new RuntimeException("applicationContext is null"));
+			.orElseThrow(() -> new RuntimeException("ApplicationContext not initialized"));
 	}
 
 	/**
@@ -48,7 +47,7 @@ public class SpringUtil implements ApplicationContextInitializer<ConfigurableApp
 	 */
 	public static <T> T getBean(final Class<T> clazz, final Object... args) {
 		final ListableBeanFactory beanFactory = getBeanFactory();
-		if (ArrayUtil.isEmpty(args)) {
+		if (null == args || args.length == 0) {
 			return beanFactory.getBean(clazz);
 		}
 		return getBeanFactory().getBean(clazz, args);
