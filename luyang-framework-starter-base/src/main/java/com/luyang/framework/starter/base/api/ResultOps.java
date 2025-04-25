@@ -1,6 +1,7 @@
-package com.luyang.framework.base.wrap.api;
+package com.luyang.framework.starter.base.api;
 
-import com.luyang.framework.base.wrap.enums.ResultEnum;
+import cn.hutool.core.util.ObjectUtil;
+import com.luyang.framework.starter.base.enums.ResultEnum;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class ResultOps<T> {
 	 * @author yang.lu
 	 */
 	private boolean codeEquals(String code) {
-		return Objects.equals(this.value.getCode(), code);
+		return ObjectUtil.equals(this.value.getCode(), code);
 	}
 
 	/**

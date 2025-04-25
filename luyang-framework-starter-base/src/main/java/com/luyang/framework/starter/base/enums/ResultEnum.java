@@ -1,4 +1,4 @@
-package com.luyang.framework.base.wrap.enums;
+package com.luyang.framework.starter.base.enums;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public enum ResultEnum implements BaseEnum<String>{
+public enum ResultEnum implements IBaseEnum<String>{
 
 	SUCCESS("0", "操作成功"),
 	FAILURE("500", "服务器内部错误");

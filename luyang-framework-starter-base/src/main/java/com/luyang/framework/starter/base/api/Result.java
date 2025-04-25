@@ -1,7 +1,7 @@
-package com.luyang.framework.base.wrap.api;
+package com.luyang.framework.starter.base.api;
 
-import com.luyang.framework.base.wrap.enums.BaseEnum;
-import com.luyang.framework.base.wrap.enums.ResultEnum;
+import com.luyang.framework.starter.base.enums.IBaseEnum;
+import com.luyang.framework.starter.base.enums.ResultEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,16 +26,16 @@ public class Result<T> implements Serializable {
 	private boolean success;
 	private T data;
 
-	private Result(BaseEnum<String> baseEnum) {
-		this(baseEnum, baseEnum.getMessage(), null);
+	private Result(IBaseEnum<String> IBaseEnum) {
+		this(IBaseEnum, IBaseEnum.getMessage(), null);
 	}
 
-	private Result(BaseEnum<String> baseEnum, String message) {
-		this(baseEnum, message, null);
+	private Result(IBaseEnum<String> IBaseEnum, String message) {
+		this(IBaseEnum, message, null);
 	}
 
-	private Result(BaseEnum<String> baseEnum, String message, T data) {
-		this(baseEnum.getMessage(), message, data);
+	private Result(IBaseEnum<String> IBaseEnum, String message, T data) {
+		this(IBaseEnum.getMessage(), message, data);
 	}
 
 	private Result(String code, String message, T data) {

@@ -1,8 +1,9 @@
-package com.luyang.framework.base.wrap.enums;
+package com.luyang.framework.starter.base.enums;
+
+import cn.hutool.core.util.ObjectUtil;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
  *
  * @author yang.lu
  */
-public interface BaseEnum<T> extends Serializable {
+public interface IBaseEnum<T> extends Serializable {
 
 	T getCode();
 	String getMessage();
@@ -24,14 +25,14 @@ public interface BaseEnum<T> extends Serializable {
 	 * @author yang.lu
 	 */
 	default boolean equals(String code) {
-		return Objects.equals(this.getCode(), code);
+		return ObjectUtil.equals(this.getCode(), code);
 	}
 
 	/**
 	 * 根据Code码匹配对应枚举 <br/>
 	 *
 	 * <pre class="code">
-	 *     ResultEnum SUCCESS_ENUM = IBaseEnum.getByCode(ResultEnum.class, 200);
+	 *     ResultEnum SUCCESS_ENUM = IIBaseEnum.getByCode(ResultEnum.class, 200);
 	 * </pre>
 	 *
 	 * @param tClass 待匹配枚举类
@@ -39,9 +40,9 @@ public interface BaseEnum<T> extends Serializable {
 	 * @return T
 	 * @author yang.lu
 	 */
-	static <T, E extends BaseEnum<T>> E getByCode(Class<E> tClass, T code) {
+	static <T, E extends IBaseEnum<T>> E getByCode(Class<E> tClass, T code) {
 		return Arrays.stream(tClass.getEnumConstants())
-			.filter(v -> Objects.equals(v.getCode(), code))
+			.filter(v -> ObjectUtil.equals(v.getCode(), code))
 			.findFirst()
 			.orElse(null);
 	}
@@ -50,7 +51,7 @@ public interface BaseEnum<T> extends Serializable {
 	 * 根据Code匹配对应枚举 <br/>
 	 *
 	 * <pre class="code">
-	 *     ResultEnum SUCCESS_ENUM = IBaseEnum.getByCode(ResultEnum.class, 999, () -> new IllegalArgumentException(""));
+	 *     ResultEnum SUCCESS_ENUM = IIBaseEnum.getByCode(ResultEnum.class, 999, () -> new IllegalArgumentException(""));
 	 * </pre>
 	 *
 	 * @param tClass        待匹配枚举类
@@ -59,7 +60,7 @@ public interface BaseEnum<T> extends Serializable {
 	 * @return T
 	 * @author yang.lu
 	 */
-	static <T, E extends BaseEnum<T>, X extends Throwable> E getByCode(Class<E> tClass, T code, Supplier<X> errorSupplier) throws X {
+	static <T, E extends IBaseEnum<T>, X extends Throwable> E getByCode(Class<E> tClass, T code, Supplier<X> errorSupplier) throws X {
 		E anyEnum = getByCode(tClass, code);
 		if (null == anyEnum) {
 			throw errorSupplier.get();
@@ -72,7 +73,7 @@ public interface BaseEnum<T> extends Serializable {
 	 * 枚举实例的代码与给定的代码匹配，则执行指定的动作 <br/>
 	 *
 	 * <pre class="code">
-	 *     IBaseEnum.executeIfCodeMatches(ResultEnum.SUCCESS, 0, () -> {
+	 *     IIBaseEnum.executeIfCodeMatches(ResultEnum.SUCCESS, 0, () -> {
 	 * 			业务代码...
 	 *     });
 	 * </pre>
@@ -82,8 +83,8 @@ public interface BaseEnum<T> extends Serializable {
 	 * @param action       业务代码
 	 * @author yang.lu
 	 */
-	static <T, E extends BaseEnum<T>> void executeIfCodeMatches(E enumInstance, T code, Runnable action) {
-		if (Objects.equals(enumInstance.getCode(), code)) {
+	static <T, E extends IBaseEnum<T>> void executeIfCodeMatches(E enumInstance, T code, Runnable action) {
+		if (ObjectUtil.equals(enumInstance.getCode(), code)) {
 			action.run();
 		}
 	}
@@ -92,7 +93,7 @@ public interface BaseEnum<T> extends Serializable {
 	 * 枚举实例的代码与给定的代码不匹配，则执行指定的动作 <br/>
 	 *
 	 * <pre class="code">
-	 *     IBaseEnum.executeIfCodeNotMatches(ResultEnum.SUCCESS, 1, () -> {
+	 *     IIBaseEnum.executeIfCodeNotMatches(ResultEnum.SUCCESS, 1, () -> {
 	 * 			业务代码...
 	 *     });
 	 * </pre>
@@ -102,8 +103,8 @@ public interface BaseEnum<T> extends Serializable {
 	 * @param action       业务代码
 	 * @author yang.lu
 	 */
-	static <T, E extends BaseEnum<T>> void executeIfCodeNotMatches(E enumInstance, T code, Runnable action) {
-		if (!Objects.equals(enumInstance.getCode(), code)) {
+	static <T, E extends IBaseEnum<T>> void executeIfCodeNotMatches(E enumInstance, T code, Runnable action) {
+		if (!ObjectUtil.equals(enumInstance.getCode(), code)) {
 			action.run();
 		}
 	}
@@ -112,7 +113,7 @@ public interface BaseEnum<T> extends Serializable {
 	 * 根据枚举属性值匹配对应的枚举 <br/>
 	 *
 	 * <pre class="code">
-	 *     ResultEnum SUCCESS_ENUM = IBaseEnum.getByProperty(ResultEnum.class, ResultEnum::getDesc, "success");
+	 *     ResultEnum SUCCESS_ENUM = IIBaseEnum.getByProperty(ResultEnum.class, ResultEnum::getDesc, "success");
 	 * </pre>
 	 *
 	 * @param tClass   待匹配枚举类
@@ -121,9 +122,9 @@ public interface BaseEnum<T> extends Serializable {
 	 * @return T
 	 * @author yang.lu
 	 */
-	static <T, E extends BaseEnum<T>, P> E getByProperty(Class<E> tClass, Function<E, P> property, P value) {
+	static <T, E extends IBaseEnum<T>, P> E getByProperty(Class<E> tClass, Function<E, P> property, P value) {
 		return Arrays.stream(tClass.getEnumConstants())
-			.filter(v -> Objects.equals(property.apply(v), value))
+			.filter(v -> ObjectUtil.equals(property.apply(v), value))
 			.findFirst()
 			.orElse(null);
 	}
@@ -132,7 +133,7 @@ public interface BaseEnum<T> extends Serializable {
 	 * 根据枚举属性值匹配对应的枚举 <br/>
 	 *
 	 * <pre class="code">
-	 *     ResultEnum SUCCESS_ENUM = IBaseEnum.getByProperty(ResultEnum.class, ResultEnum::getDesc, "success", () -> new IllegalArgumentException(""));
+	 *     ResultEnum SUCCESS_ENUM = IIBaseEnum.getByProperty(ResultEnum.class, ResultEnum::getDesc, "success", () -> new IllegalArgumentException(""));
 	 * </pre>
 	 *
 	 * @param tClass        待匹配枚举类
@@ -142,7 +143,7 @@ public interface BaseEnum<T> extends Serializable {
 	 * @return T
 	 * @author yang.lu
 	 */
-	static <T, E extends BaseEnum<T>, P, X extends Throwable> E getByProperty(Class<E> tClass, Function<E, P> property, P value, Supplier<X> errorSupplier) throws X {
+	static <T, E extends IBaseEnum<T>, P, X extends Throwable> E getByProperty(Class<E> tClass, Function<E, P> property, P value, Supplier<X> errorSupplier) throws X {
 		E anyProperty = getByProperty(tClass, property, value);
 		if (null == anyProperty) {
 			throw errorSupplier.get();
