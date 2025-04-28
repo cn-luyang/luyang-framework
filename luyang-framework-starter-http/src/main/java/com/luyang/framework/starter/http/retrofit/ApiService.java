@@ -4,9 +4,9 @@ import okhttp3.MultipartBody;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.*;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.*;
 
 /**
  * @author wangjixin
