@@ -22,7 +22,13 @@ public class RedissonHelper {
 		this.redissonClient = redissonClient;
 	}
 
+	// ============================= 公共方法优化 ============================
 
+	private void validateKey(String key) {
+		if (key == null || key.trim().isEmpty()) {
+			throw new IllegalArgumentException("Redis key cannot be null or empty");
+		}
+	}
 	// ============================= String类型操作 ============================
 
 	/**
@@ -87,6 +93,7 @@ public class RedissonHelper {
 	 * @author yang.lu
 	 */
 	public <T> boolean addToHash(String key, Object field, T value, Duration duration) {
+		validateKey(key);
 		RMap<Object, T> hash = this.redissonClient.getMap(key);
 		return hash.fastPut(field, value) && hash.expire(duration);
 	}
@@ -139,6 +146,7 @@ public class RedissonHelper {
 	 */
 	@SafeVarargs
 	public final <T> long removeFromHash(String key, T... hashKeys) {
+		validateKey(key);
 		return this.redissonClient.getMap(key).fastRemove(hashKeys);
 	}
 
@@ -238,6 +246,7 @@ public class RedissonHelper {
 	 * @author yang.lu
 	 */
 	public void removeFromList(String key, int index) {
+		validateKey(key);
 		this.redissonClient.getList(key).fastRemove(index);
 	}
 
@@ -250,6 +259,7 @@ public class RedissonHelper {
 	 * @author yang.lu
 	 */
 	public <T> boolean removeFromList(String key, T value) {
+		validateKey(key);
 		return this.redissonClient.getList(key).removeIf(o -> o.equals(value));
 	}
 
@@ -291,7 +301,8 @@ public class RedissonHelper {
 	 * @return Set<Object> ZSet 中的值
 	 * @author yang.lu
 	 */
-	public <T> Set<Object> getFromZSet(String key, int start, int end) {
+	public <T> Set<T> getFromZSet(String key, int start, int end) {
+		validateKey(key);
 		RScoredSortedSet<T> sortedSet = this.redissonClient.getScoredSortedSet(key);
 		return new HashSet<>(sortedSet.valueRange(start, end));
 	}
@@ -421,5 +432,13 @@ public class RedissonHelper {
 	 */
 	public <T> void subscribe(String topic, Class<T> clazz, Consumer<T> consumer) {
 		this.redissonClient.getTopic(topic).addListener(clazz, (channel, msg) -> consumer.accept(msg));
+	}
+
+	// ============================= 异步方法示例 ============================
+
+	public RFuture<Void> setStringAsync(String key, Object value, Duration duration) {
+		validateKey(key);
+		RBucket<Object> bucket = redissonClient.getBucket(key);
+		return bucket.setAsync(value, duration);
 	}
 }
