@@ -27,6 +27,7 @@
         <module>luyang-framework-starter-redisson</module>
         <module>luyang-framework-starter-security</module>
         <module>luyang-framework-starter-web</module>
+        <module>luyang-framework-starter-http</module>
 
     </modules>
 
