@@ -28,6 +28,7 @@
         <module>luyang-framework-starter-security</module>
         <module>luyang-framework-starter-web</module>
         <module>luyang-framework-starter-http</module>
+        <module>luyang-framework-starter-utils</module>
 
     </modules>
 
