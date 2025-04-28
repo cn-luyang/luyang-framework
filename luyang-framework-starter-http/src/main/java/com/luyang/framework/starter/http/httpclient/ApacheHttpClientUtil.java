@@ -1,4 +1,4 @@
-package com.luyang.framework.starter.http.httpClient;
+package com.luyang.framework.starter.http.httpclient;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;

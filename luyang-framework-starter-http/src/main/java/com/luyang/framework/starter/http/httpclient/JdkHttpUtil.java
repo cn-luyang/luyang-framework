@@ -1,4 +1,4 @@
-package com.luyang.framework.starter.http.httpClient;
+package com.luyang.framework.starter.http.httpclient;
 
 import java.net.URI;
 import java.net.http.HttpClient;
