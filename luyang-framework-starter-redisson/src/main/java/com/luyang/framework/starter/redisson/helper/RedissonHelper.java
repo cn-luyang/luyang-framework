@@ -436,6 +436,15 @@ public class RedissonHelper {
 
 	// ============================= 异步方法示例 ============================
 
+	/**
+	 * 设置字符串类型的值，并设置过期时间
+	 *
+	 * @param key      键
+	 * @param value    值
+	 * @param duration 过期时间
+	 * @return 异步操作结果
+	 * @author wangjixin
+	 */
 	public RFuture<Void> setStringAsync(String key, Object value, Duration duration) {
 		validateKey(key);
 		RBucket<Object> bucket = redissonClient.getBucket(key);
