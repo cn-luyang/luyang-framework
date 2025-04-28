@@ -1,5 +1,6 @@
 package com.luyang.framework.starter.redisson.helper;
 
+import com.luyang.framework.starter.redisson.queue.RedissonQueueInitialize;
 import org.redisson.api.*;
 
 import java.time.Duration;
@@ -7,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /**
@@ -432,6 +434,36 @@ public class RedissonHelper {
 	 */
 	public <T> void subscribe(String topic, Class<T> clazz, Consumer<T> consumer) {
 		this.redissonClient.getTopic(topic).addListener(clazz, (channel, msg) -> consumer.accept(msg));
+	}
+
+	/**
+	 * 添加队列
+	 *
+	 * @param queueName 队列名称
+	 * @param content   消息内容
+	 * @return boolean false添加至队列失败
+	 * @author yang.lu
+	 */
+	public <T> boolean addQueue(String queueName, T content) {
+		queueName = RedissonQueueInitialize.buildQueueName(queueName);
+		RBlockingQueue<T> blockingQueue = this.redissonClient.getBlockingQueue(queueName);
+		return blockingQueue.add(content);
+	}
+
+	/**
+	 * 添加延迟队列
+	 *
+	 * @param queueName 队列名称
+	 * @param content   消息内容
+	 * @param delay     延迟时间
+	 * @param timeUnit  时间单位
+	 * @author yang.lu
+	 */
+	public <T> void addDelayQueue(String queueName, T content, long delay, TimeUnit timeUnit) {
+		queueName = RedissonQueueInitialize.buildQueueName(queueName);
+		RBlockingQueue<T> blockingQueue = this.redissonClient.getBlockingQueue(queueName);
+		RDelayedQueue<T> delayedQueue = this.redissonClient.getDelayedQueue(blockingQueue);
+		delayedQueue.offer(content, delay, timeUnit);
 	}
 
 	// ============================= 异步方法示例 ============================
