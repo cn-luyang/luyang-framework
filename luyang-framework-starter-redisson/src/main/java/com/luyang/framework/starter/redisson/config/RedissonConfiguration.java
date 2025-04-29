@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luyang.framework.starter.redisson.config.properties.RedissonProperties;
 import com.luyang.framework.starter.redisson.helper.RedissonHelper;
 import com.luyang.framework.starter.redisson.support.RedissonNameMapper;
-import lombok.RequiredArgsConstructor;
 import org.redisson.api.RedissonClient;
 import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.spring.starter.RedissonAutoConfigurationCustomizer;
@@ -21,7 +20,6 @@ import java.util.Optional;
  *
  * @author yang.lu
  */
-@RequiredArgsConstructor
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(RedissonProperties.class)
 public class RedissonConfiguration {
@@ -29,6 +27,14 @@ public class RedissonConfiguration {
 	private final ObjectMapper objectMapper;
 	private final RedissonProperties redissonProperties;
 	private final ApplicationContext applicationContext;
+
+	public RedissonConfiguration(ObjectMapper objectMapper,
+								 RedissonProperties redissonProperties,
+								 ApplicationContext applicationContext) {
+		this.objectMapper = objectMapper;
+		this.redissonProperties = redissonProperties;
+		this.applicationContext = applicationContext;
+	}
 
 	@Bean
 	public RedissonHelper redissonHelper(RedissonClient redissonClient) {

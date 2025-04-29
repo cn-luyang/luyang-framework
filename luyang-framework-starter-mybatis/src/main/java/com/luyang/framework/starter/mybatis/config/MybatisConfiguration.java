@@ -1,8 +1,10 @@
 package com.luyang.framework.starter.mybatis.config;
 
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.luyang.framework.starter.mybatis.support.DefaultFieldHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -15,7 +17,6 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration(proxyBeanMethods = false)
 @PropertySource(value = "classpath:mybatis-plus.properties", encoding = "UTF-8")
 public class MybatisConfiguration {
-
 
 	/**
 	 * 插件主体配置
@@ -33,7 +34,6 @@ public class MybatisConfiguration {
 		return interceptor;
 	}
 
-
 	/**
 	 * 分页插件配置
 	 *
@@ -47,5 +47,16 @@ public class MybatisConfiguration {
 		// 分页合理化
 		paginationInnerInterceptor.setOverflow(true);
 		return paginationInnerInterceptor;
+	}
+
+	/**
+	 * 配置自动填充处理器
+	 *
+	 * @return MetaObjectHandler 自动填充处理器
+	 * @author yang.lu
+	 */
+	@Bean
+	public MetaObjectHandler defaultFieldHandler() {
+		return new DefaultFieldHandler();
 	}
 }
