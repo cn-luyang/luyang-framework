@@ -15,6 +15,7 @@
         <!-- SpringBoot SpringCloud SpringCloudAlibaba 版本 https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.511d1d28E6mG9S -->
         <spring-boot-dependencies.version>3.4.0</spring-boot-dependencies.version>
 
+        <mybatis-plus-bom.version>3.5.12</mybatis-plus-bom.version>
         <redisson-spring-boot-starter.version>3.45.1</redisson-spring-boot-starter.version>
 
         <hutool-all.version>5.8.37</hutool-all.version>
@@ -41,6 +42,13 @@
                         <artifactId>spring-boot-starter-tomcat</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-bom</artifactId>
+                <version>${mybatis-plus-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
