@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInt
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Mybatis plus 配置
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @author yang.lu
  */
 @Configuration(proxyBeanMethods = false)
+@PropertySource(value = "classpath:mybatis-plus.properties", encoding = "UTF-8")
 public class MybatisConfiguration {
 
 
@@ -27,7 +29,7 @@ public class MybatisConfiguration {
 		// 分页插件
 		interceptor.addInnerInterceptor(paginationInnerInterceptor());
 		// 乐观锁插件
-		interceptor.addInnerInterceptor(optimisticLockerInnerInterceptor());
+		interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
 		return interceptor;
 	}
 
@@ -45,15 +47,5 @@ public class MybatisConfiguration {
 		// 分页合理化
 		paginationInnerInterceptor.setOverflow(true);
 		return paginationInnerInterceptor;
-	}
-
-	/**
-	 * 乐观锁插件配置
-	 *
-	 * @return OptimisticLockerInnerInterceptor 乐观锁插件
-	 * @author yang.lu
-	 */
-	private OptimisticLockerInnerInterceptor optimisticLockerInnerInterceptor() {
-		return new OptimisticLockerInnerInterceptor();
 	}
 }
