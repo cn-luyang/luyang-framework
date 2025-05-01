@@ -3,15 +3,7 @@ package com.luyang.framework.base.http.okhttp;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.ConnectionPool;
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
+import okhttp3.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
