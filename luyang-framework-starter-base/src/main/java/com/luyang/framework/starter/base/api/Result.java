@@ -64,4 +64,8 @@ public class Result<T> implements Serializable {
 	public static <T> Result<T> failure(String code, String message, T data) {
 		return new Result<>(code, message, data);
 	}
+
+	public static <T> Result<T> failure(IBaseEnum<String> baseEnum, String message) {
+		return new Result<>(baseEnum, message);
+	}
 }
