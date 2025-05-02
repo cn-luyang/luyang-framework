@@ -1,6 +1,5 @@
 package com.luyang.framework.starter.web.desensitize;
 
-
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -21,16 +20,24 @@ import java.lang.annotation.Target;
 public @interface Desensitize {
 
 	/**
-	 * 脱敏规则枚举类
+	 * 脱敏规则
+	 * 如DesensitizeRule不满足，则使用front和end
 	 *
 	 * @author yang.lu
 	 */
-	Class<? extends Enum<? extends DesensitizeRule>> enumClass();
+	DesensitizeRule rule() default DesensitizeRule.CUSTOMIZE;
 
 	/**
-	 * 使用的具体脱敏规则名（枚举值）
+	 * 保留：前面的front位数；从1开始
 	 *
 	 * @author yang.lu
 	 */
-	String enumName();
+	int front() default 0;
+
+	/**
+	 * 保留：后面的end位数；从1开始
+	 *
+	 * @author yang.lu
+	 */
+	int end() default 0;
 }
