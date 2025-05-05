@@ -25,6 +25,7 @@
         <module>luyang-framework-base-http</module>
         <module>luyang-framework-base-utils</module>
         <module>luyang-framework-starter-base</module>
+        <module>luyang-framework-starter-dict</module>
         <module>luyang-framework-starter-mybatis</module>
         <module>luyang-framework-starter-redisson</module>
         <module>luyang-framework-starter-security</module>
