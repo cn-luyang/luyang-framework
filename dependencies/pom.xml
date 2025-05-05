@@ -70,6 +70,11 @@
             </dependency>
             <dependency>
                 <groupId>com.luyang</groupId>
+                <artifactId>luyang-framework-starter-dict</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.luyang</groupId>
                 <artifactId>luyang-framework-starter-mybatis</artifactId>
                 <version>${revision}</version>
             </dependency>
