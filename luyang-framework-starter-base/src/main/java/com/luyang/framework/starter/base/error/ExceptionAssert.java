@@ -9,7 +9,7 @@ import com.luyang.framework.starter.base.enums.IBaseEnum;
  */
 public interface ExceptionAssert<T> extends IBaseEnum<T> {
 
-	default RuntimeException isFalse(boolean condition) {
+	default BusinessException isFalse(boolean condition) {
 		return new BusinessException(this);
 	}
 }
