@@ -11,7 +11,7 @@ import lombok.Setter;
 public class DictEntity {
 
 	private String id;
+	private String dictCode;
 	private String dictName;
-	private String dictType;
 	private String remark;
 }
