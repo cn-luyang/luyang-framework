@@ -1,3 +1,18 @@
 spring:
   application:
     name: luyang-test-demo
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}/test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&&serverTimezone=Asia/Shanghai&useSSL=false # 数据库连接URL，配置主机地址和参数
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    hikari:
+      minimum-idle: 5 # 最小空闲连接数量，保持一定的空闲连接以提高性能
+      idle-timeout: 600000 # 空闲连接存活最大时间（单位：毫秒），默认为10分钟
+      maximum-pool-size: 10 # 连接池允许的最大连接数，默认10
+      auto-commit: true # 默认自动提交事务
+      pool-name: AuthHikariCP # 连接池的名称，用于标识
+      max-lifetime: 1800000 # 连接最大存活时间（单位：毫秒），默认为30分钟
+      connection-timeout: 30000 # 获取连接的超时时间（单位：毫秒），默认30秒
+      connection-test-query: SELECT 1 # 测试连接的SQL语句，用于验证连接可用性

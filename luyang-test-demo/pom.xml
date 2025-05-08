@@ -15,6 +15,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.luyang</groupId>
+            <artifactId>luyang-framework-starter-dict</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.luyang</groupId>
             <artifactId>luyang-framework-starter-web</artifactId>
         </dependency>

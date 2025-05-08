@@ -1,4 +1,4 @@
-package com.luyang.framework.starter.dict.entity;
+package com.luyang.framework.starter.dict.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class DictItemEntity {
+public class DictItem{
 
 	private String id;
 	private String dictCode;
