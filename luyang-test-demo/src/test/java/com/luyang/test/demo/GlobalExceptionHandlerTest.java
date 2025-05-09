@@ -7,11 +7,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,12 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author yang.lu
  */
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-public class GlobalExceptionHandlerTest {
-
-	@Autowired
-	private MockMvc mockMvc;
+public class GlobalExceptionHandlerTest extends BaseMockMvcTest {
 
 	@TestConfiguration
 	static class TestControllerConfig {
@@ -73,8 +64,7 @@ public class GlobalExceptionHandlerTest {
 	@AllArgsConstructor(access = AccessLevel.PRIVATE)
 	enum TestEnum implements ExceptionAssert<String> {
 
-		EMAIL_INVALID("EMAIL_INVALID", "无效邮箱格式")
-		;
+		EMAIL_INVALID("EMAIL_INVALID", "无效邮箱格式");
 		private final String code;
 		private final String message;
 	}
