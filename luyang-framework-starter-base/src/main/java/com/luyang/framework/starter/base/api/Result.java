@@ -65,6 +65,10 @@ public class Result<T> implements Serializable {
 		return new Result<>(code, message, data);
 	}
 
+	public static <T> Result<T> failure(IBaseEnum<String> baseEnum) {
+		return new Result<>(baseEnum);
+	}
+
 	public static <T> Result<T> failure(IBaseEnum<String> baseEnum, String message) {
 		return new Result<>(baseEnum, message);
 	}
