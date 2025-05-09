@@ -19,39 +19,86 @@ public class DictRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	/**
+	 * 查找字典项列表
+	 *
+	 * @param dictCode 字典码
+	 * @return 字典项列表
+	 * @author yang.lu
+	 */
 	public List<DictItem> findItems(String dictCode) {
 		String sql = """
-				SELECT
+				select
 					id,
 					dict_code,
 					item_name,
 					item_value,
 					sort_order,
 					remark
-				FROM
+				from
 					system_dict_item
-				WHERE
+				where
 					dict_code = ?
-				ORDER BY
-					sort_order ASC
+				order by
+					sort_order asc
 			""";
 		return jdbcTemplate.query(sql, new DictItemRowMapper(), dictCode);
 	}
 
-	public void insertItem(DictItem dictItem) {
+	/**
+	 * 添加字典项
+	 *
+	 * @param dictItem 字典项
+	 * @return 操作条数
+	 * @author yang.lu
+	 */
+	public int insertItem(DictItem dictItem) {
 		String sql = """
-				INSERT INTO system_dict_item
+				insert into system_dict_item
 					(dict_code, item_name, item_value, sort_order, remark )
-				VALUES
+				values
 					 (?, ?, ?, ?, ?)
 			""";
-		jdbcTemplate.update(sql, dictItem.getDictCode(),
+		return jdbcTemplate.update(sql, dictItem.getDictCode(),
 			dictItem.getItemName(),
 			dictItem.getItemValue(),
 			dictItem.getSortOrder(),
 			dictItem.getRemark());
 	}
 
+	/**
+	 * 查找字典项是否存在
+	 *
+	 * @param dictCode  字典码
+	 * @param itemValue 字典值
+	 * @return true存在 false不存在
+	 * @author yang.lu
+	 */
+	public boolean existsItem(String dictCode, String itemValue) {
+		String sql = "select count(1) from system_dict_item where dict_code = ? and item_value = ?";
+		Integer count = jdbcTemplate.queryForObject(sql, Integer.class, dictCode, itemValue);
+		return count != null && count > 0;
+	}
+
+	/**
+	 * 删除字典项
+	 *
+	 * @param dictCode  字典码
+	 * @param itemValue 字典值
+	 * @return true删除 false删除失败
+	 * @author yang.lu
+	 */
+	public boolean removeItem(String dictCode, String itemValue) {
+		String sql = "delete from system_dict_item where dict_code = ? and item_value = ?";
+		int count = jdbcTemplate.update(sql, Integer.class, dictCode, itemValue);
+		return count > 0;
+	}
+
+	/**
+	 * 数据类型转换
+	 *
+	 * @author yang.lu
+	 */
 	private static class DictItemRowMapper implements RowMapper<DictItem> {
 		@Override
 		public DictItem mapRow(ResultSet rs, int rowNum) throws SQLException {
