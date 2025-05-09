@@ -65,8 +65,8 @@
 | `luyang-framework-starter-dict`     | 提供字典表的增删改查、缓存等通用功能支持        |
 | `luyang-framework-starter-mybatis`  | 自定义 MyBatis-Plus 配置与通用数据库操作 |
 | `luyang-framework-starter-redisson` | 封装 Redisson 实现分布式锁、限流、缓存等工具能力             |
-| `luyang-framework-base-security`    | 提供安全认证与授权相关的基础能力                       |
-| `luyang-framework-base-web`         | 封装通用 Web 层配置，如拦截器、参数处理、脱敏等                  |
+| `luyang-framework-starter-security`    | 提供安全认证与授权相关的基础能力                       |
+| `luyang-framework-starter-web`         | 封装通用 Web 层配置，如拦截器、参数处理、脱敏等                  |
 
 ---
 
