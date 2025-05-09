@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>🌱 luyang-framework</h1>
+<h1>🌱 LUYANG-FRAMEWORK</h1>
 
 <p><strong>Brave people start first</strong></p>
 
@@ -10,9 +10,9 @@
   <img src="https://img.shields.io/badge/Spring%20Cloud-2024.0.0-yellowgreen" alt="Spring Cloud">
   <img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.3.2-yellow" alt="Spring Cloud Alibaba"><br>
   <img src="https://img.shields.io/badge/Dubbo-3.3.2-orange" alt="Dubbo">
-  <img src="https://img.shields.io/badge/Mybatis%20Plus-3.5.8-lightgrey" alt="Mybatis Plus">
-  <img src="https://img.shields.io/badge/Redisson-3.37.0-blue" alt="Redisson">
-  <img src="https://img.shields.io/badge/Hutool-5.8.32-purple" alt="Hutool">
+  <img src="https://img.shields.io/badge/Mybatis%20Plus-3.5.12-lightgrey" alt="Mybatis Plus">
+  <img src="https://img.shields.io/badge/Redisson-3.45.1-blue" alt="Redisson">
+  <img src="https://img.shields.io/badge/Hutool-5.8.37-purple" alt="Hutool">
   <img src="https://img.shields.io/badge/Mapstruct-1.6.2-pink" alt="Mapstruct">
   <img src="https://img.shields.io/badge/Flyway-10.20.1-cyan" alt="Flyway">
 </p>
@@ -59,14 +59,14 @@
 
 > 项目还在搭建阶段，以下模块持续更新中...
 
-| 模块名称                          | 简要说明                           |
-|-----------------------------------|------------------------------------|
-| `luyang-framework-starter-base`     | 通用基础配置（异常、统一返回体）     |
-| `luyang-framework-starter-web`      | Web 配置（跨域、日志、接口规范）     |
-| `luyang-framework-starter-security` | 安全认证封装（计划支持多种模式）     |
-| `luyang-framework-starter-redisson` | 分布式工具封装（锁、限流等）         |
-| `luyang-framework-base-util`        | 常用工具类                         |
-| `luyang-framework-base-wrap`        | 响应包装、枚举处理等                 |
+| 模块名称                                | 简要说明                        |
+|-------------------------------------|-----------------------------|
+| `luyang-framework-starter-base`     | 通用基础配置（异常、统一返回体）            |
+| `luyang-framework-starter-dict`     | 提供字典表的增删改查、缓存等通用功能支持        |
+| `luyang-framework-starter-mybatis`  | 自定义 MyBatis-Plus 配置与通用数据库操作 |
+| `luyang-framework-starter-redisson` | 封装 Redisson 实现分布式锁、限流、缓存等工具能力             |
+| `luyang-framework-base-security`    | 提供安全认证与授权相关的基础能力                       |
+| `luyang-framework-base-web`         | 封装通用 Web 层配置，如拦截器、参数处理、脱敏等                  |
 
 ---
 
