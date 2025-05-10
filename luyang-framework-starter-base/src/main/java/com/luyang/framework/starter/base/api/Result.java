@@ -1,5 +1,7 @@
 package com.luyang.framework.starter.base.api;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.luyang.framework.starter.base.enums.IBaseEnum;
 import com.luyang.framework.starter.base.enums.ResultEnum;
 import lombok.AccessLevel;
@@ -8,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Optional;
+import java.util.StringJoiner;
 
 /**
  * 响应包装体
@@ -27,7 +31,7 @@ public class Result<T> implements Serializable {
 	private T data;
 
 	private Result(IBaseEnum<String> IBaseEnum) {
-		this(IBaseEnum, IBaseEnum.getMessage(), null);
+		this(IBaseEnum.getCode(), IBaseEnum.getMessage(), null);
 	}
 
 	private Result(IBaseEnum<String> IBaseEnum, String message) {
@@ -35,7 +39,7 @@ public class Result<T> implements Serializable {
 	}
 
 	private Result(IBaseEnum<String> IBaseEnum, String message, T data) {
-		this(IBaseEnum.getMessage(), message, data);
+		this(IBaseEnum.getCode(), message, data);
 	}
 
 	private Result(String code, String message, T data) {
@@ -71,5 +75,26 @@ public class Result<T> implements Serializable {
 
 	public static <T> Result<T> failure(IBaseEnum<String> baseEnum, String message) {
 		return new Result<>(baseEnum, message);
+	}
+
+	@Override
+	public String toString() {
+		final StringJoiner joiner = new StringJoiner(", ", "{", "}");
+
+		Optional.ofNullable(code)
+			.filter(StrUtil::isNotEmpty)
+			.ifPresent(c -> joiner.add("\"code\":" + c));
+
+		Optional.ofNullable(message)
+			.filter(StrUtil::isNotEmpty)
+			.ifPresent(m -> joiner.add("\"message\":\"" + m + "\""));
+
+		joiner.add("\"success\":" + success);
+
+		Optional.ofNullable(data)
+			.filter(ObjectUtil::isNotNull)
+			.ifPresent(d -> joiner.add("\"data\":" + d));
+
+		return joiner.toString();
 	}
 }

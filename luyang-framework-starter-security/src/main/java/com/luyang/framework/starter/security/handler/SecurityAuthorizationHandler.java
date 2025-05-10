@@ -20,7 +20,8 @@ public class SecurityAuthorizationHandler implements AccessDeniedHandler {
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
-		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+//		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		response.setStatus(HttpServletResponse.SC_OK);
 		Result<Void> result = Result.failure(SecurityErrorEnum.FORBIDDEN);
 		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		try (PrintWriter writer = response.getWriter()) {

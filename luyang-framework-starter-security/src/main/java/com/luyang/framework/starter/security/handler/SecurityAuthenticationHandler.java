@@ -20,9 +20,10 @@ public class SecurityAuthenticationHandler implements AuthenticationEntryPoint {
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-		Result<Void> result = Result.failure(SecurityErrorEnum.UNAUTHORIZED);
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		response.setStatus(HttpServletResponse.SC_OK);
 		response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+		Result<Void> result = Result.failure(SecurityErrorEnum.UNAUTHORIZED);
 		try (PrintWriter writer = response.getWriter()) {
 			writer.write(result.toString());
 			writer.flush();

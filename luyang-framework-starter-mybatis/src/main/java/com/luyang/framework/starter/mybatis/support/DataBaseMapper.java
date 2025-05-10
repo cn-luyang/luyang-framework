@@ -135,3 +135,4 @@ public interface DataBaseMapper<T> extends BaseMapper<T> {
 		return lambdaQuery().eq(field, value).list();
 	}
 }
+

@@ -27,6 +27,10 @@
             <artifactId>luyang-framework-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.luyang</groupId>
+            <artifactId>luyang-framework-starter-security</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
