@@ -1,6 +1,7 @@
 package com.luyang.framework.starter.dict.controller;
 
 import com.luyang.framework.starter.base.api.Result;
+import com.luyang.framework.starter.dict.model.Dict;
 import com.luyang.framework.starter.dict.model.DictItem;
 import com.luyang.framework.starter.dict.service.DictService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,12 @@ import java.util.List;
 public class DictController {
 
 	private final DictService dictService;
+
+	@PostMapping
+	public Result<Void> createDict(@RequestBody Dict dict) {
+		dictService.createDict(dict);
+		return Result.success();
+	}
 
 	@PostMapping("/item")
 	public Result<Void> createItem(@RequestBody DictItem dictItem) {

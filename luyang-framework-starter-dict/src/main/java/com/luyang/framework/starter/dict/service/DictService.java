@@ -3,6 +3,7 @@ package com.luyang.framework.starter.dict.service;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.luyang.framework.starter.dict.cache.DictCache;
+import com.luyang.framework.starter.dict.model.Dict;
 import com.luyang.framework.starter.dict.model.DictItem;
 import com.luyang.framework.starter.dict.repository.DictRepository;
 
@@ -19,6 +20,22 @@ public class DictService {
 	public DictService(DictCache dictCache, DictRepository dictRepository) {
 		this.dictCache = dictCache;
 		this.dictRepository = dictRepository;
+	}
+
+	/**
+	 * 添加字典
+	 *
+	 * @param dict 字典数据
+	 * @author yang.lu
+	 */
+	public void createDict(Dict dict) {
+		String dictCode = dict.getDictCode();
+		boolean dbExists = dictRepository.existsDict(dictCode);
+		if (dbExists) {
+			throw new IllegalArgumentException("字典已存在: " + dictCode);
+		}
+
+		dictRepository.insertDict(dict);
 	}
 
 	/**

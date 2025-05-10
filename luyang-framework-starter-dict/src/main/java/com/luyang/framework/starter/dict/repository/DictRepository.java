@@ -1,5 +1,6 @@
 package com.luyang.framework.starter.dict.repository;
 
+import com.luyang.framework.starter.dict.model.Dict;
 import com.luyang.framework.starter.dict.model.DictItem;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,6 +18,24 @@ public class DictRepository {
 
 	public DictRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	public int insertDict(Dict dict) {
+		String sql = """
+				insert into system_dict
+					(dict_code, dict_name, remark )
+				values
+					 (?, ?, ?)
+			""";
+		return jdbcTemplate.update(sql, dict.getDictCode(),
+			dict.getDictName(),
+			dict.getRemark());
+	}
+
+	public boolean existsDict(String dictCode) {
+		String sql = "select count(1) from system_dict where dict_code = ?";
+		Integer count = jdbcTemplate.queryForObject(sql, Integer.class, dictCode);
+		return count != null && count > 0;
 	}
 
 	/**
