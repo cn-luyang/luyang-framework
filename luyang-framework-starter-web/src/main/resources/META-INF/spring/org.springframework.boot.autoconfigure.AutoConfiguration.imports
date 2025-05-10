@@ -2,3 +2,4 @@ com.luyang.framework.starter.web.config.UndertowConfiguration
 com.luyang.framework.starter.web.config.JacksonConfiguration
 com.luyang.framework.starter.web.banner.BannerApplicationStarter
 com.luyang.framework.starter.web.support.GlobalExceptionHandle
+com.luyang.framework.starter.web.util.SpringUtil

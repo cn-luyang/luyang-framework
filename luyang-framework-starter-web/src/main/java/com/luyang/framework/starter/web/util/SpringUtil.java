@@ -1,4 +1,4 @@
-package com.luyang.framework.starter.base.util;
+package com.luyang.framework.starter.web.util;
 
 import cn.hutool.core.util.ArrayUtil;
 import org.springframework.beans.factory.ListableBeanFactory;
