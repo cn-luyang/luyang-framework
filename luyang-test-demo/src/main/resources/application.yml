@@ -16,3 +16,9 @@ spring:
       max-lifetime: 1800000 # 连接最大存活时间（单位：毫秒），默认为30分钟
       connection-timeout: 30000 # 获取连接的超时时间（单位：毫秒），默认30秒
       connection-test-query: SELECT 1 # 测试连接的SQL语句，用于验证连接可用性
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+      timeout: 10s
