@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author yang.lu
  */
 public class DesensitizeTest extends BaseMockMvcTest{
+
+	private static final Logger logger = LoggerFactory.getLogger(DesensitizeTest.class);
 
 	@TestConfiguration
 	static class TestControllerConfig {
@@ -56,7 +60,7 @@ public class DesensitizeTest extends BaseMockMvcTest{
 			.andReturn();
 
 		String responseBody = result.getResponse().getContentAsString();
-		System.out.println(responseBody);
+		logger.info(responseBody);
 	}
 
 	@Test
@@ -66,7 +70,7 @@ public class DesensitizeTest extends BaseMockMvcTest{
 			.andReturn();
 
 		String responseBody = result.getResponse().getContentAsString();
-		System.out.println(responseBody);
+		logger.info(responseBody);
 	}
 
 	@Data

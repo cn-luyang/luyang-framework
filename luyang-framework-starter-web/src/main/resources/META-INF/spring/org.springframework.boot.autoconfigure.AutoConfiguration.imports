@@ -1,3 +1,4 @@
+com.luyang.framework.starter.web.config.WebConfiguration
 com.luyang.framework.starter.web.config.UndertowConfiguration
 com.luyang.framework.starter.web.config.JacksonConfiguration
 com.luyang.framework.starter.web.banner.BannerApplicationStarter
