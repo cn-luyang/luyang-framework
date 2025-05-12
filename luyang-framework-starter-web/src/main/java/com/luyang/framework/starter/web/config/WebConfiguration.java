@@ -1,6 +1,6 @@
 package com.luyang.framework.starter.web.config;
 
-import com.luyang.framework.starter.web.filter.TraceIdFilter;
+import com.luyang.framework.starter.web.support.TraceIdFilter;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
