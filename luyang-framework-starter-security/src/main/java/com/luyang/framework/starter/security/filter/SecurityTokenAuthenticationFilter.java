@@ -1,6 +1,7 @@
 package com.luyang.framework.starter.security.filter;
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.IdUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +38,9 @@ public class SecurityTokenAuthenticationFilter extends OncePerRequestFilter {
 
 		// TODO: 远程调用认证服务、验证token是否有效返回用户信息
 		Map<String, String> map = MapUtil.newHashMap();
-		map.put("id", "123");
+		map.put("appId", "ee647812e5404687abe21cdc55cbe8e5");
+		map.put("appName", "Test");
+		map.put("userId", "472dba35eefa42b7bfd734a4f6623142");
 		map.put("name", "luyang");
 
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

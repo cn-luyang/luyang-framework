@@ -7,7 +7,7 @@
     <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
     <springProperty scope="context" name="APPLICATION_NAME" source="spring.application.name" defaultValue=""/>
-    <springProperty scope="context" name="LOG_PATH" source="logging.path" defaultValue="/var/log/" />
+    <springProperty scope="context" name="LOG_PATH" source="logging.path" defaultValue="/data/logs" />
     <springProperty scope="context" name="FILE_MAX_HISTORY" source="logging.max-history" defaultValue="10" />
     <springProperty scope="context" name="MAX_FILE_SIZE" source="logging.max-file-size" defaultValue="200MB" />
 
