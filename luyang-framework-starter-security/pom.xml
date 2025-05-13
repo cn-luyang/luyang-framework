@@ -19,6 +19,10 @@
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.luyang</groupId>
             <artifactId>luyang-framework-starter-base</artifactId>
         </dependency>

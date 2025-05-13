@@ -44,3 +44,5 @@ target/
 
 # Custom
 *.flattened-pom.xml
+
+/logs
