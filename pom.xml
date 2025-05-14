@@ -59,7 +59,7 @@
     <properties>
         <skipTests>true</skipTests>
         <java.version>21</java.version>
-        <revision>0.0.1-SNAPSH0T</revision>
+        <revision>0.0.2-SNAPSH0T</revision>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -171,6 +171,41 @@
                     <!-- 自动发布，无需手动关闭 staging -->
                     <autoPublish>true</autoPublish>
                 </configuration>
+            </plugin>
+
+            <!-- 扁平化 Maven 配置 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.7.0</version>
+                <configuration>
+                    <!-- 扁平化模式设为 OSS -->
+                    <flattenMode>oss</flattenMode>
+                    <!-- 更新 POM 文件 -->
+                    <updatePomFile>true</updatePomFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- 扁平化执行标识 -->
+                        <id>flatten</id>
+                        <!-- 在处理资源阶段执行 -->
+                        <phase>process-resources</phase>
+                        <goals>
+                            <!-- 执行扁平化操作 -->
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <!-- 清理扁平化执行标识 -->
+                        <id>flatten.clean</id>
+                        <!-- 在清理阶段执行 -->
+                        <phase>clean</phase>
+                        <goals>
+                            <!-- 执行清理操作 -->
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
