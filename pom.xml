@@ -2,13 +2,58 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <!-- 基础项目信息 -->
     <groupId>io.github.cn-luyang</groupId>
     <artifactId>luyang-framework</artifactId>
     <version>${revision}</version>
+
     <packaging>pom</packaging>
+
+    <!-- 项目描述 -->
+    <description>luyang framework bom</description>
+
+    <!-- 项目主页 -->
+    <url>https://github.com/cn-luyang/luyang-framework</url>
+
+    <!-- 开源协议信息 -->
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- Git 仓库信息 -->
+    <scm>
+        <url>https://github.com/cn-luyang/luyang-framework</url>
+        <connection>scm:git:https://github.com/cn-luyang/luyang-framework.git</connection>
+        <developerConnection>scm:git:https://github.com/cn-luyang/luyang-framework.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <name>luyang</name>
+            <email>cn_luyang@163.com</email>
+        </developer>
+    </developers>
+
+    <!-- 发布配置：快照与正式版本分别上传至 OSSRH -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <!-- 项目属性 -->
     <properties>
@@ -47,19 +92,9 @@
         </dependencies>
     </dependencyManagement>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <plugins>
+            <!-- 打包源码插件：生成 source.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -68,12 +103,14 @@
                     <execution>
                         <id>attach-sources</id>
                         <goals>
+                            <!-- 目标任务：生成 source.jar -->
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
 
+            <!-- 打包文档插件：生成 javadoc.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -82,21 +119,28 @@
                     <execution>
                         <id>attach-javadocs</id>
                         <goals>
+                            <!-- 目标任务：生成 javadoc.jar -->
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
+                    <!-- Java 文件读取编码 -->
                     <charset>UTF-8</charset>
+                    <!-- Java 源文件的编码方式 -->
                     <encoding>UTF-8</encoding>
+                    <!-- Javadoc 输出文档编码 -->
                     <docencoding>UTF-8</docencoding>
+                    <!-- 是否在遇到错误时终止构建，false 表示忽略错误 -->
                     <failOnError>false</failOnError>
                     <additionalOptions>
+                        <!-- 禁用 Javadoc 严格校验，避免 Java 8+ 下报错 -->
                         <additionalOption>-Xdoclint:none</additionalOption>
                     </additionalOptions>
                 </configuration>
             </plugin>
 
+            <!-- GPG 签名插件：对构件进行签名，发布中央仓库所需 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -104,21 +148,27 @@
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
+                        <!-- 绑定到 verify 阶段执行签名 -->
                         <phase>verify</phase>
                         <goals>
+                            <!-- 执行签名目标 -->
                             <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
 
+            <!-- Sonatype 中央仓库发布插件：简化发布流程 -->
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
                 <version>0.7.0</version>
+                <!-- 标记为构建扩展，自动激活 -->
                 <extensions>true</extensions>
                 <configuration>
+                    <!-- 发布服务器 ID，需与 Maven settings.xml 配置文件中的 ID 对应 -->
                     <publishingServerId>central</publishingServerId>
+                    <!-- 自动发布，无需手动关闭 staging -->
                     <autoPublish>true</autoPublish>
                 </configuration>
             </plugin>
