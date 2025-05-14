@@ -1,8 +1,8 @@
 package io.github.luyang.test.demo;
 
 import cn.hutool.core.lang.Validator;
-import io.github.luyang.framework.starter.base.api.Result;
-import io.github.luyang.framework.starter.base.error.ExceptionAssert;
+import io.github.luyang.starter.base.api.Result;
+import io.github.luyang.starter.base.error.ExceptionAssert;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

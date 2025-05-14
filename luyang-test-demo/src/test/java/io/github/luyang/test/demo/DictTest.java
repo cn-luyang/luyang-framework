@@ -1,7 +1,7 @@
 package io.github.luyang.test.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.luyang.framework.starter.dict.model.DictItem;
+import io.github.luyang.starter.dict.model.DictItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;

@@ -1,8 +1,8 @@
 package io.github.luyang.test.demo;
 
-import io.github.luyang.framework.starter.base.api.Result;
-import io.github.luyang.framework.starter.web.desensitize.Desensitize;
-import io.github.luyang.framework.starter.web.desensitize.DesensitizeRule;
+import io.github.luyang.starter.base.api.Result;
+import io.github.luyang.starter.web.desensitize.Desensitize;
+import io.github.luyang.starter.web.desensitize.DesensitizeRule;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
