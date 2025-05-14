@@ -173,18 +173,19 @@
                 </configuration>
             </plugin>
 
-            <!-- 扁平化 Maven 配置 -->
+            <!-- 用于构建发布时生成“扁平化”的 POM 文件（去除继承信息、profile 等） -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
                 <version>1.7.0</version>
                 <configuration>
-                    <!-- 扁平化模式设为 OSS -->
+                    <!-- 设置扁平化模式为 'oss'（开源发布模式），仅保留必要字段如 groupId、artifactId、version 等 -->
                     <flattenMode>oss</flattenMode>
-                    <!-- 更新 POM 文件 -->
+                    <!-- 是否更新项目中的 pom.xml 文件（将扁平化结果写回到 pom 文件） -->
                     <updatePomFile>true</updatePomFile>
                 </configuration>
                 <executions>
+                    <!-- 在 process-resources 阶段执行 flatten 操作，生成扁平化后的 POM 文件，便于发布到 Maven 仓库 -->
                     <execution>
                         <!-- 扁平化执行标识 -->
                         <id>flatten</id>
@@ -195,6 +196,7 @@
                             <goal>flatten</goal>
                         </goals>
                     </execution>
+                    <!-- 在 clean 阶段执行 clean 操作，清除 flatten 生成的临时文件（如原始 pom 的备份） -->
                     <execution>
                         <!-- 清理扁平化执行标识 -->
                         <id>flatten.clean</id>
