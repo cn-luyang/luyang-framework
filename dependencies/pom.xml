@@ -4,11 +4,34 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 基础项目信息 -->
-    <groupId>com.luyang</groupId>
+    <groupId>io.github.cn-luyang</groupId>
     <artifactId>dependencies</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
+    <description>framework bom</description>
+
+    <url>https://github.com/cn-luyang/luyang-framework</url>
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/cn-luyang/luyang-framework</url>
+        <connection>scm:git:https://github.com/cn-luyang/luyang-framework.git</connection>
+        <developerConnection>scm:git:https://github.com/cn-luyang/luyang-framework.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>luyang</name>
+            <email>cn_luyang@163.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <revision>0.0.1-SNAPSH0T</revision>
@@ -70,35 +93,113 @@
             </dependency>
 
             <dependency>
-                <groupId>com.luyang</groupId>
+                <groupId>io.github.cn-luyang</groupId>
                 <artifactId>luyang-framework-starter-base</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.luyang</groupId>
+                <groupId>io.github.cn-luyang</groupId>
                 <artifactId>luyang-framework-starter-dict</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.luyang</groupId>
+                <groupId>io.github.cn-luyang</groupId>
                 <artifactId>luyang-framework-starter-mybatis</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.luyang</groupId>
+                <groupId>io.github.cn-luyang</groupId>
                 <artifactId>luyang-framework-starter-redisson</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.luyang</groupId>
+                <groupId>io.github.cn-luyang</groupId>
                 <artifactId>luyang-framework-starter-security</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>com.luyang</groupId>
+                <groupId>io.github.cn-luyang</groupId>
                 <artifactId>luyang-framework-starter-web</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                    <failOnError>false</failOnError>
+                    <additionalOptions>
+                        <additionalOption>-Xdoclint:none</additionalOption>
+                    </additionalOptions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.7</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

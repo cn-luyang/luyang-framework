@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.luyang</groupId>
+        <groupId>io.github.cn-luyang</groupId>
         <artifactId>luyang-framework</artifactId>
         <version>${revision}</version>
     </parent>
@@ -15,7 +15,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.luyang</groupId>
+            <groupId>io.github.cn-luyang</groupId>
             <artifactId>luyang-framework-starter-base</artifactId>
         </dependency>
         <dependency>
