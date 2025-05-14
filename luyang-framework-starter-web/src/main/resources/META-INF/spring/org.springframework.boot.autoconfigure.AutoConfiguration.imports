@@ -1,6 +1,6 @@
-com.luyang.framework.starter.web.config.WebConfiguration
-com.luyang.framework.starter.web.config.UndertowConfiguration
-com.luyang.framework.starter.web.config.JacksonConfiguration
-com.luyang.framework.starter.web.banner.BannerApplicationStarter
-com.luyang.framework.starter.web.support.GlobalExceptionHandle
-com.luyang.framework.starter.web.util.SpringUtil
+io.github.luyang.framework.starter.web.config.WebConfiguration
+io.github.luyang.framework.starter.web.config.UndertowConfiguration
+io.github.luyang.framework.starter.web.config.JacksonConfiguration
+io.github.luyang.framework.starter.web.banner.BannerApplicationStarter
+io.github.luyang.framework.starter.web.support.GlobalExceptionHandle
+io.github.luyang.framework.starter.web.util.SpringUtil
