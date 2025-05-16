@@ -1,12 +1,12 @@
 package io.github.luyang.starter.web.util;
 
 import cn.hutool.core.util.ArrayUtil;
+import lombok.Getter;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.util.Optional;
 
@@ -16,17 +16,18 @@ import java.util.Optional;
  * @author yang.lu
  */
 @SuppressWarnings("NullableProblems")
-public class SpringUtil implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class SpringUtil implements ApplicationContextAware {
 
     /**
      * Spring应用上下文环境
      */
-    private static ConfigurableApplicationContext applicationContext;
+	@Getter
+	private static ApplicationContext applicationContext;
 
-    @Override
-    public void initialize(final ConfigurableApplicationContext applicationContext) {
-        SpringUtil.applicationContext = applicationContext;
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		SpringUtil.applicationContext = applicationContext;
+	}
 
     /**
      * 获取{@link ListableBeanFactory}，可能为{@link ConfigurableListableBeanFactory} 或 {@link ApplicationContextAware}
@@ -73,17 +74,6 @@ public class SpringUtil implements ApplicationContextInitializer<ConfigurableApp
      * @author yang.lu
      */
     public static String getProperty(final String key) {
-        final ConfigurableEnvironment environment = getEnvironment();
-        return null == environment ? null : environment.getProperty(key);
-    }
-
-    /**
-     * 获取环境属性
-     *
-     * @return {@link ConfigurableEnvironment}
-     * @author yang.lu
-     */
-    public static ConfigurableEnvironment getEnvironment() {
-        return null == applicationContext ? null : applicationContext.getEnvironment();
+		return applicationContext.getEnvironment().getProperty(key);
     }
 }
