@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
  */
 public class DefaultFieldHandler implements MetaObjectHandler {
 
-	private static final String FIELD_created_time = "createTime";
-	private static final String FIELD_updated_time = "updateTime";
-	private static final String FIELD_DELETED = "deleted";
-	private static final String FIELD_DELETED_TIME = "deleteTime";
+	private static final String FIELD_CREATED_BY = "createdBy";
+	private static final String FIELD_CREATED_TIME = "createdTime";
+	private static final String FIELD_UPDATED_BY = "updatedBy";
+	private static final String FIELD_UPDATED_TIME = "updatedTime";
 
 	@Override
 	public void insertFill(MetaObject metaObject) {
@@ -25,21 +25,26 @@ public class DefaultFieldHandler implements MetaObjectHandler {
 		}
 
 		LocalDateTime now = LocalDateTime.now();
-		this.strictInsertFill(metaObject, FIELD_created_time, LocalDateTime.class, now);
-		this.strictInsertFill(metaObject, FIELD_updated_time, LocalDateTime.class, now);
+		this.strictInsertFill(metaObject, FIELD_CREATED_TIME, LocalDateTime.class, now);
+		this.strictInsertFill(metaObject, FIELD_UPDATED_TIME, LocalDateTime.class, now);
+
+		fillUserId(metaObject);
 	}
 
 	@Override
 	public void updateFill(MetaObject metaObject) {
-		var updateTime = getFieldValByName(FIELD_updated_time, metaObject);
+		var updateTime = getFieldValByName(FIELD_UPDATED_TIME, metaObject);
 		if (null == updateTime) {
-			this.strictUpdateFill(metaObject, FIELD_updated_time, LocalDateTime.class, LocalDateTime.now());
+			this.strictUpdateFill(metaObject, FIELD_UPDATED_TIME, LocalDateTime.class, LocalDateTime.now());
 		}
 
-		Boolean isDeleted = (Boolean) this.getFieldValByName(FIELD_DELETED, metaObject);
-		if (isDeleted) {
-			this.strictInsertFill(metaObject, FIELD_DELETED_TIME, LocalDateTime.class, LocalDateTime.now());
-		}
+		fillUserId(metaObject);
+	}
+
+	private void fillUserId(MetaObject metaObject) {
+		String userId = "";
+		this.strictInsertFill(metaObject, FIELD_CREATED_BY, String.class, userId);
+		this.strictInsertFill(metaObject, FIELD_UPDATED_BY, String.class, userId);
 	}
 }
 
