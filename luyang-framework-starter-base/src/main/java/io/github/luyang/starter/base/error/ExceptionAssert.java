@@ -9,9 +9,13 @@ import io.github.luyang.starter.base.enums.IBaseEnum;
  */
 public interface ExceptionAssert<T> extends IBaseEnum<T> {
 
+	default void exception() {
+		throw new BusinessException(this);
+	}
+
 	default void isFalse(boolean expression) {
 		if (expression) {
-			throw  new BusinessException(this);
+			exception();
 		}
 	}
 }
