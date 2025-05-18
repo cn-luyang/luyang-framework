@@ -18,7 +18,6 @@ public class BusinessException extends RuntimeException {
 	private String code;
 	private Object data;
 	private Object[] args;
-	private boolean printStackTrace;
 
 	private static String getDefaultCode(String code) {
 		return StrUtil.blankToDefault(code, ResultEnum.FAILURE.getMessage());
@@ -87,9 +86,5 @@ public class BusinessException extends RuntimeException {
 	public BusinessException args(Object... args) {
 		this.args = args;
 		return this;
-	}
-
-	public void printStackTrace() {
-		this.printStackTrace = true;
 	}
 }

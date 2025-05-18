@@ -1,5 +1,7 @@
 package io.github.luyang.starter.web.support;
 
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.base.api.Result;
 import io.github.luyang.starter.base.enums.ResultEnum;
 import io.github.luyang.starter.base.error.BusinessException;
@@ -131,7 +133,9 @@ public class GlobalExceptionHandle {
 	@ExceptionHandler(BusinessException.class)
 	public Result<?> handleError(BusinessException e, HttpServletRequest request) {
 		logger.error("Business exceptions, uri:{}", request.getRequestURI(), e);
-		return Result.failure(e.getCode(), e.getMessage(), e.getData());
+		Object[] args = e.getArgs();
+		String message = ArrayUtil.isNotEmpty(args) ? StrUtil.format(e.getMessage(), args) : e.getMessage();
+		return Result.failure(e.getCode(), message, e.getData());
 	}
 
 	/**
