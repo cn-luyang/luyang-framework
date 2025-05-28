@@ -15,6 +15,7 @@ public class DefaultFieldHandler implements MetaObjectHandler {
 
 	private static final String FIELD_CREATED_BY = "createdBy";
 	private static final String FIELD_CREATED_TIME = "createdTime";
+
 	private static final String FIELD_UPDATED_BY = "updatedBy";
 	private static final String FIELD_UPDATED_TIME = "updatedTime";
 
@@ -26,9 +27,6 @@ public class DefaultFieldHandler implements MetaObjectHandler {
 
 		LocalDateTime now = LocalDateTime.now();
 		this.strictInsertFill(metaObject, FIELD_CREATED_TIME, LocalDateTime.class, now);
-		this.strictInsertFill(metaObject, FIELD_UPDATED_TIME, LocalDateTime.class, now);
-
-		fillUserId(metaObject);
 	}
 
 	@Override
@@ -37,14 +35,6 @@ public class DefaultFieldHandler implements MetaObjectHandler {
 		if (null == updateTime) {
 			this.strictUpdateFill(metaObject, FIELD_UPDATED_TIME, LocalDateTime.class, LocalDateTime.now());
 		}
-
-		fillUserId(metaObject);
-	}
-
-	private void fillUserId(MetaObject metaObject) {
-		String userId = "";
-		this.strictInsertFill(metaObject, FIELD_CREATED_BY, String.class, userId);
-		this.strictInsertFill(metaObject, FIELD_UPDATED_BY, String.class, userId);
 	}
 }
 
