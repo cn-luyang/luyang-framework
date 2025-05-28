@@ -30,9 +30,13 @@
 ---
 
 ## 📦 仓库地址
-
+**luyang-framework**
 - GitHub：🌍 [https://github.com/cn-luyang/luyang-framework](https://github.com/cn-luyang/luyang-framework)
 - Gitee：🌏 [https://gitee.com/cn-luyang/luyang-framework](https://gitee.com/cn-luyang/luyang-framework)
+
+**luyang-cloud**
+- GitHub：🌍 [https://github.com/cn-luyang/luyang-cloud](https://github.com/cn-luyang/luyang-cloud)
+- Gitee：🌏 [https://gitee.com/cn-luyang/luyang-cloud](https://gitee.com/cn-luyang/luyang-cloud)
 
 ---
 
