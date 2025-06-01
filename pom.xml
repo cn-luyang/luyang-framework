@@ -59,7 +59,7 @@
     <properties>
         <skipTests>true</skipTests>
         <java.version>21</java.version>
-        <revision>0.0.8-SNAPSH0T</revision>
+        <revision>0.0.9-SNAPSH0T</revision>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -68,15 +68,15 @@
 
     <modules>
         <module>dependencies</module>
-        <module>luyang-framework-base-http</module>
-        <module>luyang-framework-base-utils</module>
+<!--        <module>luyang-framework-base-http</module>-->
+<!--        <module>luyang-framework-base-utils</module>-->
         <module>luyang-framework-starter-base</module>
         <module>luyang-framework-starter-dict</module>
         <module>luyang-framework-starter-mybatis</module>
         <module>luyang-framework-starter-redisson</module>
         <module>luyang-framework-starter-security</module>
         <module>luyang-framework-starter-web</module>
-        <module>luyang-test-demo</module>
+<!--        <module>luyang-test-demo</module>-->
     </modules>
 
     <dependencyManagement>
