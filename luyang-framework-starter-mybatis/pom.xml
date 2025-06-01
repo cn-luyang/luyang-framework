@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>luyang-framework-starter-mybatis</artifactId>
+    <name>Luyang Framework Starter MyBatis-Plus</name>
 
     <dependencies>
         <dependency>

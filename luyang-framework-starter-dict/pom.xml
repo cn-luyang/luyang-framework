@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>luyang-framework-starter-dict</artifactId>
+    <name>Luyang Framework Starter Dictionary</name>
 
     <dependencies>
         <dependency>

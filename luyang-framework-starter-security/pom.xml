@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>luyang-framework-starter-security</artifactId>
+    <name>Luyang Framework Starter Security</name>
 
     <dependencies>
         <dependency>

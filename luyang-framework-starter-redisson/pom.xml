@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>luyang-framework-starter-redisson</artifactId>
+    <name>Luyang Framework Starter Redisson</name>
 
     <dependencies>
         <dependency>

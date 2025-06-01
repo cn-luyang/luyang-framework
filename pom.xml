@@ -9,6 +9,7 @@
     <groupId>io.github.cn-luyang</groupId>
     <artifactId>luyang-framework</artifactId>
     <version>${revision}</version>
+    <name>Luyang Parent Framework</name>
 
     <packaging>pom</packaging>
 
