@@ -54,20 +54,23 @@
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
     <properties>
         <revision>0.0.9-SNAPSH0T</revision>
         <!-- SpringBoot SpringCloud SpringCloudAlibaba 版本 https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.511d1d28E6mG9S -->
         <spring-boot-dependencies.version>3.5.0</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2025.0.0</spring-cloud-dependencies.version>
+        <!-- Nacos官网 https://nacos.io/?spm=5238cd80.5e8a737d.0.0.3e5d7e84StoDVK -->
         <spring-cloud-alibaba-dependencies.version>2023.0.3.3</spring-cloud-alibaba-dependencies.version>
 
+        <!-- Dubbo官网 https://cn.dubbo.apache.org/zh-cn/ -->
         <dubbo-bom.version>3.3.4</dubbo-bom.version>
+        <!-- MyBatis-Plus官网 https://www.baomidou.com/ -->
         <mybatis-plus-bom.version>3.5.12</mybatis-plus-bom.version>
 
         <redisson-spring-boot-starter.version>3.45.1</redisson-spring-boot-starter.version>
 
         <mapstruct.version>1.6.3</mapstruct.version>
+        <!-- Hutool官网 https://hutool.cn/ -->
         <hutool-all.version>5.8.37</hutool-all.version>
         <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
