@@ -39,10 +39,10 @@ public class SecurityTokenAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 		throws ServletException, IOException {
 
-		// 尝试从请求中获取 Token
-		String authToken = StrUtil.blankToDefault(SecurityUtil.getTokenValue(request), "123");
+		// 尝试从请求中获取 Access_Token
+		String accessToken = StrUtil.blankToDefault(SecurityUtil.getAccessTokenValue(request), "123");
 		// 如果 Token 为空，则直接将请求传递给下一个过滤器，由后续的认证机制处理
-		if (StrUtil.isBlank(authToken)) {
+		if (StrUtil.isBlank(accessToken)) {
 			chain.doFilter(request, response);
 			return;
 		}

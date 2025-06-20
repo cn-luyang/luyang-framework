@@ -18,11 +18,11 @@ public class SecurityUtil {
 	 * @return 令牌
 	 * @author yang.lu
 	 */
-	public static String getTokenValue(HttpServletRequest request) {
+	public static String getAccessTokenValue(HttpServletRequest request) {
 
 		String token = StrUtil.blankToDefault(
-			request.getHeader(SecurityConstant.LY_AUTH_TOKEN),
-			request.getParameter(SecurityConstant.LY_AUTH_TOKEN)
+			request.getHeader(SecurityConstant.LY_ACCESS_TOKEN),
+			request.getParameter(SecurityConstant.LY_ACCESS_TOKEN)
 		);
 
 		if (StrUtil.isBlank(token)) {
