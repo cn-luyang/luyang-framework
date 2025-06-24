@@ -48,7 +48,8 @@ public class SecurityResourceConfiguration {
 
 	private final SecurityProperties securityProperties;
 	private final RequestMappingHandlerMapping requestMappingHandlerMapping;
-	@DubboReference(check = false)
+
+	@DubboReference(check = false, providedBy = "platform-auth")
 	private TokenValidationRpc tokenValidationRpc;
 
 	public SecurityResourceConfiguration(SecurityProperties securityProperties, RequestMappingHandlerMapping requestMappingHandlerMapping) {
