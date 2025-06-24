@@ -49,7 +49,7 @@ public class SecurityResourceConfiguration {
 	private final SecurityProperties securityProperties;
 	private final RequestMappingHandlerMapping requestMappingHandlerMapping;
 
-	@DubboReference(check = false, providedBy = "platform-auth")
+	@DubboReference(check = false, group = "platform-auth")
 	private TokenValidationRpc tokenValidationRpc;
 
 	public SecurityResourceConfiguration(SecurityProperties securityProperties, RequestMappingHandlerMapping requestMappingHandlerMapping) {
@@ -68,12 +68,12 @@ public class SecurityResourceConfiguration {
 	}
 
 	/**
-     * 配置用户详情服务
+	 * 配置用户详情服务
 	 * 阻止 Spring Security 尝试查找默认用户，从而避免项目启动时打印生成默认密码的警告
-     *
-     * @return 用户详情服务
-     * @author yang.lu
-     */
+	 *
+	 * @return 用户详情服务
+	 * @author yang.lu
+	 */
 	public @Bean UserDetailsService userDetailsService() {
 		return username -> {
 			throw new UsernameNotFoundException("UserDetailsService not implemented");
