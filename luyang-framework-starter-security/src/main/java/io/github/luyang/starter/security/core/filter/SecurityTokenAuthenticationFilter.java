@@ -27,8 +27,11 @@ import java.util.Collections;
  */
 public class SecurityTokenAuthenticationFilter extends OncePerRequestFilter {
 
-	@DubboReference(check = false)
-	private TokenValidationRpc tokenValidationRpc;
+	private final TokenValidationRpc tokenValidationRpc;
+
+	public SecurityTokenAuthenticationFilter(TokenValidationRpc tokenValidationRpc) {
+		this.tokenValidationRpc = tokenValidationRpc;
+	}
 
 	/**
 	 * 对每个请求进行拦截和处理
@@ -43,7 +46,7 @@ public class SecurityTokenAuthenticationFilter extends OncePerRequestFilter {
 		throws ServletException, IOException {
 
 		// 尝试从请求中获取 Access_Token
-		String accessToken = StrUtil.blankToDefault(SecurityUtil.getAccessTokenValue(request), "123");
+		String accessToken = SecurityUtil.getAccessTokenValue(request);
 		// 如果 Token 为空，则直接将请求传递给下一个过滤器，由后续的认证机制处理
 		if (StrUtil.isBlank(accessToken)) {
 			chain.doFilter(request, response);

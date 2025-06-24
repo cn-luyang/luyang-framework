@@ -7,6 +7,8 @@ import io.github.luyang.starter.security.config.properties.SecurityProperties;
 import io.github.luyang.starter.security.core.filter.SecurityTokenAuthenticationFilter;
 import io.github.luyang.starter.security.core.handler.SecurityAuthenticationHandler;
 import io.github.luyang.starter.security.core.handler.SecurityAuthorizationHandler;
+import io.github.luyang.starter.security.rpc.TokenValidationRpc;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +48,8 @@ public class SecurityResourceConfiguration {
 
 	private final SecurityProperties securityProperties;
 	private final RequestMappingHandlerMapping requestMappingHandlerMapping;
+	@DubboReference(check = false)
+	private TokenValidationRpc tokenValidationRpc;
 
 	public SecurityResourceConfiguration(SecurityProperties securityProperties, RequestMappingHandlerMapping requestMappingHandlerMapping) {
 		this.securityProperties = securityProperties;
@@ -124,7 +128,7 @@ public class SecurityResourceConfiguration {
 			);
 
 		// 在 UsernamePasswordAuthenticationFilter 前添加自定义的 SecurityTokenAuthenticationFilter
-		httpSecurity.addFilterBefore(new SecurityTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterBefore(new SecurityTokenAuthenticationFilter(tokenValidationRpc), UsernamePasswordAuthenticationFilter.class);
 
 		return httpSecurity.build();
 	}
