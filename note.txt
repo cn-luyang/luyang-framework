@@ -1,7 +1,4 @@
-帮我改造图片中的项目包结构和统一规范类命名
-
-
-模版命名规范(如有存在问题的地方帮我更正)
+模版命名规范
 io.github.luyang.starter.{模块名}
 ├── annotation           // 自定义注解
 │   ├── @DataAuth.java               // 数据权限注解
