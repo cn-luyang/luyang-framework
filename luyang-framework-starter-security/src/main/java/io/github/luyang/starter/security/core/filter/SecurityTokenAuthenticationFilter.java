@@ -1,14 +1,17 @@
-package io.github.luyang.starter.security.filter;
+package io.github.luyang.starter.security.core.filter;
 
-import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import io.github.luyang.starter.base.api.Result;
+import io.github.luyang.starter.security.UnifiedPrincipal;
+import io.github.luyang.starter.security.rpc.TokenValidationRpc;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -16,7 +19,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Map;
 
 /**
  * Token 认证过滤器
@@ -25,7 +27,8 @@ import java.util.Map;
  */
 public class SecurityTokenAuthenticationFilter extends OncePerRequestFilter {
 
-	private static final Logger logger = LoggerFactory.getLogger(SecurityTokenAuthenticationFilter.class);
+	@DubboReference(check = false)
+	private TokenValidationRpc tokenValidationRpc;
 
 	/**
 	 * 对每个请求进行拦截和处理
@@ -47,15 +50,21 @@ public class SecurityTokenAuthenticationFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		// TODO: 远程调用认证服务、验证token是否有效返回用户信息
-		Map<String, String> map = MapUtil.newHashMap();
-		map.put("appId", "ee647812e5404687abe21cdc55cbe8e5");
-		map.put("appName", "Test");
-		map.put("userId", "472dba35eefa42b7bfd734a4f6623142");
-		map.put("name", "luyang");
+		Result<UnifiedPrincipal> unifiedPrincipalResult = tokenValidationRpc.validateToken(accessToken);
+		if (!unifiedPrincipalResult.isSuccess() || BeanUtil.isEmpty(unifiedPrincipalResult.getData())) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			response.setContentType(MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8");
+
+			try (var writer = response.getWriter()) {
+				writer.write(unifiedPrincipalResult.toString());
+				writer.flush();
+			}
+
+			return;
+		}
 
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-			map,
+			unifiedPrincipalResult.getData(),
 			null,
 			Collections.emptyList()
 		);

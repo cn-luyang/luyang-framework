@@ -1,0 +1,113 @@
+帮我改造图片中的项目包结构和统一规范类命名
+
+
+模版命名规范(如有存在问题的地方帮我更正)
+io.github.luyang.starter.{模块名}
+├── annotation           // 自定义注解
+│   ├── @DataAuth.java               // 数据权限注解
+│   ├── @RateLimiter.java            // 限流注解
+│   └── @DistributedLock.java        // 分布式锁注解
+│
+├── api                  // 对外接口 & 数据模型
+│   ├── dto              // 数据传输对象（入参+出参）
+│   │   ├── request
+│   │   │   ├── UserCreateReqDTO.java   // 创建请求
+│   │   │   ├── UserUpdateReqDTO.java   // 更新请求
+│   │   │   └── UserQueryReqDTO.java    // 查询请求
+│   │   └── response
+│   │       ├── UserRespDTO.java        // 基础响应
+│   │       └── UserDetailRespDTO.java  // 详情响应
+│   │
+│   ├── vo               // 视图对象（纯展示用）
+│   │   ├── UserVO.java                // 基础视图
+│   │   └── UserProfileVO.java         // 复杂视图
+│   │
+│   ├── command          // 写操作命令（CQRS模式）
+│   │   ├── CreateUserCommand.java     // 创建命令
+│   │   └── UpdateUserPasswordCmd.java // 更新命令
+│   │
+│   ├── query            // 查询对象
+│   │   ├── UserPageQuery.java        // 分页查询
+│   │   └── UserExportQuery.java      // 导出查询
+│   │
+│   ├── event            // 领域事件
+│   │   ├── UserCreatedEvent.java     // 用户创建事件
+│   │   └── PasswordChangedEvent.java // 密码修改事件
+│   │
+│   └── rpc              // 远程调用接口
+│       ├── UserRpcService.java       // RPC服务接口
+│       └── AuthFeignClient.java      // Feign客户端
+│
+├── config               // 配置相关
+│   ├── properties       // 配置属性
+│   │   ├── ThreadPoolProperties.java // 线程池配置
+│   │   └── RedisCacheProperties.java // Redis缓存配置
+│   │
+│   ├── WebConfig.java               // Web相关配置
+│   ├── SecurityConfig.java          // 安全配置
+│   └── MybatisPlusConfig.java       // MyBatis配置
+│
+├── constant             // 常量定义
+│   ├── AuthConstant.java           // 认证常量
+│   ├── CacheConstant.java          // 缓存常量
+│   └── enums
+│       ├── UserTypeEnum.java       // 用户类型枚举
+│       └── ErrorCodeEnum.java      // 错误码枚举
+│
+├── core                 // 核心业务逻辑
+│   ├── context          // 上下文
+│   │   ├── UserContext.java       // 用户上下文
+│   │   └── TenantContextHolder.java // 租户上下文
+│   │
+│   ├── filter           // 过滤器
+│   │   ├── TraceIdFilter.java     // 链路追踪
+│   │   └── XssFilter.java         // XSS防护
+│   │
+│   ├── interceptor      // 拦截器
+│   │   ├── AuthInterceptor.java   // 认证拦截
+│   │   └── LogCostInterceptor.java // 耗时日志
+│   │
+│   ├── handler          // 处理器
+│   │   ├── GlobalExceptionHandler.java // 全局异常
+│   │   └── AccessDeniedHandler.java   // 权限拒绝
+│   │
+│   ├── processor        // 业务处理器
+│   │   ├── TokenRefreshProcessor.java // 令牌刷新
+│   │   └── MessageQueueProcessor.java // 消息处理
+│   │
+│   ├── registry         // 注册中心
+│   │   ├── ApiRegistry.java       // API注册
+│   │   └── ListenerRegistry.java  // 监听器注册
+│   │
+│   └── initializer      // 初始化
+│       ├── EnvInitializer.java    // 环境初始化
+│       └── DbInitializer.java     // 数据库初始化
+│
+├── exception            // 异常体系
+│   ├── BusinessException.java    // 业务异常
+│   ├── AuthException.java        // 认证异常
+│   └── assert           // 断言
+│       ├── BizAssert.java        // 业务断言
+│       └── AuthAssert.java       // 认证断言
+│
+├── support              // 技术支撑
+│   ├── redis            // Redis操作
+│   │   ├── RedisCacheClient.java // 缓存客户端
+│   │   └── RedisDistributedLock.java // 分布式锁
+│   │
+│   ├── db               // 数据库操作
+│   │   ├── DynamicDataSourceHolder.java // 动态数据源
+│   │   └── MyBatisPlusExtMapper.java    // Mapper扩展
+│   │
+│   ├── mq               // 消息队列
+│   │   ├── RocketMQProducer.java       // 生产者
+│   │   └── KafkaMessageListener.java   // 消费者
+│   │
+│   └── converter        // 转换器
+│       ├── UserDTOConverter.java       // 用户转换
+│       └── DateToStringConverter.java  // 日期转换
+│
+└── util                 // 工具类
+    ├── JsonUtils.java              // JSON处理
+    ├── SecureUtils.java            // 安全工具
+    └── ValidatorUtils.java         // 验证工具

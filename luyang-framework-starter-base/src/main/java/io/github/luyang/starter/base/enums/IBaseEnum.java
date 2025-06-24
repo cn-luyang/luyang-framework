@@ -32,7 +32,7 @@ public interface IBaseEnum<T> extends Serializable {
 	 * 根据Code码匹配对应枚举 <br/>
 	 *
 	 * <pre class="code">
-	 *     ResultEnum SUCCESS_ENUM = IIBaseEnum.getByCode(ResultEnum.class, 200);
+	 *     ResultEnum SUCCESS_ENUM = IBaseEnum.getByCode(ResultEnum.class, 200);
 	 * </pre>
 	 *
 	 * @param tClass 待匹配枚举类
