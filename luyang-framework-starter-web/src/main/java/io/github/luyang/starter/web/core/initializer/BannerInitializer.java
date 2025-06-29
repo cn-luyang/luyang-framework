@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.banner;
+package io.github.luyang.starter.web.core.initializer;
 
 import cn.hutool.core.thread.ThreadUtil;
 import org.slf4j.Logger;
@@ -10,18 +10,19 @@ import org.springframework.core.env.Environment;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 项目启动成功后，提供文档相关的地址
+ * 自定义 Banner 初始化器
  *
  * @author yang.lu
  */
-public record BannerApplicationStarter(Environment environment) implements ApplicationRunner {
+public record BannerInitializer(Environment environment) implements ApplicationRunner {
 
-	private static final Logger logger = LoggerFactory.getLogger(BannerApplicationStarter.class);
+	private static final Logger logger = LoggerFactory.getLogger(BannerInitializer.class);
 
 	@Override
 	public void run(ApplicationArguments args) {
 		ThreadUtil.execute(() -> {
-			ThreadUtil.sleep(1, TimeUnit.SECONDS);
+			// 延迟确保日志系统初始化完成
+			ThreadUtil.sleep(800, TimeUnit.MILLISECONDS);
 			logger.info("Application started successfully!");
 		});
 	}

@@ -5,4 +5,5 @@ ${AnsiColor.BRIGHT_MAGENTA} |  |'  ''  '  \   ' \ '-'  ||  ||  |' '-' ' ${AnsiCo
 ${AnsiColor.BRIGHT_MAGENTA} `--' `----' .-'  /   `--`--'`--''--'.`-  /  ${AnsiColor.BLUE} `--'  `--'    `--`--'`--`--`--' `----''--'   '--' `---' `--'   `--'`--'
 ${AnsiColor.BRIGHT_MAGENTA}             `---'                   `---'
 
-${AnsiColor.BLUE}:: LUYANG :: ${spring.application.name} :: Running SpringBoot ${spring-boot.version} ::
+${AnsiColor.BLUE}:: Spring Boot :: ${spring-boot.version}
+${AnsiColor.BLUE}:: Application :: (${spring.application.name})

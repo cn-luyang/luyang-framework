@@ -1,11 +1,11 @@
-package io.github.luyang.starter.web.support;
+package io.github.luyang.starter.web.core.advice;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.base.api.Result;
 import io.github.luyang.starter.base.enums.ResultEnum;
 import io.github.luyang.starter.base.error.BusinessException;
-import io.github.luyang.starter.web.constant.WebErrorEnum;
+import io.github.luyang.starter.web.constant.error.WebErrorEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +31,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RestControllerAdvice
 @ResponseStatus(HttpStatus.OK)
 @PropertySource(value = "classpath:rest-error.properties", encoding = "UTF-8")
-public class GlobalExceptionHandle {
+public class GlobalExceptionAdvice {
 
-	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandle.class);
+	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionAdvice.class);
 
 	/**
 	 * 处理缺失请求参数异常

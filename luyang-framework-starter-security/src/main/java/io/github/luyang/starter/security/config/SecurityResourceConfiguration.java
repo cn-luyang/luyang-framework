@@ -8,7 +8,7 @@ import io.github.luyang.starter.security.core.filter.SecurityTokenAuthentication
 import io.github.luyang.starter.security.core.handler.SecurityAuthenticationHandler;
 import io.github.luyang.starter.security.core.handler.SecurityAuthorizationHandler;
 import io.github.luyang.starter.security.rpc.TokenValidationRpc;
-import org.apache.dubbo.config.annotation.DubboReference;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,20 +42,14 @@ import java.util.Set;
  */
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityResourceConfiguration {
 
 	private final SecurityProperties securityProperties;
 	private final RequestMappingHandlerMapping requestMappingHandlerMapping;
-
-	@DubboReference(check = false, group = "platform-auth")
-	private TokenValidationRpc tokenValidationRpc;
-
-	public SecurityResourceConfiguration(SecurityProperties securityProperties, RequestMappingHandlerMapping requestMappingHandlerMapping) {
-		this.securityProperties = securityProperties;
-		this.requestMappingHandlerMapping = requestMappingHandlerMapping;
-	}
+	private final TokenValidationRpc tokenValidationRpc;
 
 	/**
 	 * 密码编码器
