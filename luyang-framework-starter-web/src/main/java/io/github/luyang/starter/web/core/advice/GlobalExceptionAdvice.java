@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.base.api.Result;
 import io.github.luyang.starter.base.enums.ResultEnum;
 import io.github.luyang.starter.base.error.BusinessException;
-import io.github.luyang.starter.web.constant.error.WebErrorEnum;
+import io.github.luyang.starter.web.constant.error.WebError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +45,7 @@ public class GlobalExceptionAdvice {
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public Result<?> handleError(MissingServletRequestParameterException e) {
 		String message = String.format("参数缺失: %s", e.getParameterName());
-		return Result.failure(WebErrorEnum.BAD_REQUEST, message);
+		return Result.failure(WebError.BAD_REQUEST, message);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class GlobalExceptionAdvice {
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public Result<?> handleError(MethodArgumentTypeMismatchException e) {
 		String message = String.format("参数类型错误: %s", e.getName());
-		return Result.failure(WebErrorEnum.BAD_REQUEST, message);
+		return Result.failure(WebError.BAD_REQUEST, message);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class GlobalExceptionAdvice {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Result<?> handleError(MethodArgumentNotValidException e) {
 		String message = this.handleError(e.getBindingResult());
-		return Result.failure(WebErrorEnum.BAD_REQUEST, message);
+		return Result.failure(WebError.BAD_REQUEST, message);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class GlobalExceptionAdvice {
 	 */
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public Result<?> handleError(NoHandlerFoundException e) {
-		return Result.failure(WebErrorEnum.NOT_FOUND, String.format("请求的资源不存在或已删除: %s", e.getRequestURL()));
+		return Result.failure(WebError.NOT_FOUND, String.format("请求的资源不存在或已删除: %s", e.getRequestURL()));
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class GlobalExceptionAdvice {
 	 */
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public Result<?> handleError(HttpMessageNotReadableException e) {
-		return Result.failure(WebErrorEnum.BAD_REQUEST, String.format("无法解析请求体: %s", e.getMessage()));
+		return Result.failure(WebError.BAD_REQUEST, String.format("无法解析请求体: %s", e.getMessage()));
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class GlobalExceptionAdvice {
 	 */
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public Result<?> handleError(HttpRequestMethodNotSupportedException e) {
-		return Result.failure(WebErrorEnum.METHOD_NOT_ALLOWED, String.format("请求方法不被允许或不适用于请求的资源: %s", e.getMessage()));
+		return Result.failure(WebError.METHOD_NOT_ALLOWED, String.format("请求方法不被允许或不适用于请求的资源: %s", e.getMessage()));
 	}
 
 	/**
