@@ -71,6 +71,8 @@
         <module>dependencies</module>
 <!--        <module>luyang-framework-base-http</module>-->
 <!--        <module>luyang-framework-base-utils</module>-->
+<!--        <module>luyang-framework-example-one</module>-->
+<!--        <module>luyang-framework-example-two</module>-->
         <module>luyang-framework-starter-base</module>
         <module>luyang-framework-starter-dict</module>
         <module>luyang-framework-starter-dubbo</module>
@@ -79,7 +81,7 @@
         <module>luyang-framework-starter-redisson</module>
         <module>luyang-framework-starter-security</module>
         <module>luyang-framework-starter-web</module>
-<!--        <module>luyang-test-demo</module>-->
+
     </modules>
 
     <dependencyManagement>

@@ -4,11 +4,12 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import io.github.luyang.starter.security.annotation.AnonymousAccess;
 import io.github.luyang.starter.security.config.properties.SecurityProperties;
-import io.github.luyang.starter.security.core.filter.SecurityTokenAuthenticationFilter;
+import io.github.luyang.starter.security.core.filter.TokenAuthFilter;
 import io.github.luyang.starter.security.core.handler.SecurityAuthenticationHandler;
 import io.github.luyang.starter.security.core.handler.SecurityAuthorizationHandler;
 import io.github.luyang.starter.security.rpc.TokenValidationRpc;
 import lombok.RequiredArgsConstructor;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +50,8 @@ public class SecurityResourceConfiguration {
 
 	private final SecurityProperties securityProperties;
 	private final RequestMappingHandlerMapping requestMappingHandlerMapping;
-	private final TokenValidationRpc tokenValidationRpc;
+	@DubboReference(check = false, group = "platform-auth")
+	private TokenValidationRpc tokenValidationRpc;
 
 	/**
 	 * 密码编码器
@@ -57,7 +59,8 @@ public class SecurityResourceConfiguration {
 	 * @return 密码编码器
 	 * @author yang.lu
 	 */
-	public @Bean PasswordEncoder passwordEncoder() {
+	@Bean
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
@@ -68,7 +71,8 @@ public class SecurityResourceConfiguration {
 	 * @return 用户详情服务
 	 * @author yang.lu
 	 */
-	public @Bean UserDetailsService userDetailsService() {
+	@Bean
+	public UserDetailsService userDetailsService() {
 		return username -> {
 			throw new UsernameNotFoundException("UserDetailsService not implemented");
 		};
@@ -81,7 +85,8 @@ public class SecurityResourceConfiguration {
 	 * @return 构建好的 SecurityFilterChain 对象
 	 * @author yang.lu
 	 */
-	public @Bean SecurityFilterChain resourceSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+	@Bean
+	public SecurityFilterChain resourceSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
 		// 配置 HTTP 头部
 		httpSecurity
@@ -123,7 +128,7 @@ public class SecurityResourceConfiguration {
 			);
 
 		// 在 UsernamePasswordAuthenticationFilter 前添加自定义的 SecurityTokenAuthenticationFilter
-		httpSecurity.addFilterBefore(new SecurityTokenAuthenticationFilter(tokenValidationRpc), UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterBefore(new TokenAuthFilter(tokenValidationRpc), UsernamePasswordAuthenticationFilter.class);
 
 		return httpSecurity.build();
 	}

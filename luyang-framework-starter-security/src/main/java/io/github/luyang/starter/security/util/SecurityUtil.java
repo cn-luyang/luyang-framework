@@ -21,8 +21,8 @@ public class SecurityUtil {
 	public static String getAccessTokenValue(HttpServletRequest request) {
 
 		String token = StrUtil.blankToDefault(
-			request.getHeader(SecurityConstant.LY_ACCESS_TOKEN),
-			request.getParameter(SecurityConstant.LY_ACCESS_TOKEN)
+			request.getHeader(SecurityConstant.X_ACCESS_TOKEN),
+			request.getParameter(SecurityConstant.X_ACCESS_TOKEN)
 		);
 
 		if (StrUtil.isBlank(token)) {

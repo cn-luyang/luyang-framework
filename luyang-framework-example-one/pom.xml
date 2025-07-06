@@ -11,33 +11,29 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>luyang-framework-starter-security</artifactId>
-    <name>Luyang Framework Starter Security</name>
+    <artifactId>luyang-framework-example-one</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.cn-luyang</groupId>
-            <artifactId>luyang-framework-starter-base</artifactId>
+            <artifactId>luyang-framework-starter-dict</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.cn-luyang</groupId>
-            <artifactId>luyang-framework-starter-dubbo</artifactId>
+            <artifactId>luyang-framework-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
+            <groupId>io.github.cn-luyang</groupId>
+            <artifactId>luyang-framework-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
