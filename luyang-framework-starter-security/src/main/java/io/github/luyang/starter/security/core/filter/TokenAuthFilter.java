@@ -72,7 +72,7 @@ public class TokenAuthFilter extends OncePerRequestFilter {
 			unifiedPrincipal = unifiedPrincipalResult.getData();
 		} catch (Exception e) {
 			logger.error("访问令牌认证异常", e);
-			writeUnauthorizedResponse(response, Result.failure(SecurityError.ACCESS_TOKEN_VALIDATE_EXCEPTION).toString());
+			writeUnauthorizedResponse(response, Result.failure(SecurityError.VALIDATE_EXCEPTION_ACCESS_TOKEN).toString());
 			return;
 		}
 
