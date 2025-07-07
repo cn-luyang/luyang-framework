@@ -14,8 +14,9 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum SecurityError implements IBaseEnum<String> {
 
-	MISSING_ACCESS_TOKEN("missing_access_token", "缺失访问令牌"),
-	EXPIRED_ACCESS_TOKEN("expired_access_token", "访问令牌已过期"),
+	ACCESS_TOKEN_VALIDATE_EXCEPTION("access_token_validate_exception", "访问令牌验证异常"),
+	ACCESS_TOKEN_MISSING("access_token_missing", "缺失访问令牌"),
+	ACCESS_TOKEN_EXPIRED("access_token_expired", "访问令牌已过期"),
 	PERMISSION_DENIED("permission_denied", "权限不足"),
 	;
 

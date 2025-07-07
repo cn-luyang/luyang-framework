@@ -5,12 +5,16 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.api.Result;
 import io.github.luyang.starter.security.UnifiedPrincipal;
+import io.github.luyang.starter.security.constant.SecurityConstant;
+import io.github.luyang.starter.security.constant.enums.error.SecurityError;
 import io.github.luyang.starter.security.rpc.TokenValidationRpc;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +23,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Optional;
 
 /**
  * Token 认证过滤器
@@ -26,6 +31,8 @@ import java.util.Collections;
  * @author yang.lu
  */
 public class TokenAuthFilter extends OncePerRequestFilter {
+
+	private final static Logger logger = LoggerFactory.getLogger(TokenAuthFilter.class);
 
 	private final TokenValidationRpc tokenValidationRpc;
 
@@ -42,7 +49,7 @@ public class TokenAuthFilter extends OncePerRequestFilter {
 	 * @author yang.lu
 	 */
 	@Override
-	@SuppressWarnings({"NullableProblems", "deprecation"})
+	@SuppressWarnings("NullableProblems")
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 		throws ServletException, IOException {
 
@@ -54,17 +61,23 @@ public class TokenAuthFilter extends OncePerRequestFilter {
 			return;
 		}
 
-		Result<UnifiedPrincipal> unifiedPrincipalResult = tokenValidationRpc.validateToken(accessToken);
-		if (!unifiedPrincipalResult.isSuccess() || BeanUtil.isEmpty(unifiedPrincipalResult.getData())) {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			String content = unifiedPrincipalResult.toString();
-			JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
+		UnifiedPrincipal unifiedPrincipal;
 
+		try {
+			Result<UnifiedPrincipal> unifiedPrincipalResult = tokenValidationRpc.validateToken(accessToken);
+			if (!unifiedPrincipalResult.isSuccess() || BeanUtil.isEmpty(unifiedPrincipalResult.getData())) {
+				writeUnauthorizedResponse(response, unifiedPrincipalResult.toString());
+				return;
+			}
+			unifiedPrincipal = unifiedPrincipalResult.getData();
+		} catch (Exception e) {
+			logger.error("访问令牌认证异常", e);
+			writeUnauthorizedResponse(response, Result.failure(SecurityError.ACCESS_TOKEN_VALIDATE_EXCEPTION).toString());
 			return;
 		}
 
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-			unifiedPrincipalResult.getData(),
+			unifiedPrincipal,
 			null,
 			Collections.emptyList()
 		);
@@ -75,6 +88,34 @@ public class TokenAuthFilter extends OncePerRequestFilter {
 		// 将构建好的 Authentication 对象设置到 Spring Security 的安全上下文中，表示当前请求已经通过认证
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
+		// 填充认证信息
+		fillAuthInfo(request, unifiedPrincipal);
+
 		chain.doFilter(request, response);
+	}
+
+	/**
+	 * 将认证用户信息填充到 HttpServletRequest 的属性中，供后续业务层读取使用。
+	 *
+	 * @param request          当前请求对象
+	 * @param unifiedPrincipal 认证成功的统一用户信息
+	 * @author yang.lu
+	 */
+	private void fillAuthInfo(HttpServletRequest request, UnifiedPrincipal unifiedPrincipal) {
+		Optional.ofNullable(unifiedPrincipal)
+			.ifPresent(principal -> {
+				// 设置用户ID
+				request.setAttribute(SecurityConstant.ATTR_USER_ID, principal.userId());
+				// 设置客户端ID
+				request.setAttribute(SecurityConstant.ATTR_CLIENT_ID, principal.clientId());
+				// 设置主体类型（如 USER / CLIENT 等）
+				request.setAttribute(SecurityConstant.ATTR_PRINCIPAL_TYPE, principal.principalType());
+			});
+	}
+
+	@SuppressWarnings("deprecation")
+	private void writeUnauthorizedResponse(HttpServletResponse response, String content) {
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
 	}
 }

@@ -23,7 +23,7 @@ public class SecurityAuthenticationHandler implements AuthenticationEntryPoint {
 						 AuthenticationException authException) {
 
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		String content = Result.failure(SecurityError.MISSING_ACCESS_TOKEN).toString();
+		String content = Result.failure(SecurityError.ACCESS_TOKEN_MISSING).toString();
 		JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
 	}
 }
