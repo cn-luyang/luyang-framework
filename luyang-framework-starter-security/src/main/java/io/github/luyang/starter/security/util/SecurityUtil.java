@@ -45,11 +45,26 @@ public class SecurityUtil {
 	 * @author yang.lu
 	 */
 	public UnifiedPrincipal getUnifiedPrincipal() {
+		return getUnifiedPrincipalOpt().orElse(null);
+	}
+
+	public Optional<UnifiedPrincipal> getUnifiedPrincipalOpt() {
 		return Optional.ofNullable(SecurityContextHolder.getContext())
 			.map(SecurityContext::getAuthentication)
 			.map(Authentication::getPrincipal)
 			.filter(UnifiedPrincipal.class::isInstance)
-			.map(UnifiedPrincipal.class::cast)
+			.map(UnifiedPrincipal.class::cast);
+	}
+
+	public String getUserId() {
+		return getUnifiedPrincipalOpt()
+			.map(UnifiedPrincipal::userId)
+			.orElse(null);
+	}
+
+	public String getClientId() {
+		return getUnifiedPrincipalOpt()
+			.map(UnifiedPrincipal::clientId)
 			.orElse(null);
 	}
 }
