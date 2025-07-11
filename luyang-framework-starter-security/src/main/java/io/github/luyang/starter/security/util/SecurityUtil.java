@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.security.UnifiedPrincipal;
 import io.github.luyang.starter.security.constant.SecurityConstant;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import java.util.Optional;
  *
  * @author yang.lu
  */
+@UtilityClass
 public class SecurityUtil {
 
 	/**
@@ -44,11 +46,11 @@ public class SecurityUtil {
 	 * @return 如果认证主体是 UnifiedPrincipal 类型，则返回该对象；否则返回 null
 	 * @author yang.lu
 	 */
-	public UnifiedPrincipal getUnifiedPrincipal() {
+	public static UnifiedPrincipal getUnifiedPrincipal() {
 		return getUnifiedPrincipalOpt().orElse(null);
 	}
 
-	public Optional<UnifiedPrincipal> getUnifiedPrincipalOpt() {
+	public static Optional<UnifiedPrincipal> getUnifiedPrincipalOpt() {
 		return Optional.ofNullable(SecurityContextHolder.getContext())
 			.map(SecurityContext::getAuthentication)
 			.map(Authentication::getPrincipal)
@@ -56,13 +58,13 @@ public class SecurityUtil {
 			.map(UnifiedPrincipal.class::cast);
 	}
 
-	public String getUserId() {
+	public static String getUserId() {
 		return getUnifiedPrincipalOpt()
 			.map(UnifiedPrincipal::userId)
 			.orElse(null);
 	}
 
-	public String getClientId() {
+	public static String getClientId() {
 		return getUnifiedPrincipalOpt()
 			.map(UnifiedPrincipal::clientId)
 			.orElse(null);
