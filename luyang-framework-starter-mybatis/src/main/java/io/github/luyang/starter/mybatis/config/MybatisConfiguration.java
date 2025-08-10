@@ -1,6 +1,9 @@
 package io.github.luyang.starter.mybatis.config;
 
+import cn.hutool.core.net.NetUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator;
+import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -58,5 +61,16 @@ public class MybatisConfiguration {
 	@Bean
 	public MetaObjectHandler defaultFieldHandler() {
 		return new DefaultFieldHandler();
+	}
+
+	/**
+	 * 分布式ID生成器（基于主机地址）
+	 *
+	 * @return IdentifierGenerator ID生成器
+	 * @author yang.lu
+	 */
+	@Bean
+	public IdentifierGenerator identifierGenerator() {
+		return new DefaultIdentifierGenerator(NetUtil.getLocalhost());
 	}
 }
