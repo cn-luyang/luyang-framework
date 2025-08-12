@@ -58,13 +58,13 @@ public class SecurityUtil {
 			.map(UnifiedPrincipal.class::cast);
 	}
 
-	public static Long getUserId() {
+	public static String getUserId() {
 		return getUnifiedPrincipalOpt()
 			.map(UnifiedPrincipal::userId)
 			.orElse(null);
 	}
 
-	public static Long getClientId() {
+	public static String getClientId() {
 		return getUnifiedPrincipalOpt()
 			.map(UnifiedPrincipal::clientId)
 			.orElse(null);

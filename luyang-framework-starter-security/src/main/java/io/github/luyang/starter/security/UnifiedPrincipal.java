@@ -16,8 +16,8 @@ import java.util.Map;
  * @author yang.lu
  */
 public record UnifiedPrincipal(
-	Long clientId,
-	Long userId,
+	String clientId,
+	String userId,
 	PrincipalType principalType,
 	Map<String, Object> attachedInfo
 ) implements Serializable {
