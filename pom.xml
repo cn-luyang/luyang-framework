@@ -60,7 +60,7 @@
     <properties>
         <skipTests>true</skipTests>
         <java.version>21</java.version>
-        <revision>0.0.28-SNAPSH0T</revision>
+        <revision>0.0.29-SNAPSH0T</revision>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -96,6 +96,18 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+                <configuration>
+                    <fork>true</fork>
+                    <source>21</source>
+                    <target>21</target>
+                    <!-- 编译时启用警告位置 -->
+                    <compilerArgument>-Xlint:unchecked</compilerArgument>
+                </configuration>
+            </plugin>
             <!-- 打包源码插件：生成 source.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

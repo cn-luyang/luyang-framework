@@ -55,7 +55,7 @@
         </repository>
     </distributionManagement>
     <properties>
-        <revision>0.0.28-SNAPSH0T</revision>
+        <revision>0.0.29-SNAPSH0T</revision>
         <!-- SpringBoot SpringCloud SpringCloudAlibaba 版本 https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.511d1d28E6mG9S -->
         <spring-boot-dependencies.version>3.5.0</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2025.0.0</spring-cloud-dependencies.version>
@@ -208,6 +208,18 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+                <configuration>
+                    <fork>true</fork>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!-- 编译时启用警告位置 -->
+                    <compilerArgument>-Xlint:unchecked</compilerArgument>
+                </configuration>
+            </plugin>
             <!-- 打包源码插件：生成 source.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
