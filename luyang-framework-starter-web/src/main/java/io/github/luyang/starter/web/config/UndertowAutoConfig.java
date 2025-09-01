@@ -3,13 +3,18 @@ package io.github.luyang.starter.web.config;
 import io.undertow.Undertow;
 import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.unit.DataSize;
 
 import static io.undertow.UndertowOptions.ENABLE_HTTP2;
 
@@ -19,18 +24,16 @@ import static io.undertow.UndertowOptions.ENABLE_HTTP2;
  * @author yang.lu
  */
 @AutoConfiguration
+@RequiredArgsConstructor
 @ConditionalOnClass(Undertow.class)
+@EnableConfigurationProperties(ServerProperties.class)
 @AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class)
-public class UndertowConfiguration implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+public class UndertowAutoConfig implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
-	/*
-		@AutoConfiguration 自动配置类，Spring Boot 启动时会自动加载
-		@ConditionalOnClass(Undertow.class) classpath 中存在 Undertow 时才生效
-		@AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class) 在默认 Web 服务器配置之前生效
-	 */
+	private final ServerProperties serverProperties;
 
 	/**
-	 * 添加自定义部署的Web应用程序的配置信息
+	 * 自定义 Undertow 服务器配置
 	 *
 	 * @author yang.lu
 	 */
@@ -38,25 +41,38 @@ public class UndertowConfiguration implements WebServerFactoryCustomizer<Underto
 	public void customize(UndertowServletWebServerFactory factory) {
 		factory.addDeploymentInfoCustomizers(deploymentInfo -> {
 			WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
-			// 设置 WebSocket 的缓冲池，512 字节非直接内存缓冲池
-			webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 512));
-			// 将 WebSocket 部署信息绑定到 servlet 上下文属性中，供 Undertow 使用
+			webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(isDirectBuffers(), getBufferSizeAsInt()));
 			deploymentInfo.addServletContextAttribute(
-				"io.undertow.websockets.jsr.WebSocketDeploymentInfo",
+				WebSocketDeploymentInfo.ATTRIBUTE_NAME,
 				webSocketDeploymentInfo
 			);
 		});
 	}
 
 	/**
-	 * 添加自定义的构建器定制器，启用对HTTP/2的支持
+	 * HTTP/2配置
 	 *
 	 * @author yang.lu
 	 */
 	@Bean
-	public WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowHttp2WebServerFactoryCustomizer() {
+	@ConditionalOnProperty(prefix = "server.http2", name = "enabled", havingValue = "true", matchIfMissing = true)
+	public WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowHttp2Customizer() {
 		return factory -> factory.addBuilderCustomizers(
 			builder -> builder.setServerOption(ENABLE_HTTP2, true)
 		);
+	}
+
+	private int getBufferSizeAsInt() {
+		DataSize bufferSize = serverProperties.getUndertow().getBufferSize();
+		if (null != bufferSize) {
+			return (int) bufferSize.toBytes();
+		}
+
+		return 512;
+	}
+
+	private boolean isDirectBuffers() {
+		Boolean directBuffers = serverProperties.getUndertow().getDirectBuffers();
+		return null != directBuffers ? directBuffers : false;
 	}
 }

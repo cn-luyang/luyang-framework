@@ -16,7 +16,7 @@ import org.springframework.core.env.Environment;
  * @author yang.lu
  */
 @AutoConfiguration
-public class WebConfiguration {
+public class WebAutoConfig {
 
 	@Bean
 	public FilterRegistrationBean<TraceIdFilter> traceIdFilter() {

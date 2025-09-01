@@ -11,6 +11,32 @@
     <packaging>pom</packaging>
     <name>dependencies</name>
     <description>dependencies</description>
+    <url>https://github.com/cn-luyang/luyang-framework</url>
+
+    <!-- 开源协议信息 -->
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- Git 仓库信息 -->
+    <scm>
+        <url>https://github.com/cn-luyang/luyang-framework</url>
+        <connection>scm:git:https://github.com/cn-luyang/luyang-framework.git</connection>
+        <developerConnection>scm:git:https://github.com/cn-luyang/luyang-framework.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <name>luyang</name>
+            <email>cn_luyang@163.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <revision>2025.09.01.01</revision>

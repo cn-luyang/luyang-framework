@@ -1,3 +1,3 @@
-io.github.luyang.starter.web.config.WebConfiguration
-io.github.luyang.starter.web.config.JacksonConfiguration
-io.github.luyang.starter.web.config.UndertowConfiguration
+io.github.luyang.starter.web.config.WebAutoConfig
+io.github.luyang.starter.web.config.JacksonAutoConfig
+io.github.luyang.starter.web.config.UndertowAutoConfig
