@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>luyang-framework-starter-base</artifactId>
-    <name>Luyang Framework Starter Base</name>
+    <name>luyang-framework-starter-base</name>
 
     <dependencies>
         <dependency>
@@ -22,18 +22,6 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok-mapstruct-binding</artifactId>
         </dependency>
     </dependencies>
 </project>
