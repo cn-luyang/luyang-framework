@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.github.luyang.starter.base.util.jackson.databind.TimeModule;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -46,7 +47,7 @@ public class JacksonAutoConfig {
 			// 反序列化配置
 			configureDeserializationSettings(builder);
 			// 模块配置
-//			configureModules(builder);
+			configureModules(builder);
 		};
 	}
 
@@ -118,7 +119,7 @@ public class JacksonAutoConfig {
 	 * @param builder Jackson2ObjectMapperBuilder
 	 * @author yang.lu
 	 */
-//	private void configureModules(Jackson2ObjectMapperBuilder builder) {
-//		builder.modules(new TimeModule());
-//	}
+	private void configureModules(Jackson2ObjectMapperBuilder builder) {
+		builder.modules(new TimeModule());
+	}
 }

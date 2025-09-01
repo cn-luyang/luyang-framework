@@ -30,18 +30,6 @@ public class Result<T> implements Serializable {
 	private boolean success;
 	private T data;
 
-	private Result(IBaseEnum<String> IBaseEnum) {
-		this(IBaseEnum.getCode(), IBaseEnum.getMessage(), null);
-	}
-
-	private Result(IBaseEnum<String> IBaseEnum, String message) {
-		this(IBaseEnum, message, null);
-	}
-
-	private Result(IBaseEnum<String> IBaseEnum, String message, T data) {
-		this(IBaseEnum.getCode(), message, data);
-	}
-
 	private Result(String code, String message, T data) {
 		this.code = code;
 		this.message = message;
@@ -54,11 +42,11 @@ public class Result<T> implements Serializable {
 	}
 
 	public static <T> Result<T> success(T data) {
-		return new Result<T>(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), data);
+		return new Result<>(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), data);
 	}
 
 	public static <T> Result<T> failure(String message) {
-		return new Result<>(ResultEnum.FAILURE, message);
+		return failure(ResultEnum.FAILURE.getCode(), message);
 	}
 
 	public static <T> Result<T> failure(String code, String message) {
@@ -70,11 +58,11 @@ public class Result<T> implements Serializable {
 	}
 
 	public static <T> Result<T> failure(IBaseEnum<String> baseEnum) {
-		return new Result<>(baseEnum);
+		return new Result<>(baseEnum.getCode(), baseEnum.getMessage(), null);
 	}
 
 	public static <T> Result<T> failure(IBaseEnum<String> baseEnum, String message) {
-		return new Result<>(baseEnum, message);
+		return new Result<>(baseEnum.getCode(), message, null);
 	}
 
 	@Override
