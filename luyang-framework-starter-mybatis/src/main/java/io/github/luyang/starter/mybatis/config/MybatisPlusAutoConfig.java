@@ -8,27 +8,19 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import io.github.luyang.starter.mybatis.support.DefaultFieldHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.Statement;
 
 /**
  * Mybatis plus 配置
  *
  * @author yang.lu
  */
-@Configuration(proxyBeanMethods = false)
-@PropertySource(value = "classpath:mybatis-plus.properties", encoding = "UTF-8")
-public class MybatisConfiguration {
 
-	private static final Logger logger = LoggerFactory.getLogger(MybatisConfiguration.class);
+@AutoConfiguration
+@PropertySource(value = "classpath:mybatis-plus.properties", encoding = "UTF-8")
+public class MybatisPlusAutoConfig {
 
 	/**
 	 * 插件主体配置
@@ -81,28 +73,5 @@ public class MybatisConfiguration {
 	@Bean
 	public IdentifierGenerator identifierGenerator() {
 		return new DefaultIdentifierGenerator(NetUtil.getLocalhost());
-	}
-
-	/**
-	 * 更早初始化连接池，避免首次请求延迟
-	 *
-	 * @param dataSource 数据源
-	 * @return org.springframework.boot.ApplicationRunner
-	 * @author yang.lu
-	 */
-	@Bean
-	public ApplicationRunner dataSourceInitializer(DataSource dataSource) {
-		return args -> {
-			logger.info("Initializing DataSource connection...");
-			try (Connection connection = dataSource.getConnection();
-				 Statement statement = connection.createStatement()) {
-				// 测试连接
-				statement.execute("SELECT 1");
-				logger.info("DataSource initialized successfully: {}", dataSource);
-			} catch (Exception e) {
-				logger.error("Failed to initialize DataSource!", e);
-				throw new IllegalStateException("DataSource initialization failed", e);
-			}
-		};
 	}
 }

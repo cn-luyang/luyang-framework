@@ -5,15 +5,15 @@ import io.github.luyang.starter.dict.controller.DictController;
 import io.github.luyang.starter.dict.repository.DictRepository;
 import io.github.luyang.starter.dict.service.DictService;
 import org.redisson.api.RedissonClient;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * @author yang.lu
  */
-@Configuration
-public class DictAutoConfiguration {
+@AutoConfiguration
+public class DictAutoConfig {
 
 	@Bean
 	public DictRepository dictRepository(JdbcTemplate jdbcTemplate) {

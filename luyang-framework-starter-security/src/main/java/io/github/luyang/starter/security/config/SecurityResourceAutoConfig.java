@@ -10,9 +10,9 @@ import io.github.luyang.starter.security.core.handler.SecurityAuthorizationHandl
 import io.github.luyang.starter.security.rpc.TokenValidationRpc;
 import lombok.RequiredArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -41,12 +41,12 @@ import java.util.Set;
  *
  * @author yang.lu
  */
+@AutoConfiguration
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
-@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(SecurityProperties.class)
-public class SecurityResourceConfiguration {
+public class SecurityResourceAutoConfig {
 
 	private final SecurityProperties securityProperties;
 	private final RequestMappingHandlerMapping requestMappingHandlerMapping;

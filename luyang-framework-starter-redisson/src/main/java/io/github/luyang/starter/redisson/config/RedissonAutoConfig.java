@@ -22,13 +22,13 @@ import java.util.Optional;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(RedissonProperties.class)
-public class RedissonConfiguration {
+public class RedissonAutoConfig {
 
 	private final ObjectMapper objectMapper;
 	private final RedissonProperties redissonProperties;
 	private final ApplicationContext applicationContext;
 
-	public RedissonConfiguration(ObjectMapper objectMapper,
+	public RedissonAutoConfig(ObjectMapper objectMapper,
 								 RedissonProperties redissonProperties,
 								 ApplicationContext applicationContext) {
 		this.objectMapper = objectMapper;

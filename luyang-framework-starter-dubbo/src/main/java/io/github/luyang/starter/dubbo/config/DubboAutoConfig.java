@@ -8,5 +8,5 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableDubbo(scanBasePackages = "${dubbo.scan.base-packages:}")
-public class DubboAutoConfiguration {
+public class DubboAutoConfig {
 }
