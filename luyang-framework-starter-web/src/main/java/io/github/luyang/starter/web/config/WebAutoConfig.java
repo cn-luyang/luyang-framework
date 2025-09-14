@@ -1,8 +1,8 @@
 package io.github.luyang.starter.web.config;
 
-import io.github.luyang.starter.web.core.advice.GlobalExceptionAdvice;
-import io.github.luyang.starter.web.core.filter.TraceIdFilter;
-import io.github.luyang.starter.web.core.initializer.BannerInitializer;
+import io.github.luyang.starter.web.advice.GlobalExceptionAdvice;
+import io.github.luyang.starter.web.filter.TraceIdFilter;
+import io.github.luyang.starter.web.initializer.BannerInitializer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;

@@ -1,12 +1,12 @@
-package io.github.luyang.starter.security.core.filter;
+package io.github.luyang.starter.security.filter;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.api.Result;
+import io.github.luyang.starter.base.constant.BaseConstant;
 import io.github.luyang.starter.security.UnifiedPrincipal;
-import io.github.luyang.starter.security.constant.SecurityConstant;
-import io.github.luyang.starter.security.constant.enums.error.SecurityError;
+import io.github.luyang.starter.security.enums.error.SecurityError;
 import io.github.luyang.starter.security.rpc.TokenValidationRpc;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
@@ -105,11 +105,11 @@ public class TokenAuthFilter extends OncePerRequestFilter {
 		Optional.ofNullable(unifiedPrincipal)
 			.ifPresent(principal -> {
 				// 设置用户ID
-				request.setAttribute(SecurityConstant.ATTR_USER_ID, principal.userId());
+				request.setAttribute(BaseConstant.ATTR_USER_ID, principal.userId());
 				// 设置客户端ID
-				request.setAttribute(SecurityConstant.ATTR_CLIENT_ID, principal.clientId());
+				request.setAttribute(BaseConstant.ATTR_CLIENT_ID, principal.clientId());
 				// 设置主体类型（如 USER / CLIENT 等）
-				request.setAttribute(SecurityConstant.ATTR_PRINCIPAL_TYPE, principal.principalType());
+				request.setAttribute(BaseConstant.ATTR_PRINCIPAL_TYPE, principal.principalType());
 			});
 	}
 

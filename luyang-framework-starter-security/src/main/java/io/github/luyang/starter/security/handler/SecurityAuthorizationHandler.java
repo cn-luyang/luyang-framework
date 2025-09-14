@@ -1,8 +1,8 @@
-package io.github.luyang.starter.security.core.handler;
+package io.github.luyang.starter.security.handler;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.api.Result;
-import io.github.luyang.starter.security.constant.enums.error.SecurityError;
+import io.github.luyang.starter.security.enums.error.SecurityError;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;

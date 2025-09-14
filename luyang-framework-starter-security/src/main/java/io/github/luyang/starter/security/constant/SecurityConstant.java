@@ -12,9 +12,4 @@ public interface SecurityConstant {
 
 	/** 刷新 Token，用于获取新的认证 Token */
 	String X_REFRESH_TOKEN = "X-Refresh-Token";
-
-
-	String ATTR_USER_ID = "auth.user-id";
-	String ATTR_CLIENT_ID = "auth.client-id";
-	String ATTR_PRINCIPAL_TYPE = "auth.principal-type";
 }

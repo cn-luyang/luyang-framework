@@ -1,4 +1,4 @@
-package io.github.luyang.starter.mybatis.support;
+package io.github.luyang.starter.mybatis.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author yang.lu
  */
-public interface DataBaseMapper<T> extends BaseMapper<T> {
+public interface UltraMapper<T> extends BaseMapper<T> {
 
 
 	/**

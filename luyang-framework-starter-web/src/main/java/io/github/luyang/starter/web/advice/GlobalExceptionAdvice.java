@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.core.advice;
+package io.github.luyang.starter.web.advice;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

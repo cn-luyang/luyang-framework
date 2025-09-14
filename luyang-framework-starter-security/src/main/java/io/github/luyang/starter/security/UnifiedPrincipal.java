@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security;
 
-import io.github.luyang.starter.security.constant.enums.PrincipalType;
+import io.github.luyang.starter.security.enums.PrincipalType;
 
 import java.io.Serial;
 import java.io.Serializable;

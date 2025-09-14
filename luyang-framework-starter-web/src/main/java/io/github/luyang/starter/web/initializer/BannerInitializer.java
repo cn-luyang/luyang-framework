@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.core.initializer;
+package io.github.luyang.starter.web.initializer;
 
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.thread.ThreadUtil;

@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.constant.enums;
+package io.github.luyang.starter.security.enums;
 
 /**
  * 认证主体的类型

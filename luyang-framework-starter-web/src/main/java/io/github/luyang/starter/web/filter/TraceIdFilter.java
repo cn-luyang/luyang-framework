@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.core.filter;
+package io.github.luyang.starter.web.filter;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
