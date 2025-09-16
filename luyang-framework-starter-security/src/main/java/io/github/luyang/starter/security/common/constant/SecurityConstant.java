@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.constant;
+package io.github.luyang.starter.security.common.constant;
 
 /**
  * Security 相关常量

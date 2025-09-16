@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.enums;
+package io.github.luyang.starter.security.common.enums;
 
 /**
  * 认证主体的类型
@@ -6,7 +6,7 @@ package io.github.luyang.starter.security.enums;
  * @author yang.lu
  */
 
-public enum PrincipalType {
+public enum PrincipalTypeEnum {
 
 	/**
 	 * 系统用户

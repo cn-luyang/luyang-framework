@@ -1,8 +1,8 @@
-package io.github.luyang.starter.security.handler;
+package io.github.luyang.starter.security.web.handler;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.api.Result;
-import io.github.luyang.starter.security.enums.error.SecurityError;
+import io.github.luyang.starter.security.common.enums.SecurityErrorEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -14,7 +14,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
  *
  * @author yang.lu
  */
-public class SecurityAuthenticationHandler implements AuthenticationEntryPoint {
+public class AuthenticationHandler implements AuthenticationEntryPoint {
 
 	@Override
 	@SuppressWarnings("deprecation")
@@ -23,7 +23,7 @@ public class SecurityAuthenticationHandler implements AuthenticationEntryPoint {
 						 AuthenticationException authException) {
 
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		String content = Result.failure(SecurityError.MISSING_ACCESS_TOKEN).toString();
+		String content = Result.failure(SecurityErrorEnum.MISSING_ACCESS_TOKEN).toString();
 		JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
 	}
 }

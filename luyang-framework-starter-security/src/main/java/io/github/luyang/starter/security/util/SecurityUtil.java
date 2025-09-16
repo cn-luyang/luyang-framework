@@ -1,15 +1,9 @@
 package io.github.luyang.starter.security.util;
 
 import cn.hutool.core.util.StrUtil;
-import io.github.luyang.starter.security.UnifiedPrincipal;
-import io.github.luyang.starter.security.constant.SecurityConstant;
+import io.github.luyang.starter.security.common.constant.SecurityConstant;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.util.Optional;
 
 /**
  * Security 相关工具类
@@ -38,35 +32,5 @@ public class SecurityUtil {
 		}
 
 		return StrUtil.removePrefix(token, "Bearer ");
-	}
-
-	/**
-	 * 从 Spring Security 上下文中获取当前登录用户的 UnifiedPrincipal 实例
-	 *
-	 * @return 如果认证主体是 UnifiedPrincipal 类型，则返回该对象；否则返回 null
-	 * @author yang.lu
-	 */
-	public static UnifiedPrincipal getUnifiedPrincipal() {
-		return getUnifiedPrincipalOpt().orElse(null);
-	}
-
-	public static Optional<UnifiedPrincipal> getUnifiedPrincipalOpt() {
-		return Optional.ofNullable(SecurityContextHolder.getContext())
-			.map(SecurityContext::getAuthentication)
-			.map(Authentication::getPrincipal)
-			.filter(UnifiedPrincipal.class::isInstance)
-			.map(UnifiedPrincipal.class::cast);
-	}
-
-	public static String getUserId() {
-		return getUnifiedPrincipalOpt()
-			.map(UnifiedPrincipal::userId)
-			.orElse(null);
-	}
-
-	public static String getClientId() {
-		return getUnifiedPrincipalOpt()
-			.map(UnifiedPrincipal::clientId)
-			.orElse(null);
 	}
 }

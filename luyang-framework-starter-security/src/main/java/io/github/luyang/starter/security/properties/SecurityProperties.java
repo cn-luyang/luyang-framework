@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.config.properties;
+package io.github.luyang.starter.security.properties;
 
 import lombok.Getter;
 import lombok.Setter;

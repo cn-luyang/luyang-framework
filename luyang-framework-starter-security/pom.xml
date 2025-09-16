@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>io.github.cn-luyang</groupId>
-            <artifactId>luyang-framework-starter-dubbo</artifactId>
+            <artifactId>luyang-framework-starter-feign</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>

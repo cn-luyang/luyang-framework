@@ -1,8 +1,8 @@
-package io.github.luyang.starter.security.handler;
+package io.github.luyang.starter.security.web.handler;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.api.Result;
-import io.github.luyang.starter.security.enums.error.SecurityError;
+import io.github.luyang.starter.security.common.enums.SecurityErrorEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -14,7 +14,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
  *
  * @author yang.lu
  */
-public class SecurityAuthorizationHandler implements AccessDeniedHandler {
+public class AuthorizationHandler implements AccessDeniedHandler {
 
 	@Override
 	@SuppressWarnings("deprecation")
@@ -23,7 +23,7 @@ public class SecurityAuthorizationHandler implements AccessDeniedHandler {
 					   AccessDeniedException accessDeniedException) {
 
 		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-		String content = Result.failure(SecurityError.PERMISSION_DENIED).toString();
+		String content = Result.failure(SecurityErrorEnum.PERMISSION_DENIED).toString();
 		JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
 	}
 }
