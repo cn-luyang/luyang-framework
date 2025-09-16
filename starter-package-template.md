@@ -3,8 +3,9 @@
 ```azure
 project
     └── src/main/java/com/xxx/starter
-    ├── autoconfigure                # 自动配置入口（Spring Boot Starter 的核心配置）
-    │   └── StarterAutoConfiguration.java
+    ├── config                       # 配置入口（Spring Boot Starter 的核心配置）
+    │   ├── StarterConfig            # 配置
+    │   └── StarterAutoConfig.java   # 自动配置
     │
     ├── properties                   # 配置属性类（@ConfigurationProperties）
     │   └── StarterProperties.java
@@ -41,7 +42,7 @@ project
     │   └── retry                    # 重试机制
     │       └── RetryExecutor.java
     │
-    ├── web                          # Web 层扩展（与业务无关）
+    ├── support                      # Web 层支持（与业务无关）
     │   ├── resolver                 # 参数解析器
     │   │   └── UserArgumentResolver.java
     │   ├── advice                   # 全局异常/响应处理

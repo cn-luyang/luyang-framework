@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.web.handler;
+package io.github.luyang.starter.security.support.handler;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.api.Result;

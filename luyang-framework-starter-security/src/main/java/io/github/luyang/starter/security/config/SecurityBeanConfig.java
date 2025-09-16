@@ -1,9 +1,9 @@
-package io.github.luyang.starter.security.autoconfigure;
+package io.github.luyang.starter.security.config;
 
 import io.github.luyang.starter.security.remote.openfeign.RemoteTokenServiceApi;
-import io.github.luyang.starter.security.web.filter.TokenAuthenticationFilter;
-import io.github.luyang.starter.security.web.handler.AuthenticationHandler;
-import io.github.luyang.starter.security.web.handler.AuthorizationHandler;
+import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
+import io.github.luyang.starter.security.support.handler.AuthenticationHandler;
+import io.github.luyang.starter.security.support.handler.AuthorizationHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @author yang.lu
  */
 @Configuration
-public class SecurityBeanConfiguration {
+public class SecurityBeanConfig {
 
 	/**
 	 * 配置密码编码器

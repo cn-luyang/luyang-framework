@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.desensitize;
+package io.github.luyang.starter.web.features.desensitize;
 
 import cn.hutool.core.util.DesensitizedUtil;
 

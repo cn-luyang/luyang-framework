@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.web.filter;
+package io.github.luyang.starter.security.support.filter;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;

@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.constant;
+package io.github.luyang.starter.web.common.constant;
 
 public interface WebConstant {
 

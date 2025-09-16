@@ -1,12 +1,12 @@
-package io.github.luyang.starter.security.autoconfigure;
+package io.github.luyang.starter.security.config;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import io.github.luyang.starter.security.annotation.Anonymous;
 import io.github.luyang.starter.security.properties.SecurityProperties;
-import io.github.luyang.starter.security.web.filter.TokenAuthenticationFilter;
-import io.github.luyang.starter.security.web.handler.AuthenticationHandler;
-import io.github.luyang.starter.security.web.handler.AuthorizationHandler;
+import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
+import io.github.luyang.starter.security.support.handler.AuthenticationHandler;
+import io.github.luyang.starter.security.support.handler.AuthorizationHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +35,7 @@ import java.util.Set;
  */
 @Configuration
 @RequiredArgsConstructor
-public class SecurityFilterChainConfiguration {
+public class SecurityFilterChainConfig {
 
 	// 安全配置属性
 	private final SecurityProperties securityProperties;

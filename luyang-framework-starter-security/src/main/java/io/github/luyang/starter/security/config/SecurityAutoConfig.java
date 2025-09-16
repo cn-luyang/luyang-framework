@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.autoconfigure;
+package io.github.luyang.starter.security.config;
 
 import io.github.luyang.starter.security.properties.SecurityProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -18,9 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableMethodSecurity
 @EnableConfigurationProperties(SecurityProperties.class)
 @Import({
-	SecurityBeanConfiguration.class,
-	SecurityFilterChainConfiguration.class
+	SecurityBeanConfig.class,
+	SecurityFilterChainConfig.class
 })
-public class SecurityAutoConfiguration {
+public class SecurityAutoConfig {
 
 }

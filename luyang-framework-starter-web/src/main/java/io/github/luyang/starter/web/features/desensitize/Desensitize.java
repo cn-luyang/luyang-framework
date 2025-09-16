@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.desensitize;
+package io.github.luyang.starter.web.features.desensitize;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

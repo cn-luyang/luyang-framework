@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.constant.error;
+package io.github.luyang.starter.web.common.constant.error;
 
 import io.github.luyang.starter.base.enums.IBaseEnum;
 import lombok.AccessLevel;
