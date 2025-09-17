@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.common.enums;
 
-import io.github.luyang.starter.base.enums.IBaseEnum;
+import io.github.luyang.starter.base.common.enums.IBaseEnum;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

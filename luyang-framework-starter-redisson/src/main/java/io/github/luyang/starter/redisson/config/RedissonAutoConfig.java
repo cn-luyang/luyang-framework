@@ -1,8 +1,8 @@
 package io.github.luyang.starter.redisson.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.luyang.starter.redisson.config.properties.RedissonProperties;
 import io.github.luyang.starter.redisson.helper.RedissonHelper;
+import io.github.luyang.starter.redisson.properties.RedissonProperties;
 import io.github.luyang.starter.redisson.support.RedissonNameMapper;
 import org.redisson.api.RedissonClient;
 import org.redisson.codec.JsonJacksonCodec;

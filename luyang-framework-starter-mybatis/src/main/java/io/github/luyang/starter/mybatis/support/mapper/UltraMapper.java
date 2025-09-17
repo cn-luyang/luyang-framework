@@ -1,4 +1,4 @@
-package io.github.luyang.starter.mybatis.mapper;
+package io.github.luyang.starter.mybatis.support.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;

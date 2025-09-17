@@ -1,8 +1,8 @@
-package io.github.luyang.starter.mybatis.handler;
+package io.github.luyang.starter.mybatis.support.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import io.github.luyang.starter.base.constant.BaseConstant;
-import io.github.luyang.starter.mybatis.beans.BaseEntity;
+import io.github.luyang.starter.base.common.constant.BaseConstant;
+import io.github.luyang.starter.mybatis.common.model.BaseEntity;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.web.context.request.RequestAttributes;

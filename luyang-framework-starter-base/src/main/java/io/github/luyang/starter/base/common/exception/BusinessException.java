@@ -1,8 +1,8 @@
-package io.github.luyang.starter.base.error;
+package io.github.luyang.starter.base.common.exception;
 
 import cn.hutool.core.util.StrUtil;
-import io.github.luyang.starter.base.enums.IBaseEnum;
-import io.github.luyang.starter.base.enums.ResultEnum;
+import io.github.luyang.starter.base.common.enums.IBaseEnum;
+import io.github.luyang.starter.base.common.enums.ResultEnum;
 import lombok.Getter;
 import lombok.Setter;
 

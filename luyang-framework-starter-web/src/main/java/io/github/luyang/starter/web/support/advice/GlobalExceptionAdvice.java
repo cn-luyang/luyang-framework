@@ -2,9 +2,9 @@ package io.github.luyang.starter.web.support.advice;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import io.github.luyang.starter.base.api.Result;
-import io.github.luyang.starter.base.enums.ResultEnum;
-import io.github.luyang.starter.base.error.BusinessException;
+import io.github.luyang.starter.base.common.enums.ResultEnum;
+import io.github.luyang.starter.base.common.exception.BusinessException;
+import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.web.common.constant.error.WebError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;

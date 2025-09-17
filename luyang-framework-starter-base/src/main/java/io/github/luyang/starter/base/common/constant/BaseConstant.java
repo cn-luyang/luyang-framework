@@ -1,4 +1,4 @@
-package io.github.luyang.starter.base.constant;
+package io.github.luyang.starter.base.common.constant;
 
 /**
  * @author yang.lu

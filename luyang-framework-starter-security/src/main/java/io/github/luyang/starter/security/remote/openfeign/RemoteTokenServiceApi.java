@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.remote.openfeign;
 
-import io.github.luyang.starter.base.api.Result;
+import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.security.AuthUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package io.github.luyang.starter.redisson.queue;
+package io.github.luyang.starter.redisson.features.queue;
 
 /**
  * 基于 Redisson 客户端队列监听器

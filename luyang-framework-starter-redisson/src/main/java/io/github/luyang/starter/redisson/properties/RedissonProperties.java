@@ -1,4 +1,4 @@
-package io.github.luyang.starter.redisson.config.properties;
+package io.github.luyang.starter.redisson.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

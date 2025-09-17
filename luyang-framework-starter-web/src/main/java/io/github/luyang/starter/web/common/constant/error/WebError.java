@@ -1,6 +1,6 @@
 package io.github.luyang.starter.web.common.constant.error;
 
-import io.github.luyang.starter.base.enums.IBaseEnum;
+import io.github.luyang.starter.base.common.enums.IBaseEnum;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

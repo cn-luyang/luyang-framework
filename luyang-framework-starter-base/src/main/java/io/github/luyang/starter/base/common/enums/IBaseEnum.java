@@ -1,4 +1,4 @@
-package io.github.luyang.starter.base.enums;
+package io.github.luyang.starter.base.common.enums;
 
 import cn.hutool.core.util.ObjectUtil;
 

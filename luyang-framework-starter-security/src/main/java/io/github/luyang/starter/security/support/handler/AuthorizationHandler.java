@@ -1,7 +1,7 @@
 package io.github.luyang.starter.security.support.handler;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
-import io.github.luyang.starter.base.api.Result;
+import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.security.common.enums.SecurityErrorEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

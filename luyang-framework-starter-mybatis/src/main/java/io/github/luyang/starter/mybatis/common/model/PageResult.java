@@ -1,4 +1,4 @@
-package io.github.luyang.starter.mybatis.beans;
+package io.github.luyang.starter.mybatis.common.model;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 

@@ -1,4 +1,4 @@
-package io.github.luyang.starter.redisson.queue;
+package io.github.luyang.starter.redisson.features.queue;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

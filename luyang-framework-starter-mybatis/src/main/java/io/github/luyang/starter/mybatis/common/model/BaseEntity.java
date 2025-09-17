@@ -1,4 +1,4 @@
-package io.github.luyang.starter.mybatis.beans;
+package io.github.luyang.starter.mybatis.common.model;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

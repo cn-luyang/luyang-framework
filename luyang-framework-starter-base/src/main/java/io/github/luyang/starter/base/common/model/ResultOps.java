@@ -1,7 +1,7 @@
-package io.github.luyang.starter.base.api;
+package io.github.luyang.starter.base.common.model;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.luyang.starter.base.enums.ResultEnum;
+import io.github.luyang.starter.base.common.enums.ResultEnum;
 
 import java.util.Objects;
 import java.util.Optional;

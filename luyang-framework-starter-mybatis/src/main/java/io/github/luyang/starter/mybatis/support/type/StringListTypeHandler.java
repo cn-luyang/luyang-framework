@@ -1,4 +1,4 @@
-package io.github.luyang.starter.mybatis.type;
+package io.github.luyang.starter.mybatis.support.type;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.StrPool;
