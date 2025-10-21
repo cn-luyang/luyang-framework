@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.config;
 
-import io.github.luyang.starter.security.remote.openfeign.RemoteTokenServiceApi;
+import io.github.luyang.starter.security.remote.feign.RemoteTokenServiceApi;
 import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
 import io.github.luyang.starter.security.support.handler.AuthenticationHandler;
 import io.github.luyang.starter.security.support.handler.AuthorizationHandler;

@@ -7,7 +7,7 @@ import io.github.luyang.starter.base.common.constant.BaseConstant;
 import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.security.AuthUser;
 import io.github.luyang.starter.security.common.enums.SecurityErrorEnum;
-import io.github.luyang.starter.security.remote.openfeign.RemoteTokenServiceApi;
+import io.github.luyang.starter.security.remote.feign.RemoteTokenServiceApi;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
