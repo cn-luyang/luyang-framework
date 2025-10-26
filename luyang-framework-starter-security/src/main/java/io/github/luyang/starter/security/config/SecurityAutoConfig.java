@@ -18,8 +18,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableMethodSecurity
 @EnableConfigurationProperties(SecurityProperties.class)
 @Import({
-	SecurityBeanConfig.class,
-	SecurityFilterChainConfig.class
+    SecurityBeanConfig.class,
+    SecurityFilterChainConfig.class
 })
 public class SecurityAutoConfig {
 

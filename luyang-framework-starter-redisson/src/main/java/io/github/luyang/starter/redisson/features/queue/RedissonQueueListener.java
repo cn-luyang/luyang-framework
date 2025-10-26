@@ -7,11 +7,11 @@ package io.github.luyang.starter.redisson.features.queue;
  */
 public interface RedissonQueueListener<T> {
 
-	/**
-	 * 消费队列消息
-	 *
-	 * @param content 消息内容
-	 * @author yang.lu
-	 */
-	void consume(T content);
+    /**
+     * 消费队列消息
+     *
+     * @param content 消息内容
+     * @author yang.lu
+     */
+    void consume(T content);
 }

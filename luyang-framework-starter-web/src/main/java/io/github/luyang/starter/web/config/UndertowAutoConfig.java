@@ -30,49 +30,49 @@ import static io.undertow.UndertowOptions.ENABLE_HTTP2;
 @AutoConfigureBefore(ServletWebServerFactoryAutoConfiguration.class)
 public class UndertowAutoConfig implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
-	private final ServerProperties serverProperties;
+    private final ServerProperties serverProperties;
 
-	/**
-	 * 自定义 Undertow 服务器配置
-	 *
-	 * @author yang.lu
-	 */
-	@Override
-	public void customize(UndertowServletWebServerFactory factory) {
-		factory.addDeploymentInfoCustomizers(deploymentInfo -> {
-			WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
-			webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(isDirectBuffers(), getBufferSizeAsInt()));
-			deploymentInfo.addServletContextAttribute(
-				WebSocketDeploymentInfo.ATTRIBUTE_NAME,
-				webSocketDeploymentInfo
-			);
-		});
-	}
+    /**
+     * 自定义 Undertow 服务器配置
+     *
+     * @author yang.lu
+     */
+    @Override
+    public void customize(UndertowServletWebServerFactory factory) {
+        factory.addDeploymentInfoCustomizers(deploymentInfo -> {
+            WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
+            webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(isDirectBuffers(), getBufferSizeAsInt()));
+            deploymentInfo.addServletContextAttribute(
+                WebSocketDeploymentInfo.ATTRIBUTE_NAME,
+                webSocketDeploymentInfo
+            );
+        });
+    }
 
-	/**
-	 * HTTP/2配置
-	 *
-	 * @author yang.lu
-	 */
-	@Bean
-	@ConditionalOnProperty(prefix = "server.http2", name = "enabled", havingValue = "true", matchIfMissing = true)
-	public WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowHttp2Customizer() {
-		return factory -> factory.addBuilderCustomizers(
-			builder -> builder.setServerOption(ENABLE_HTTP2, true)
-		);
-	}
+    /**
+     * HTTP/2配置
+     *
+     * @author yang.lu
+     */
+    @Bean
+    @ConditionalOnProperty(prefix = "server.http2", name = "enabled", havingValue = "true", matchIfMissing = true)
+    public WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowHttp2Customizer() {
+        return factory -> factory.addBuilderCustomizers(
+            builder -> builder.setServerOption(ENABLE_HTTP2, true)
+        );
+    }
 
-	private int getBufferSizeAsInt() {
-		DataSize bufferSize = serverProperties.getUndertow().getBufferSize();
-		if (null != bufferSize) {
-			return (int) bufferSize.toBytes();
-		}
+    private int getBufferSizeAsInt() {
+        DataSize bufferSize = serverProperties.getUndertow().getBufferSize();
+        if (null != bufferSize) {
+            return (int) bufferSize.toBytes();
+        }
 
-		return 512;
-	}
+        return 512;
+    }
 
-	private boolean isDirectBuffers() {
-		Boolean directBuffers = serverProperties.getUndertow().getDirectBuffers();
-		return null != directBuffers ? directBuffers : false;
-	}
+    private boolean isDirectBuffers() {
+        Boolean directBuffers = serverProperties.getUndertow().getDirectBuffers();
+        return null != directBuffers ? directBuffers : false;
+    }
 }

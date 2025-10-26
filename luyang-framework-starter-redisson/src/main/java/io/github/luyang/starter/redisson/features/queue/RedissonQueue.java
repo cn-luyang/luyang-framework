@@ -14,8 +14,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RedissonQueue {
 
-	/**
-	 * 设置队列名
-	 */
-	String value();
+    /**
+     * 设置队列名
+     */
+    String value();
 }

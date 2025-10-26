@@ -15,7 +15,7 @@ import java.util.Set;
 @ConfigurationProperties(prefix = SecurityProperties.PREFIX)
 public class SecurityProperties {
 
-	public static final String PREFIX = "luyang.security";
+    public static final String PREFIX = "luyang.security";
 
-	private Set<String> ignoreUrls = new HashSet<>();
+    private Set<String> ignoreUrls = new HashSet<>();
 }

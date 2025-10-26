@@ -16,14 +16,14 @@ import org.springframework.security.web.access.AccessDeniedHandler;
  */
 public class AuthorizationHandler implements AccessDeniedHandler {
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public void handle(HttpServletRequest request,
-					   HttpServletResponse response,
-					   AccessDeniedException accessDeniedException) {
+    @Override
+    @SuppressWarnings("deprecation")
+    public void handle(HttpServletRequest request,
+                       HttpServletResponse response,
+                       AccessDeniedException accessDeniedException) {
 
-		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-		String content = Result.failure(SecurityErrorEnum.PERMISSION_DENIED).toString();
-		JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
-	}
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        String content = Result.failure(SecurityErrorEnum.PERMISSION_DENIED).toString();
+        JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
+    }
 }

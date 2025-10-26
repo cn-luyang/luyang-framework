@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.util;
 
-import cn.hutool.core.util.StrUtil;
+import io.github.luyang.base.util.StrUtil;
 import io.github.luyang.starter.security.common.constant.SecurityConstant;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
@@ -13,24 +13,24 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class SecurityUtil {
 
-	/**
-	 * 从当前请求中获取认证令牌
-	 *
-	 * @param request 当前请求
-	 * @return 令牌
-	 * @author yang.lu
-	 */
-	public static String getAccessTokenValue(HttpServletRequest request) {
+    /**
+     * 从当前请求中获取认证令牌
+     *
+     * @param request 当前请求
+     * @return 令牌
+     * @author yang.lu
+     */
+    public static String getAccessTokenValue(HttpServletRequest request) {
 
-		String token = StrUtil.blankToDefault(
-			request.getHeader(SecurityConstant.X_ACCESS_TOKEN),
-			request.getParameter(SecurityConstant.X_ACCESS_TOKEN)
-		);
+        String token = StrUtil.blankToDefault(
+            request.getHeader(SecurityConstant.X_ACCESS_TOKEN),
+            request.getParameter(SecurityConstant.X_ACCESS_TOKEN)
+        );
 
-		if (StrUtil.isBlank(token)) {
-			return null;
-		}
+        if (StrUtil.isBlank(token)) {
+            return null;
+        }
 
-		return StrUtil.removePrefix(token, "Bearer ");
-	}
+        return StrUtil.removePrefix(token, "Bearer ");
+    }
 }

@@ -16,14 +16,14 @@ import org.springframework.security.web.AuthenticationEntryPoint;
  */
 public class AuthenticationHandler implements AuthenticationEntryPoint {
 
-	@Override
-	@SuppressWarnings("deprecation")
-	public void commence(HttpServletRequest request,
-						 HttpServletResponse response,
-						 AuthenticationException authException) {
+    @Override
+    @SuppressWarnings("deprecation")
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException) {
 
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		String content = Result.failure(SecurityErrorEnum.MISSING_ACCESS_TOKEN).toString();
-		JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
-	}
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        String content = Result.failure(SecurityErrorEnum.MISSING_ACCESS_TOKEN).toString();
+        JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
+    }
 }

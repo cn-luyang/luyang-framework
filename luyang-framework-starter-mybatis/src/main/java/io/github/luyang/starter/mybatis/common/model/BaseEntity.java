@@ -19,24 +19,24 @@ import java.time.LocalDateTime;
 @Setter
 public class BaseEntity implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = -6552230978610685185L;
+    @Serial
+    private static final long serialVersionUID = -6552230978610685185L;
 
-	/** 创建人 */
-	private String createdBy;
+    /** 创建人 */
+    private String createdBy;
 
-	/** 创建时间 */
-	@TableField(fill = FieldFill.INSERT)
-	private LocalDateTime createdTime;
+    /** 创建时间 */
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createdTime;
 
-	/** 最后更新人 */
-	private String updatedBy;
+    /** 最后更新人 */
+    private String updatedBy;
 
-	/** 更新时间 */
-	@TableField(fill = FieldFill.INSERT_UPDATE)
-	private LocalDateTime updatedTime;
+    /** 更新时间 */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updatedTime;
 
-	/** 逻辑删除: [删除:true] [未删除:false] */
-	@TableLogic
-	private Boolean deleted;
+    /** 逻辑删除: [删除:true] [未删除:false] */
+    @TableLogic
+    private Boolean deleted;
 }

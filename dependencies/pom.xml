@@ -175,6 +175,11 @@
 
             <dependency>
                 <groupId>io.github.cn-luyang</groupId>
+                <artifactId>luyang-framework-base-util</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.cn-luyang</groupId>
                 <artifactId>luyang-framework-starter-base</artifactId>
                 <version>${revision}</version>
             </dependency>

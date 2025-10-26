@@ -18,34 +18,34 @@ import org.springframework.core.env.Environment;
 @AutoConfiguration
 public class WebAutoConfig {
 
-	@Bean
-	public FilterRegistrationBean<TraceIdFilter> traceIdFilter() {
-		FilterRegistrationBean<TraceIdFilter> registrationBean = new FilterRegistrationBean<>();
-		registrationBean.setFilter(new TraceIdFilter());
-		registrationBean.addUrlPatterns("/*");
-		registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return registrationBean;
-	}
+    @Bean
+    public FilterRegistrationBean<TraceIdFilter> traceIdFilter() {
+        FilterRegistrationBean<TraceIdFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new TraceIdFilter());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return registrationBean;
+    }
 
-	/**
-	 * 注册全局异常处理器
-	 * 统一处理控制器层异常
-	 *
-	 * @author yang.lu
-	 */
-	@Bean
-	public GlobalExceptionAdvice globalExceptionAdvice() {
-		return new GlobalExceptionAdvice();
-	}
+    /**
+     * 注册全局异常处理器
+     * 统一处理控制器层异常
+     *
+     * @author yang.lu
+     */
+    @Bean
+    public GlobalExceptionAdvice globalExceptionAdvice() {
+        return new GlobalExceptionAdvice();
+    }
 
-	/**
-	 * 注册Banner初始化器
-	 * 负责应用启动时的Banner显示
-	 *
-	 * @author yang.lu
-	 */
-	@Bean
-	public BannerInitializer bannerInitializer(Environment environment, ApplicationContext context) {
-		return new BannerInitializer(environment, context);
-	}
+    /**
+     * 注册Banner初始化器
+     * 负责应用启动时的Banner显示
+     *
+     * @author yang.lu
+     */
+    @Bean
+    public BannerInitializer bannerInitializer(Environment environment, ApplicationContext context) {
+        return new BannerInitializer(environment, context);
+    }
 }

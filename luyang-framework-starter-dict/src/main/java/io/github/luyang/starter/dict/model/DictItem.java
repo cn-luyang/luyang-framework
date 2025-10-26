@@ -10,10 +10,10 @@ import lombok.Setter;
 @Setter
 public class DictItem{
 
-	private String id;
-	private String dictCode;
-	private String itemName;
-	private String itemValue;
-	private int sortOrder;
-	private String remark;
+    private String id;
+    private String dictCode;
+    private String itemName;
+    private String itemValue;
+    private int sortOrder;
+    private String remark;
 }

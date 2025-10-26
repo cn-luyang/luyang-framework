@@ -1,8 +1,8 @@
 package io.github.luyang.starter.mybatis.support.type;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.text.StrPool;
-import cn.hutool.core.util.StrUtil;
+import io.github.luyang.base.util.CollUtil;
+import io.github.luyang.base.util.StrUtil;
+import io.github.luyang.base.util.text.StrPool;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
@@ -25,44 +25,44 @@ import java.util.List;
 @MappedTypes(List.class)
 public class StringListTypeHandler implements TypeHandler<List<String>> {
 
-	@Override
-	public void setParameter(PreparedStatement ps, int i, List<String> strings, JdbcType jdbcType) throws SQLException {
-		// 将字符串列表以逗号连接并设置到 PreparedStatement
-		ps.setString(i, CollUtil.join(strings, StrPool.COMMA));
-	}
+    @Override
+    public void setParameter(PreparedStatement ps, int i, List<String> strings, JdbcType jdbcType) throws SQLException {
+        // 将字符串列表以逗号连接并设置到 PreparedStatement
+        ps.setString(i, CollUtil.join(strings, StrPool.COMMA));
+    }
 
-	@Override
-	public List<String> getResult(ResultSet rs, String columnName) throws SQLException {
-		// 从 ResultSet 中获取字符串并解析为列表
-		String value = rs.getString(columnName);
-		return parseResult(value);
-	}
+    @Override
+    public List<String> getResult(ResultSet rs, String columnName) throws SQLException {
+        // 从 ResultSet 中获取字符串并解析为列表
+        String value = rs.getString(columnName);
+        return parseResult(value);
+    }
 
-	@Override
-	public List<String> getResult(ResultSet rs, int columnIndex) throws SQLException {
-		// 根据列索引获取字符串并解析为列表
-		String value = rs.getString(columnIndex);
-		return parseResult(value);
-	}
+    @Override
+    public List<String> getResult(ResultSet rs, int columnIndex) throws SQLException {
+        // 根据列索引获取字符串并解析为列表
+        String value = rs.getString(columnIndex);
+        return parseResult(value);
+    }
 
-	@Override
-	public List<String> getResult(CallableStatement cs, int columnIndex) throws SQLException {
-		// 从 CallableStatement 中获取字符串并解析为列表
-		String value = cs.getString(columnIndex);
-		return parseResult(value);
-	}
+    @Override
+    public List<String> getResult(CallableStatement cs, int columnIndex) throws SQLException {
+        // 从 CallableStatement 中获取字符串并解析为列表
+        String value = cs.getString(columnIndex);
+        return parseResult(value);
+    }
 
-	/**
-	 * 解析字符串，将其拆分为字符串列表
-	 *
-	 * @param value 输入字符串
-	 * @return List<String> 拆分后的字符串列表，如果输入为空则返回 null
-	 * @author yang.lu
-	 */
-	private List<String> parseResult(String value) {
-		return StrUtil.isBlank(value)
-			? null
-			// 拆分并去除空白
-			: StrUtil.splitTrim(value, StrPool.COMMA);
-	}
+    /**
+     * 解析字符串，将其拆分为字符串列表
+     *
+     * @param value 输入字符串
+     * @return List<String> 拆分后的字符串列表，如果输入为空则返回 null
+     * @author yang.lu
+     */
+    private List<String> parseResult(String value) {
+        return StrUtil.isBlank(value)
+            ? null
+            // 拆分并去除空白
+            : StrUtil.splitTrim(value, StrPool.COMMA);
+    }
 }

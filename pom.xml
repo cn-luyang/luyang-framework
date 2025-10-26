@@ -75,6 +75,7 @@
 
     <modules>
         <module>dependencies</module>
+        <module>luyang-framework-base-util</module>
         <module>luyang-framework-starter-base</module>
         <module>luyang-framework-starter-dict</module>
         <module>luyang-framework-starter-dubbo</module>

@@ -19,43 +19,43 @@ import java.util.Objects;
  */
 public class DefaultFieldHandler implements MetaObjectHandler {
 
-	@Override
-	public void insertFill(MetaObject metaObject) {
-		if (metaObject == null) return;
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        if (metaObject == null) return;
 
-		if (Objects.requireNonNull(metaObject.getOriginalObject()) instanceof BaseEntity baseEntity) {
-			var now = LocalDateTime.now();
-			baseEntity.setCreatedTime(Objects.requireNonNullElse(baseEntity.getCreatedTime(), now));
-			baseEntity.setUpdatedTime(Objects.requireNonNullElse(baseEntity.getUpdatedTime(), now));
-			String userId = getUserId();
-			baseEntity.setCreatedBy(userId);
-			baseEntity.setUpdatedBy(userId);
-		}
-	}
+        if (Objects.requireNonNull(metaObject.getOriginalObject()) instanceof BaseEntity baseEntity) {
+            var now = LocalDateTime.now();
+            baseEntity.setCreatedTime(Objects.requireNonNullElse(baseEntity.getCreatedTime(), now));
+            baseEntity.setUpdatedTime(Objects.requireNonNullElse(baseEntity.getUpdatedTime(), now));
+            String userId = getUserId();
+            baseEntity.setCreatedBy(userId);
+            baseEntity.setUpdatedBy(userId);
+        }
+    }
 
-	@Override
-	public void updateFill(MetaObject metaObject) {
-		if (metaObject == null) return;
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        if (metaObject == null) return;
 
-		if (metaObject.getOriginalObject() instanceof BaseEntity baseEntity) {
-			baseEntity.setUpdatedTime(
-				Objects.requireNonNullElseGet(baseEntity.getUpdatedTime(), LocalDateTime::now)
-			);
+        if (metaObject.getOriginalObject() instanceof BaseEntity baseEntity) {
+            baseEntity.setUpdatedTime(
+                Objects.requireNonNullElseGet(baseEntity.getUpdatedTime(), LocalDateTime::now)
+            );
 
-			String userId = getUserId();
-			baseEntity.setUpdatedBy(userId);
-		}
-	}
+            String userId = getUserId();
+            baseEntity.setUpdatedBy(userId);
+        }
+    }
 
-	private String getUserId() {
-		RequestAttributes att = RequestContextHolder.getRequestAttributes();
-		if (!(att instanceof ServletRequestAttributes)) {
-			// 非 Web 调用（定时器、MQ、单元测试等）
-			return null;
-		}
+    private String getUserId() {
+        RequestAttributes att = RequestContextHolder.getRequestAttributes();
+        if (!(att instanceof ServletRequestAttributes)) {
+            // 非 Web 调用（定时器、MQ、单元测试等）
+            return null;
+        }
 
-		HttpServletRequest req = ((ServletRequestAttributes) att).getRequest();
-		return (String) req.getAttribute(BaseConstant.ATTR_USER_ID);
-	}
+        HttpServletRequest req = ((ServletRequestAttributes) att).getRequest();
+        return (String) req.getAttribute(BaseConstant.ATTR_USER_ID);
+    }
 }
 

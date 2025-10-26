@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "open-service", path = "/auth")
 public interface RemoteAuthFeign {
 
-	@PostMapping("/token")
-	Result<AccessTokenResp> getAccessToken(@RequestParam("grant_type") String grantType,
-										   @RequestParam("client_id") String clientId,
-										   @RequestParam("client_secret") String clientSecret);
+    @PostMapping("/token")
+    Result<AccessTokenResp> getAccessToken(@RequestParam("grant_type") String grantType,
+                                           @RequestParam("client_id") String clientId,
+                                           @RequestParam("client_secret") String clientSecret);
 
-	@GetMapping("/check-token")
-	Result<CheckTokenResp> checkToken(@RequestParam("token") String token);
+    @GetMapping("/check-token")
+    Result<CheckTokenResp> checkToken(@RequestParam("token") String token);
 }

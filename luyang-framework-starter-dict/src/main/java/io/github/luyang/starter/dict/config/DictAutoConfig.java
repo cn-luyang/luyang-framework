@@ -15,23 +15,23 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @AutoConfiguration
 public class DictAutoConfig {
 
-	@Bean
-	public DictRepository dictRepository(JdbcTemplate jdbcTemplate) {
-		return new DictRepository(jdbcTemplate);
-	}
+    @Bean
+    public DictRepository dictRepository(JdbcTemplate jdbcTemplate) {
+        return new DictRepository(jdbcTemplate);
+    }
 
-	@Bean
-	public DictCache dictCache(RedissonClient redissonClient) {
-		return new DictCache(redissonClient);
-	}
+    @Bean
+    public DictCache dictCache(RedissonClient redissonClient) {
+        return new DictCache(redissonClient);
+    }
 
-	@Bean
-	public DictService dictService(DictCache dictCache, DictRepository dictRepository) {
-		return new DictService(dictCache, dictRepository);
-	}
+    @Bean
+    public DictService dictService(DictCache dictCache, DictRepository dictRepository) {
+        return new DictService(dictCache, dictRepository);
+    }
 
-	@Bean
-	public DictController dictController(DictService dictService) {
-		return new DictController(dictService);
-	}
+    @Bean
+    public DictController dictController(DictService dictService) {
+        return new DictController(dictService);
+    }
 }

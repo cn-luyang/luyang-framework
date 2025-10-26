@@ -17,14 +17,14 @@ import java.util.Map;
  * @author yang.lu
  */
 public record AuthUser(
-	String clientId,
-	String userId,
-	String zhName,
-	String enName,
-	LocalDateTime expireTime,
-	Map<String, Object> attachedInfo
+    String clientId,
+    String userId,
+    String zhName,
+    String enName,
+    LocalDateTime expireTime,
+    Map<String, Object> attachedInfo
 ) implements Serializable {
 
-	@Serial
-	private static final long serialVersionUID = 4758668578675934182L;
+    @Serial
+    private static final long serialVersionUID = 4758668578675934182L;
 }

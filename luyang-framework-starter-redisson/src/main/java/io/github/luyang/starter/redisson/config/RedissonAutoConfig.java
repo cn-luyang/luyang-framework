@@ -24,43 +24,43 @@ import java.util.Optional;
 @EnableConfigurationProperties(RedissonProperties.class)
 public class RedissonAutoConfig {
 
-	private final ObjectMapper objectMapper;
-	private final RedissonProperties redissonProperties;
-	private final ApplicationContext applicationContext;
+    private final ObjectMapper objectMapper;
+    private final RedissonProperties redissonProperties;
+    private final ApplicationContext applicationContext;
 
-	public RedissonAutoConfig(ObjectMapper objectMapper,
-								 RedissonProperties redissonProperties,
-								 ApplicationContext applicationContext) {
-		this.objectMapper = objectMapper;
-		this.redissonProperties = redissonProperties;
-		this.applicationContext = applicationContext;
-	}
+    public RedissonAutoConfig(ObjectMapper objectMapper,
+                                 RedissonProperties redissonProperties,
+                                 ApplicationContext applicationContext) {
+        this.objectMapper = objectMapper;
+        this.redissonProperties = redissonProperties;
+        this.applicationContext = applicationContext;
+    }
 
-	@Bean
-	public RedissonHelper redissonHelper(RedissonClient redissonClient) {
-		return new RedissonHelper(redissonClient);
-	}
+    @Bean
+    public RedissonHelper redissonHelper(RedissonClient redissonClient) {
+        return new RedissonHelper(redissonClient);
+    }
 
-	@Bean
-	public RedissonAutoConfigurationCustomizer redissonAutoConfigurationCustomizer() {
-		return config -> {
-			// 设置 JSON 编解码器
-			config.setCodec(new JsonJacksonCodec(objectMapper));
-			String keyPrefix = Optional.ofNullable(redissonProperties.getPrefix())
-				.map(String::toUpperCase)
-				.orElse(applicationContext.getEnvironment().getProperty("spring.application.name"));
+    @Bean
+    public RedissonAutoConfigurationCustomizer redissonAutoConfigurationCustomizer() {
+        return config -> {
+            // 设置 JSON 编解码器
+            config.setCodec(new JsonJacksonCodec(objectMapper));
+            String keyPrefix = Optional.ofNullable(redissonProperties.getPrefix())
+                .map(String::toUpperCase)
+                .orElse(applicationContext.getEnvironment().getProperty("spring.application.name"));
 
-			RedissonNameMapper redissonNameMapper = new RedissonNameMapper(keyPrefix);
+            RedissonNameMapper redissonNameMapper = new RedissonNameMapper(keyPrefix);
 
-			// 单机模式
-			if (config.isSingleConfig()) {
-				config.useSingleServer().setNameMapper(redissonNameMapper);
-			}
+            // 单机模式
+            if (config.isSingleConfig()) {
+                config.useSingleServer().setNameMapper(redissonNameMapper);
+            }
 
-			// 集群模式
-			if (config.isClusterConfig()) {
-				config.useClusterServers().setNameMapper(redissonNameMapper);
-			}
-		};
-	}
+            // 集群模式
+            if (config.isClusterConfig()) {
+                config.useClusterServers().setNameMapper(redissonNameMapper);
+            }
+        };
+    }
 }

@@ -10,15 +10,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = RedissonProperties.PREFIX)
 public class RedissonProperties {
 
-	public static final String PREFIX = "spring.data.redis";
+    public static final String PREFIX = "spring.data.redis";
 
-	private String prefix;
+    private String prefix;
 
-	public String getPrefix() {
-		return prefix;
-	}
+    public String getPrefix() {
+        return prefix;
+    }
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 }

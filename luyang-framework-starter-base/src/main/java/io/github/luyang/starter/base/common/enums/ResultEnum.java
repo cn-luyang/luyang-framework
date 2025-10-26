@@ -13,9 +13,9 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ResultEnum implements IBaseEnum<String> {
 
-	SUCCESS("0", "Success"),
-	FAILURE("500", "Failure");
+    SUCCESS("0", "Success"),
+    FAILURE("500", "Failure");
 
-	private final String code;
-	private final String message;
+    private final String code;
+    private final String message;
 }
