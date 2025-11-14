@@ -1,7 +1,7 @@
 package io.github.luyang.starter.base.common.model;
 
-import io.github.luyang.base.util.ObjectUtil;
-import io.github.luyang.base.util.StrUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.base.common.enums.IBaseEnum;
 import io.github.luyang.starter.base.common.enums.ResultEnum;
 import lombok.AccessLevel;

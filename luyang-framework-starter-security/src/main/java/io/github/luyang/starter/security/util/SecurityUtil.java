@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.util;
 
-import io.github.luyang.base.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.security.common.constant.SecurityConstant;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;

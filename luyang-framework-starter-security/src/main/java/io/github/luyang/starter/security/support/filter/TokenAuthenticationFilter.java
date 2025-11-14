@@ -1,8 +1,8 @@
 package io.github.luyang.starter.security.support.filter;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
-import io.github.luyang.base.util.StrUtil;
 import io.github.luyang.starter.base.common.constant.BaseConstant;
 import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.security.AuthUser;

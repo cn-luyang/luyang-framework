@@ -1,7 +1,7 @@
 package io.github.luyang.starter.security.config;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
-import io.github.luyang.base.util.CollUtil;
 import io.github.luyang.starter.security.annotation.Anonymous;
 import io.github.luyang.starter.security.properties.SecurityProperties;
 import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
