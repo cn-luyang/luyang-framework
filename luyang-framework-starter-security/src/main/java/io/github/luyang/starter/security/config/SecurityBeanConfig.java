@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.config;
 
-import io.github.luyang.starter.security.remote.feign.RemoteTokenServiceApi;
+import io.github.luyang.starter.security.remote.feign.RemoteAuthApi;
 import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
 import io.github.luyang.starter.security.support.handler.AuthenticationHandler;
 import io.github.luyang.starter.security.support.handler.AuthorizationHandler;
@@ -72,12 +72,12 @@ public class SecurityBeanConfig {
     /**
      * 配置Token认证过滤器
      *
-     * @param remoteTokenServiceApi 远程Token验证服务
+     * @param remoteAuthApi 远程Token验证服务
      * @return TokenAuthenticationFilter 实例
      * @author yang.lu
      */
     @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter(RemoteTokenServiceApi remoteTokenServiceApi) {
-        return new TokenAuthenticationFilter(remoteTokenServiceApi);
+    public TokenAuthenticationFilter tokenAuthenticationFilter(RemoteAuthApi remoteAuthApi) {
+        return new TokenAuthenticationFilter(remoteAuthApi);
     }
 }

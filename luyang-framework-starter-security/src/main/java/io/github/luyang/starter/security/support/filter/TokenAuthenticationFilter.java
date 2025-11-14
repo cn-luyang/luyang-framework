@@ -7,7 +7,7 @@ import io.github.luyang.starter.base.common.constant.BaseConstant;
 import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.security.AuthUser;
 import io.github.luyang.starter.security.common.enums.SecurityErrorEnum;
-import io.github.luyang.starter.security.remote.feign.RemoteTokenServiceApi;
+import io.github.luyang.starter.security.remote.feign.RemoteAuthApi;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -42,7 +42,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     /**
      * 远程Token验证服务
      */
-    private final RemoteTokenServiceApi remoteTokenServiceApi;
+    private final RemoteAuthApi remoteAuthApi;
 
     /**
      * 对每个请求进行Token验证和认证处理
@@ -95,7 +95,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      */
     private AuthUser validateToken(String accessToken) {
         // 调用远程Token验证服务
-        Result<AuthUser> authUserResult = remoteTokenServiceApi.validateToken(accessToken);
+        Result<AuthUser> authUserResult = null;
+//        Result<AuthUser> authUserResult = remoteAuthApi.checkToken(accessToken);
 
         // 验证失败时抛出异常
         if (!authUserResult.isSuccess() || BeanUtil.isEmpty(authUserResult.getData())) {

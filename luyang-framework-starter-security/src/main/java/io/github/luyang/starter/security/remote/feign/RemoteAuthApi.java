@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "open-service", path = "/auth")
-public interface RemoteAuthFeign {
+public interface RemoteAuthApi {
 
     @PostMapping("/token")
     Result<AccessTokenResp> getAccessToken(@RequestParam("grant_type") String grantType,
