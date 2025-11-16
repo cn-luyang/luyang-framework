@@ -28,7 +28,7 @@ public class ResultOps<T> {
      * @author yang.lu
      */
     private ResultOps(Result<T> value) {
-        this.value = value;
+		this.value = Objects.requireNonNull(value, "Result cannot be null");
     }
 
     /**
@@ -83,7 +83,7 @@ public class ResultOps<T> {
      * @author yang.lu
      */
     public static <T> ResultOps<T> of(Result<T> value) {
-        return new ResultOps<>(Objects.requireNonNull(value));
+        return new ResultOps<>(value);
     }
 
     /**
