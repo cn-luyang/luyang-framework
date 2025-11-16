@@ -72,6 +72,7 @@
 
         <redisson-spring-boot-starter.version>3.45.1</redisson-spring-boot-starter.version>
 
+        <commons-lang3.version>3.20.0</commons-lang3.version>
         <!-- Hutool官网 https://hutool.cn/ -->
         <hutool.version>5.8.39</hutool.version>
         <mapstruct.version>1.6.3</mapstruct.version>
@@ -137,6 +138,11 @@
                 <version>${redisson-spring-boot-starter.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
