@@ -20,13 +20,13 @@ import java.util.Optional;
 public class SecurityUtil {
 
 	/**
-	 * 从当前请求中获取认证令牌
+	 * 从当前请求中获取令牌
 	 *
 	 * @param request 当前请求
 	 * @return 令牌
 	 * @author yang.lu
 	 */
-	public static String getAccessTokenValue(HttpServletRequest request) {
+	public static String getTokenValue(HttpServletRequest request) {
 
 		String token = StrUtil.blankToDefault(
 			request.getHeader(SecurityConstant.X_ACCESS_TOKEN),

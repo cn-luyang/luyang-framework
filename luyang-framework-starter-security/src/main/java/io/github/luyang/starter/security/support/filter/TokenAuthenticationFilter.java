@@ -60,18 +60,18 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
         throws ServletException, IOException {
 
-        // 从请求中提取Access Token
-        String accessToken = SecurityUtil.getAccessTokenValue(request);
+        // 从请求中提取 Token
+        String token = SecurityUtil.getTokenValue(request);
 
         // 如果Token为空，直接放行（由后续认证机制处理）
-        if (StrUtil.isBlank(accessToken)) {
+        if (StrUtil.isBlank(token)) {
             chain.doFilter(request, response);
             return;
         }
 
         try {
             // 验证Token有效性
-            AuthUser authUser = validateToken(accessToken);
+            AuthUser authUser = validateToken(token);
             // 设置认证信息到Security上下文
             setAuthentication(request, authUser);
             // 填充认证信息到请求属性
@@ -89,13 +89,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      * 验证Token有效性
      * 调用远程服务验证Token并返回用户主体信息
      *
-     * @param accessToken 访问令牌
+     * @param token 访问令牌
      * @return 统一用户主体信息
      * @author yang.lu
      */
-    private AuthUser validateToken(String accessToken) {
+    private AuthUser validateToken(String token) {
         // 调用远程Token验证服务
-        Result<AuthUser> authUserResult = securityTokenRpc.checkToken(accessToken);
+        Result<AuthUser> authUserResult = securityTokenRpc.checkToken(token);
 
 		return ResultOps.of(authUserResult)
 			.ifFailure(r -> new AuthenticationServiceException("令牌验证失败: " + r.getMessage()))
