@@ -1,10 +1,10 @@
 package io.github.luyang.starter.security.support.filter;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.common.constant.BaseConstant;
 import io.github.luyang.starter.base.common.model.Result;
+import io.github.luyang.starter.base.common.model.ResultOps;
 import io.github.luyang.starter.security.AuthUser;
 import io.github.luyang.starter.security.common.enums.SecurityErrorEnum;
 import io.github.luyang.starter.security.remote.feign.RemoteAuthApi;
@@ -21,6 +21,7 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -84,7 +85,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         }
     }
 
-
     /**
      * 验证Token有效性
      * 调用远程服务验证Token并返回用户主体信息
@@ -98,12 +98,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         Result<AuthUser> authUserResult = null;
 //        Result<AuthUser> authUserResult = remoteAuthApi.checkToken(accessToken);
 
-        // 验证失败时抛出异常
-        if (!authUserResult.isSuccess() || BeanUtil.isEmpty(authUserResult.getData())) {
-            throw new AuthenticationServiceException("Token validation failed: " + authUserResult.getMessage());
-        }
-
-        return authUserResult.getData();
+		return ResultOps.of(authUserResult)
+			.ifFailure(r -> new AuthenticationServiceException("Token validation failed: " + r.getMessage()))
+			.getOrThrow(() -> new UsernameNotFoundException("User information not found"));
     }
 
     /**
