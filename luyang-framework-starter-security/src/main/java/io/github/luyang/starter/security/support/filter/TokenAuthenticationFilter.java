@@ -7,7 +7,7 @@ import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.base.common.model.ResultOps;
 import io.github.luyang.starter.security.AuthUser;
 import io.github.luyang.starter.security.common.enums.SecurityErrorEnum;
-import io.github.luyang.starter.security.remote.feign.RemoteAuthApi;
+import io.github.luyang.starter.security.remote.SecurityTokenRpc;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -43,7 +43,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     /**
      * 远程Token验证服务
      */
-    private final RemoteAuthApi remoteAuthApi;
+    private final SecurityTokenRpc securityTokenRpc;
 
     /**
      * 对每个请求进行Token验证和认证处理
@@ -95,12 +95,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      */
     private AuthUser validateToken(String accessToken) {
         // 调用远程Token验证服务
-        Result<AuthUser> authUserResult = null;
-//        Result<AuthUser> authUserResult = remoteAuthApi.checkToken(accessToken);
+        Result<AuthUser> authUserResult = securityTokenRpc.checkToken(accessToken);
 
 		return ResultOps.of(authUserResult)
-			.ifFailure(r -> new AuthenticationServiceException("Token validation failed: " + r.getMessage()))
-			.getOrThrow(() -> new UsernameNotFoundException("User information not found"));
+			.ifFailure(r -> new AuthenticationServiceException("令牌验证失败: " + r.getMessage()))
+			.getOrThrow(() -> new UsernameNotFoundException("用户信息未找到"));
     }
 
     /**
