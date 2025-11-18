@@ -1,8 +1,8 @@
 package io.github.luyang.starter.security.util;
 
 import cn.hutool.core.util.StrUtil;
-import io.github.luyang.starter.security.AuthUser;
 import io.github.luyang.starter.security.common.constant.SecurityConstant;
+import io.github.luyang.starter.security.support.identity.AuthSubject;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
@@ -26,7 +26,7 @@ public class SecurityUtil {
 	 * @return 令牌
 	 * @author yang.lu
 	 */
-	public static String getTokenValue(HttpServletRequest request) {
+	public static String extractToken(HttpServletRequest request) {
 
 		String token = StrUtil.blankToDefault(
 			request.getHeader(SecurityConstant.X_ACCESS_TOKEN),
@@ -53,28 +53,49 @@ public class SecurityUtil {
 	}
 
 	/**
-	 * 获取当前已认证的用户信息
+	 * 获取当前认证主体
 	 *
-	 * @return 当前认证用户，未认证或类型不匹配则返回 null
 	 * @author yang.lu
 	 */
-	public static AuthUser getCurrentUser() {
-		return Optional.ofNullable(getAuthentication())
-			.map(Authentication::getPrincipal)
-			.filter(AuthUser.class::isInstance)
-			.map(AuthUser.class::cast)
-			.orElse(null);
+	public static AuthSubject getSubject() {
+		Authentication authentication = getAuthentication();
+		if (authentication != null && authentication.getPrincipal() instanceof AuthSubject subject) {
+			return subject;
+		}
+		return null;
 	}
 
 	/**
-	 * 获取认证用户ID
+	 * 获取当前用户ID
+	 * 只有当主体确实是 USER 类型时才返回，否则返回 null
 	 *
-	 * @return 当前用户ID，用户未认证则返回 null
 	 * @author yang.lu
 	 */
 	public static String getCurrentUserId() {
-		return Optional.ofNullable(getCurrentUser())
-			.map(AuthUser::userId)
-			.orElse(null);
+		AuthSubject subject = getSubject();
+		if (subject != null && subject.isUser()) {
+			return subject.getId();
+		}
+		return null;
+	}
+
+	/**
+	 * 获取当前客户端ID
+	 *
+	 * @author yang.lu
+	 */
+	public static String getCurrentClientId() {
+		AuthSubject subject = getSubject();
+		return subject != null ? subject.clientId() : null;
+	}
+
+	/**
+	 * 检查当前请求是否拥有某个 Scope
+	 *
+	 * @author yang.lu
+	 */
+	public static boolean hasScope(String scope) {
+		AuthSubject subject = getSubject();
+		return subject != null && subject.scopes().contains(scope);
 	}
 }

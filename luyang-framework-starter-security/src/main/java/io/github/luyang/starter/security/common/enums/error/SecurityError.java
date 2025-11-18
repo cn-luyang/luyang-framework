@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.common.enums;
+package io.github.luyang.starter.security.common.enums.error;
 
 import io.github.luyang.starter.base.common.enums.IBaseEnum;
 import lombok.AccessLevel;
@@ -12,7 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public enum SecurityErrorEnum implements IBaseEnum<String> {
+public enum SecurityError implements IBaseEnum<String> {
 
     VALIDATE_EXCEPTION_ACCESS_TOKEN("validate_exception_access_token", "访问令牌验证异常"),
     MISSING_ACCESS_TOKEN("missing_access_token", "缺失访问令牌"),

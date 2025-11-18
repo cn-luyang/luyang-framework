@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import io.github.luyang.starter.base.common.context.CurrentUserAccessor;
 import io.github.luyang.starter.mybatis.support.handler.DefaultFieldHandler;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -60,8 +62,8 @@ public class MybatisPlusAutoConfig {
      * @author yang.lu
      */
     @Bean
-    public MetaObjectHandler defaultFieldHandler() {
-        return new DefaultFieldHandler();
+    public MetaObjectHandler defaultFieldHandler(ObjectProvider<CurrentUserAccessor> userAccessorProvider) {
+        return new DefaultFieldHandler(userAccessorProvider);
     }
 
     /**

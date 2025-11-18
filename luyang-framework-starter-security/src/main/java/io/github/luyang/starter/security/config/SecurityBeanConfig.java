@@ -1,6 +1,7 @@
 package io.github.luyang.starter.security.config;
 
-import io.github.luyang.starter.security.remote.SecurityTokenRpc;
+import io.github.luyang.starter.security.remote.AuthTokenRemoteService;
+import io.github.luyang.starter.security.support.context.SecurityCurrentUserAccessor;
 import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
 import io.github.luyang.starter.security.support.handler.AuthenticationHandler;
 import io.github.luyang.starter.security.support.handler.AuthorizationHandler;
@@ -21,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityBeanConfig {
 
 	@DubboReference(providedBy = "platform-uaa")
-	private SecurityTokenRpc securityTokenRpc;
+	private AuthTokenRemoteService authTokenRemoteService;
 
     /**
      * 配置密码编码器
@@ -81,6 +82,17 @@ public class SecurityBeanConfig {
      */
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter(securityTokenRpc);
+        return new TokenAuthenticationFilter(authTokenRemoteService);
     }
+
+	/**
+	 * 配置Token认证过滤器
+	 *
+	 * @return TokenAuthenticationFilter 实例
+	 * @author yang.lu
+	 */
+	@Bean
+	public SecurityCurrentUserAccessor securityCurrentUserAccessor() {
+		return new SecurityCurrentUserAccessor();
+	}
 }
