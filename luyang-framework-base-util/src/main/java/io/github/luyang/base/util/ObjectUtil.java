@@ -54,4 +54,8 @@ public class ObjectUtil {
         }
         return Objects.equals(obj1, obj2);
     }
+
+	public static String toString(Object obj) {
+		return Objects.toString(obj, StrUtil.EMPTY);
+	}
 }

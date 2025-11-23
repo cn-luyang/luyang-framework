@@ -69,7 +69,7 @@ public final class StrFormatter {
                 // 若前面还有一个反斜杠，则认为转义符自身被转义，占位符仍有效
                 if (delimIndex > 1 && strPattern.charAt(delimIndex - 2) == CharPool.BACKSLASH) {
                     sbuf.append(strPattern, handledPos, delimIndex - 1);
-                    sbuf.append(StrUtil.utf8Str(argArray[argIndex]));
+                    sbuf.append(""/*StrUtil.utf8Str(argArray[argIndex])*/);
                     handledPos = delimIndex + holderLen;
                 } else {
                     // 否则占位符被转义，仅输出占位符字符本身
@@ -81,7 +81,7 @@ public final class StrFormatter {
             } else {
                 // 正常占位符替换
                 sbuf.append(strPattern, handledPos, delimIndex)
-                    .append(StrUtil.utf8Str(argArray[argIndex]));
+                    .append(/*StrUtil.utf8Str(argArray[argIndex])*/"");
                 handledPos = delimIndex + holderLen;
             }
         }

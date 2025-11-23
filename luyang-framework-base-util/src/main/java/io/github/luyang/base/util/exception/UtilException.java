@@ -1,7 +1,5 @@
 package io.github.luyang.base.util.exception;
 
-import io.github.luyang.base.util.StrUtil;
-
 /**
  * 工具类异常
  *
@@ -38,6 +36,6 @@ public class UtilException extends RuntimeException {
      * @author yang.lu
      */
     public UtilException(Throwable throwable, String messageTemplate, Object... params) {
-        super(StrUtil.format(messageTemplate, params), throwable);
+        //super(StrUtil.format(messageTemplate, params), throwable);
     }
 }
