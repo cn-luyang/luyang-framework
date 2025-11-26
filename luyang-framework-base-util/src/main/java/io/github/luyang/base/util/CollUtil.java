@@ -1,8 +1,7 @@
 package io.github.luyang.base.util;
 
 import java.util.Collection;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Iterator;
 
 /**
  * 集合相关工具类
@@ -34,21 +33,65 @@ public class CollUtil {
 	}
 
 	/**
-	 * 将集合元素以指定分隔符拼成字符串，跳过 null。
+	 * 使用指定的分隔符连接集合中的元素
+	 * <pre>
+	 *     join(Arrays.asList("a", "b", "c"), ",")  	= "a,b,c"
+	 * </pre>
 	 *
-	 * @param collection 任意元素集合
-	 * @param delimiter  分隔符，例如 " and "、" & "、", "
-	 * @param <T>        元素类型
-	 * @return 拼接后的字符串；集合为 empty 时返回 ""
+	 * @param <T>       集合元素类型
+	 * @param coll      要连接的集合，如果为null或空则返回null
+	 * @param delimiter 元素之间的分隔符，如果为null则视为空字符串
+	 * @return 连接后的字符串，如果集合为null或空则返回null
 	 * @author yang.lu
 	 */
-	public static <T> String join(Collection<T> collection, String delimiter) {
-		if (collection == null || collection.isEmpty()) {
-			return "";
+	public static <T> String join(Collection<T> coll, CharSequence delimiter) {
+		if (isEmpty(coll)) {
+			return null;
 		}
-		return collection.stream()
-			.filter(Objects::nonNull)
-			.map(String::valueOf)
-			.collect(Collectors.joining(delimiter));
+
+		return join(coll, delimiter, StrUtil.EMPTY, StrUtil.EMPTY);
+	}
+
+	/**
+	 * 使用指定的分隔符、前缀和后缀连接集合中的元素
+	 * 示例：
+	 * <pre>
+	 *     join(Arrays.asList("a", "b", "c"), ",","[", "]") 	= "[a],[b],[c]"
+	 * </pre>
+	 *
+	 * @param <T>       集合元素类型
+	 * @param coll      要连接的集合，如果为null或空则返回空字符串
+	 * @param delimiter 元素之间的分隔符，如果为null则视为空字符串
+	 * @param prefix    每个元素的前缀，如果为null则视为空字符串
+	 * @param suffix    每个元素的后缀，如果为null则视为空字符串
+	 * @return 连接后的字符串，如果集合为null或空则返回空字符串
+	 * @author yang.lu
+	 */
+	public static <T> String join(Collection<T> coll, CharSequence delimiter, CharSequence prefix, CharSequence suffix) {
+
+		if (isEmpty(coll)) {
+			return StrUtil.EMPTY;
+		}
+
+		delimiter = StrUtil.blankToDefault(delimiter, StrUtil.EMPTY);
+		prefix = StrUtil.blankToDefault(prefix, StrUtil.EMPTY);
+		suffix = StrUtil.blankToDefault(suffix, StrUtil.EMPTY);
+
+		int totalLength = coll.size() * (prefix.length() + suffix.length()) + (coll.size() - 1) * delimiter.length();
+		for (Object element : coll) {
+			totalLength += String.valueOf(element).length();
+		}
+
+		StringBuilder builder = new StringBuilder(totalLength);
+		Iterator<?> it = coll.iterator();
+		while (it.hasNext()) {
+			builder.append(prefix)
+				.append(it.next())
+				.append(suffix);
+			if (it.hasNext()) {
+				builder.append(delimiter);
+			}
+		}
+		return builder.toString();
 	}
 }

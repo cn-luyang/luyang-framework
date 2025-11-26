@@ -17,6 +17,10 @@ public class StrUtil implements StrPool {
 //		throw new UnsupportedOperationException("StrUtil is a utility class and cannot be instantiated");
 //	}
 
+	public static String str(CharSequence cs) {
+		return null == cs ? null : cs.toString();
+	}
+
 	/**
 	 * 检查字符序列是否为 null 或空字符串 ""
 	 *
@@ -308,7 +312,7 @@ public class StrUtil implements StrPool {
 			return false;
 		}
 
-		return CharSequenceUtil.regionMatches(source, ignoreCase, 0, prefix, 0, prefixLength);
+		return regionMatches(source, ignoreCase, 0, prefix, 0, prefixLength);
 	}
 
 	/**
@@ -373,7 +377,7 @@ public class StrUtil implements StrPool {
 		if (suffixLength > source.length()) {
 			return false;
 		}
-		return CharSequenceUtil.regionMatches(source, ignoreCase, source.length() - suffixLength, suffix, 0, suffixLength);
+		return regionMatches(source, ignoreCase, source.length() - suffixLength, suffix, 0, suffixLength);
 	}
 
 	/**
@@ -454,7 +458,7 @@ public class StrUtil implements StrPool {
 
 		// 忽略大小写比较：使用regionMatches方法进行完整的区域比较
 		if (ignoreCase) {
-			return CharSequenceUtil.regionMatches(source, true, 0, target, 0, source.length());
+			return regionMatches(source, true, 0, target, 0, source.length());
 		}
 
 		// 如果两个字符序列都是String类型，直接使用String.equals()方法
@@ -616,5 +620,147 @@ public class StrUtil implements StrPool {
 		}
 
 		return list;
+	}
+
+	/**
+	 * 比较两个字符序列的指定区域是否匹配（支持忽略大小写）
+	 *
+	 * @param cs         主字符序列（被比较的源序列）
+	 * @param ignoreCase 是否忽略大小写比较
+	 *                   true：不区分大小写比较
+	 *                   false：区分大小写比较
+	 * @param thisStart  主字符序列中比较区域的起始索引位置
+	 * @param substring  要比较的子字符序列
+	 * @param start      子字符序列中比较区域的起始索引位置
+	 * @param length     要比较的字符数量
+	 * @return 如果指定区域的字符匹配则返回true，否则返回false
+	 * @author yang.lu
+	 */
+	static boolean regionMatches(CharSequence cs, boolean ignoreCase, int thisStart, CharSequence substring, int start, int length) {
+
+		// 如果两个字符序列都是String类型，直接调用String类的regionMatches方法
+		if (cs instanceof String && substring instanceof String) {
+			return ((String) cs).regionMatches(ignoreCase, thisStart, (String) substring, start, length);
+		}
+
+		// 初始化比较索引和长度计数器
+		int index1 = thisStart;    // 主字符序列的当前比较位置
+		int index2 = start;        // 子字符序列的当前比较位置
+		int tmpLen = length;    // 剩余需要比较的字符数
+
+		// 提前获取长度以便检测NPE，保持与java.lang.String版本相同的异常行为
+		final int srcLen = cs.length() - thisStart;        // 主字符序列从起始位置到末尾的剩余长度
+		final int otherLen = substring.length() - start;    // 子字符序列从起始位置到末尾的剩余长度
+
+		// 检查参数有效性：起始位置和长度不能为负数
+		if (thisStart < 0 || start < 0 || length < 0) {
+			return false;
+		}
+
+		// 检查区域长度是否足够：两个序列的剩余长度都必须不小于要比较的长度
+		if (srcLen < length || otherLen < length) {
+			return false;
+		}
+
+		// 逐个字符比较指定长度的区域
+		while (tmpLen-- > 0) {
+			// 从两个序列中分别获取当前要比较的字符
+			final char c1 = cs.charAt(index1++);
+			final char c2 = substring.charAt(index2++);
+
+			// 如果字符完全相同，继续比较下一个字符
+			if (c1 == c2) {
+				continue;
+			}
+
+			// 如果要求区分大小写且字符不相等，直接返回不匹配
+			if (!ignoreCase) {
+				return false;
+			}
+
+			// 忽略大小写比较：使用与String#regionMatches相同的逻辑
+			// 先转换为大写比较
+			final char u1 = Character.toUpperCase(c1);
+			final char u2 = Character.toUpperCase(c2);
+			if (u1 != u2 && Character.toLowerCase(u1) != Character.toLowerCase(u2)) {
+				return false;
+			}
+		}
+
+		// 所有字符都比较完毕且匹配，返回true
+		return true;
+	}
+
+	/**
+	 * 替换指定字符串的指定区间内字符为 "*"
+	 *
+	 * @param str          字符串
+	 * @param startInclude 开始位置（包含）
+	 * @param endExclude   结束位置（不包含）
+	 * @return 替换后的字符串
+	 * @author yang.lu
+	 */
+	public static String hide(CharSequence str, int startInclude, int endExclude) {
+		return replaceByCodePoint(str, startInclude, endExclude, '*');
+	}
+
+	/**
+	 * 替换指定字符串的指定区间内字符为固定字符
+	 *
+	 * @param str          字符串
+	 * @param startInclude 开始位置（包含）
+	 * @param endExclude   结束位置（不包含）
+	 * @param replacedChar 被替换的字符
+	 * @return 替换后的字符串
+	 * @author yang.lu
+	 */
+	public static String replaceByCodePoint(CharSequence str, int startInclude, int endExclude, char replacedChar) {
+		if (isEmpty(str)) {
+			return null;
+		}
+
+		String originalStr = str.toString();
+		int[] codePoints = originalStr.codePoints().toArray();
+		int len = codePoints.length;
+
+		/*
+			替换范围有效性检查：
+    		1. 开始位置超出字符串长度，无需替换
+			2. 开始位置大于等于结束位置，参数逻辑错误
+		 */
+		if (startInclude >= len || startInclude >= endExclude) {
+			return originalStr;
+		}
+
+		// 规范化结束位置：确保不超出字符串的码点长度边界
+		endExclude = Math.min(endExclude, len);
+
+		// 足够容量，避免扩容。原字符串长度 + 替换字符可能带来的长度变化 + 安全边界
+		StringBuilder sb = new StringBuilder(originalStr.length() + (endExclude - startInclude) + 16);
+
+		// 遍历所有码点位置，根据位置决定替换或保留原字符
+		for (int i = 0; i < len; i++) {
+			if (i >= startInclude && i < endExclude) {
+				// 当前码点位于替换范围内：使用指定字符替换
+				sb.append(replacedChar);
+			} else {
+				// 当前码点位于替换范围外：保留原字符
+				int cp = codePoints[i];
+				/*
+					Unicode字符处理优化：
+					- 基本多文种平面字符（BMP）：U+0000 ~ U+FFFF，可直接转换为char
+				 	- 补充字符：U+10000 ~ U+10FFFF，需要代理对表示
+				 */
+				if (cp < Character.MIN_SUPPLEMENTARY_CODE_POINT) {
+					// BMP字符：直接转换为char类型追加，性能最优
+					sb.append((char) cp);
+				} else {
+					// 补充字符：分解为高位代理和低位代理分别追加
+					sb.append(Character.highSurrogate(cp));
+					sb.append(Character.lowSurrogate(cp));
+				}
+			}
+		}
+		return sb.toString();
 	}
 }
