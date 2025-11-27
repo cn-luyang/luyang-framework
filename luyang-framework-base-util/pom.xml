@@ -13,4 +13,11 @@
 
     <artifactId>luyang-framework-base-util</artifactId>
     <name>luyang-framework-starter-base</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>
