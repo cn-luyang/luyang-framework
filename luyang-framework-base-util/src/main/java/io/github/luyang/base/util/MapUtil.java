@@ -1,5 +1,6 @@
 package io.github.luyang.base.util;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -10,6 +11,18 @@ import java.util.Map;
 public final class MapUtil {
 
 	private MapUtil() {
+	}
+
+	/**
+	 * 返回一个空Map
+	 *
+	 * @param <K> 键类型
+	 * @param <V> 值类型
+	 * @return 空Map
+	 * @author yang.lu
+	 */
+	public static <K, V> Map<K, V> empty() {
+		return Collections.emptyMap();
 	}
 
 	/**
