@@ -1,4 +1,4 @@
-package io.github.luyang.base.util;
+package io.github.luyang.base.util.web;
 
 import java.nio.charset.StandardCharsets;
 
@@ -7,24 +7,42 @@ import java.nio.charset.StandardCharsets;
  *
  * @author yang.lu
  */
+
+/**
+ * Content-Type 常量与工具类
+ * 提供常用 MIME 类型常量及便捷方法，支持带字符集和不带字符集的类型。
+ *
+ * @author yang.lu
+ */
 public final class ContentType {
 
+	/**
+	 * 私有构造方法，防止实例化
+	 */
 	private ContentType() {
+		throw new UnsupportedOperationException("Utility class");
 	}
 
 	/**
-	 * 密封接口，所有 Content-Type 都必须实现它
+	 * Content-Type 类型接口
 	 */
 	public sealed interface Type permits WithCharset, WithoutCharset {
+		/**
+		 * 返回完整的 Content-Type 字符串
+		 */
 		String value();
 	}
 
 	/**
-	 * 带 charset 的类型（推荐）
+	 * 带字符集的 Content-Type 类型
+	 *
+	 * @param mime    MIME 类型
+	 * @param charset 字符集，默认 UTF-8
 	 */
 	public record WithCharset(String mime, String charset) implements Type {
+
 		public WithCharset(String mime) {
-			this(mime, "UTF-8");
+			this(mime, StandardCharsets.UTF_8.name());
 		}
 
 		@Override
@@ -39,7 +57,10 @@ public final class ContentType {
 	}
 
 	/**
-	 * 不带 charset 的类型（如图片流、文件下载）
+	 * 不带字符集的 Content-Type 类型
+	 * 适用于图片、音视频等二进制流
+	 *
+	 * @param mime MIME 类型
 	 */
 	public record WithoutCharset(String mime) implements Type {
 		@Override
@@ -53,7 +74,7 @@ public final class ContentType {
 		}
 	}
 
-	// ====================== 常用文本类型（自动带 UTF-8） ======================
+	// ====================== 常用文本类型（默认 UTF-8 字符集） ======================
 	public static final Type TEXT_PLAIN = new WithCharset("text/plain");
 	public static final Type TEXT_HTML = new WithCharset("text/html");
 	public static final Type TEXT_CSS = new WithCharset("text/css");
@@ -82,52 +103,55 @@ public final class ContentType {
 	public static final Type IMAGE_SVG = new WithCharset("image/svg+xml");
 	public static final Type IMAGE_ICON = new WithoutCharset("image/x-icon");
 
-	// ====================== 视频/音频 ======================
+	// ====================== 视频/音频类型 ======================
 	public static final Type VIDEO_MP4 = new WithoutCharset("video/mp4");
 	public static final Type VIDEO_WEBM = new WithoutCharset("video/webm");
 	public static final Type AUDIO_MPEG = new WithoutCharset("audio/mpeg");
 	public static final Type AUDIO_OGG = new WithoutCharset("audio/ogg");
 
-	// ====================== 字体 ======================
+	// ====================== 字体类型 ======================
 	public static final Type FONT_WOFF = new WithoutCharset("font/woff");
 	public static final Type FONT_WOFF2 = new WithoutCharset("font/woff2");
 	public static final Type FONT_TTF = new WithoutCharset("font/ttf");
 
-
 	/**
-	 * 快速生成带 UTF-8 的 JSON
+	 * 返回 application/json;charset=UTF-8
 	 */
 	public static String json() {
 		return APPLICATION_JSON.value();
 	}
 
 	/**
-	 * 自定义 charset 的 JSON
+	 * 返回指定字符集的 application/json
+	 *
+	 * @param charset 字符集名称
 	 */
 	public static String json(String charset) {
 		return new WithCharset("application/json", charset).value();
 	}
 
 	/**
-	 * 快速生成 text/html
+	 * 返回 text/html;charset=UTF-8
 	 */
 	public static String html() {
 		return TEXT_HTML.value();
 	}
 
 	/**
-	 * 快速生成 text/plain
+	 * 返回 text/plain;charset=UTF-8
 	 */
 	public static String text() {
 		return TEXT_PLAIN.value();
 	}
 
 	/**
-	 * 文件下载（附件）
+	 * 生成文件下载的 Content-Disposition 头值
+	 *
+	 * @param filename 文件名
+	 * @return attachment 格式字符串
 	 */
 	public static String attachment(String filename) {
-		return "attachment; filename=\"%s\"; filename*=UTF-8''%s".formatted(
-			filename, java.net.URLEncoder.encode(filename, StandardCharsets.UTF_8)
-		);
+		String encoded = java.net.URLEncoder.encode(filename, StandardCharsets.UTF_8);
+		return String.format("attachment; filename=\"%s\"; filename*=UTF-8''%s", filename, encoded);
 	}
 }

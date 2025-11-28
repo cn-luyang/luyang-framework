@@ -9,24 +9,30 @@ import java.util.Arrays;
  */
 public class ArrayUtil {
 
+	/**
+	 * 空字符串数组常量
+	 */
 	public static final String[] EMPTY_STRING_ARRAY = {};
 
-	/**
-	 * 检查数组是否为空
-	 *
-	 * @param array 待检查的数组
-	 * @return 如果数组为null或长度为0，则返回true，否则返回false
-	 * @author yang.lu
-	 */
-	public static <T> boolean isEmpty(T[] array) {
-		return array == null || array.length == 0;
+	private ArrayUtil() {
 	}
 
 	/**
-	 * 检查数组是否不为空
+	 * 检查数组是否为空（null 或长度为 0）
 	 *
 	 * @param array 待检查的数组
-	 * @return 如果数组不为null且长度大于0，则返回true，否则返回false
+	 * @return 如果数组为空则返回 true，否则返回 false
+	 * @author yang.lu
+	 */
+	public static <T> boolean isEmpty(T[] array) {
+		return null == array || array.length == 0;
+	}
+
+	/**
+	 * 检查数组是否不为空（非 null 且长度大于 0）
+	 *
+	 * @param array 待检查的数组
+	 * @return 如果数组不为空则返回 true，否则返回 false
 	 * @author yang.lu
 	 */
 	public static <T> boolean isNotEmpty(T[] array) {
@@ -37,7 +43,7 @@ public class ArrayUtil {
 	 * 检查对象是否为数组
 	 *
 	 * @param obj 待检查的对象
-	 * @return 如果对象是数组，则返回true，否则返回false
+	 * @return 如果对象是数组则返回 true，否则返回 false
 	 * @author yang.lu
 	 */
 	public static boolean isArray(Object obj) {
@@ -45,10 +51,10 @@ public class ArrayUtil {
 	}
 
 	/**
-	 * 将数组转换为字符串表示
+	 * 将数组转换为字符串表示形式
 	 *
 	 * @param obj 数组对象
-	 * @return 数组的字符串表示，如果对象为null，则返回null
+	 * @return 数组的字符串表示，如果对象为 null 则返回 null
 	 * @author yang.lu
 	 */
 	public static String toString(Object obj) {

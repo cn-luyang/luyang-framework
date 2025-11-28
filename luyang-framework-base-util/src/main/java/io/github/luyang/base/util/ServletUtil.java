@@ -1,6 +1,7 @@
 package io.github.luyang.base.util;
 
 import io.github.luyang.base.util.exception.UtilException;
+import io.github.luyang.base.util.web.ContentType;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;

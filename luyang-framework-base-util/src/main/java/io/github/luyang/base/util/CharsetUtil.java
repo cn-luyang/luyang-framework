@@ -11,7 +11,10 @@ import java.nio.charset.StandardCharsets;
 public class CharsetUtil {
 
     /**
-     * UTF-8
+     * UTF-8 字符集常量
      */
     public static final Charset CHARSET_UTF_8 = StandardCharsets.UTF_8;
+
+	private CharsetUtil() {
+	}
 }

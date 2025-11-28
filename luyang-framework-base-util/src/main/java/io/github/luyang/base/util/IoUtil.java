@@ -20,7 +20,7 @@ public class IoUtil {
 			try {
 				closeable.close();
 			} catch (Exception e) {
-				// 静默关闭
+				// 静默关闭，忽略异常
 			}
 		}
 	}

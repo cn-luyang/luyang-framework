@@ -65,9 +65,9 @@ public final class StrFormatter {
             }
 
             // 判断占位符前是否为转义符 '\'
-            if (delimIndex > 0 && strPattern.charAt(delimIndex - 1) == CharPool.BACKSLASH) {
+            if (delimIndex > 0 && strPattern.charAt(delimIndex - 1) == CharConstants.BACKSLASH) {
                 // 若前面还有一个反斜杠，则认为转义符自身被转义，占位符仍有效
-                if (delimIndex > 1 && strPattern.charAt(delimIndex - 2) == CharPool.BACKSLASH) {
+                if (delimIndex > 1 && strPattern.charAt(delimIndex - 2) == CharConstants.BACKSLASH) {
                     sbuf.append(strPattern, handledPos, delimIndex - 1);
                     sbuf.append(""/*StrUtil.utf8Str(argArray[argIndex])*/);
                     handledPos = delimIndex + holderLen;

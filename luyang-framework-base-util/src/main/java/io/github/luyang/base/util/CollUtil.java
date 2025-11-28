@@ -10,22 +10,25 @@ import java.util.Iterator;
  */
 public class CollUtil {
 
-	/**
-	 * 检查集合是否为空
-	 *
-	 * @param collection 待检查的集合
-	 * @return 如果集合为null或空，则返回true，否则返回false
-	 * @author yang.lu
-	 */
-	public static boolean isEmpty(Collection<?> collection) {
-		return collection == null || collection.isEmpty();
+	private CollUtil() {
 	}
 
 	/**
-	 * 检查集合是否不为空
+	 * 检查集合是否为空（null 或空集合）
 	 *
 	 * @param collection 待检查的集合
-	 * @return 如果集合不为null且不为空，则返回true，否则返回false
+	 * @return 如果集合为空则返回 true，否则返回 false
+	 * @author yang.lu
+	 */
+	public static boolean isEmpty(Collection<?> collection) {
+		return null == collection || collection.isEmpty();
+	}
+
+	/**
+	 * 检查集合是否不为空（非 null 且不为空集合）
+	 *
+	 * @param collection 待检查的集合
+	 * @return 如果集合不为空则返回 true，否则返回 false
 	 * @author yang.lu
 	 */
 	public static boolean isNotEmpty(Collection<?> collection) {
@@ -39,9 +42,9 @@ public class CollUtil {
 	 * </pre>
 	 *
 	 * @param <T>       集合元素类型
-	 * @param coll      要连接的集合，如果为null或空则返回null
-	 * @param delimiter 元素之间的分隔符，如果为null则视为空字符串
-	 * @return 连接后的字符串，如果集合为null或空则返回null
+	 * @param coll      要连接的集合，如果为 null 或空则返回 null
+	 * @param delimiter 元素之间的分隔符，如果为 null 则视为空字符串
+	 * @return 连接后的字符串，如果集合为 null 或空则返回 null
 	 * @author yang.lu
 	 */
 	public static <T> String join(Collection<T> coll, CharSequence delimiter) {

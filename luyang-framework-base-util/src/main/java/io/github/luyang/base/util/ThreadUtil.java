@@ -1,4 +1,6 @@
-package io.github.luyang.base.util.thread;
+package io.github.luyang.base.util;
+
+import io.github.luyang.base.util.thread.GlobalThreadPool;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,15 +1,13 @@
 package io.github.luyang.base.util.text;
 
 /**
- * 字符常量定义类
- * 集中管理所有字符常量，避免魔法字符
+ * 字符常量定义类，集中管理所有字符常量，避免魔法字符
  *
  * @author yang.lu
  */
-public final class Constants {
+public final class CharConstants {
 
-    private Constants() {
-        // 禁止实例化
+    private CharConstants() {
     }
 
     // 空白字符
