@@ -1,6 +1,6 @@
 package io.github.luyang.starter.web.features.desensitize;
 
-import cn.hutool.core.util.DesensitizedUtil;
+import io.github.luyang.base.util.StrUtil;
 
 /**
  * 脱敏规则
@@ -23,7 +23,8 @@ public enum DesensitizeRule {
     CHINESE_NAME {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.chineseName(value);
+
+            return StrUtil.hide(value, 1, value.length());
         }
     },
 
@@ -33,7 +34,7 @@ public enum DesensitizeRule {
     CHINESE_ID_CARD {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.idCardNum(value, 6, 2);
+            return /*DesensitizedUtil.idCardNum(value, 6, 2);*/null;
         }
     },
 
@@ -43,7 +44,7 @@ public enum DesensitizeRule {
     CHINESE_FIXED_PHONE {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.fixedPhone(value);
+            return /*DesensitizedUtil.fixedPhone(value);*/null;
         }
     },
 
@@ -53,7 +54,7 @@ public enum DesensitizeRule {
     CHINESE_MOBILE_PHONE {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.mobilePhone(value);
+            return /*DesensitizedUtil.mobilePhone(value);*/null;
         }
     },
 
@@ -63,7 +64,7 @@ public enum DesensitizeRule {
     CHINESE_ADDRESS {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.address(value, 8);
+            return /*DesensitizedUtil.address(value, 8);*/null;
         }
     },
 
@@ -73,7 +74,7 @@ public enum DesensitizeRule {
     CHINESE_CAR_LICENSE {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.carLicense(value);
+            return /*DesensitizedUtil.carLicense(value);*/null;
         }
     },
 
@@ -83,7 +84,7 @@ public enum DesensitizeRule {
     CHINESE_BANK_CARD {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.bankCard(value);
+            return /*DesensitizedUtil.bankCard(value);*/null;
         }
     },
 
@@ -93,7 +94,7 @@ public enum DesensitizeRule {
     EMAIL {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.email(value);
+            return /*DesensitizedUtil.email(value);*/null;
         }
     },
 
@@ -103,7 +104,7 @@ public enum DesensitizeRule {
     PASSWORD {
         @Override
         String mask(String value) {
-            return DesensitizedUtil.password(value);
+            return /*DesensitizedUtil.password(value);*/null;
         }
     },
 

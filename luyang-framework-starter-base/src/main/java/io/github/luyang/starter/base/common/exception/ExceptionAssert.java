@@ -1,9 +1,9 @@
 package io.github.luyang.starter.base.common.exception;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
+import io.github.luyang.base.util.ArrayUtil;
+import io.github.luyang.base.util.CollUtil;
+import io.github.luyang.base.util.ObjectUtil;
+import io.github.luyang.base.util.StrUtil;
 import io.github.luyang.starter.base.common.enums.IBaseEnum;
 
 import java.util.Collection;

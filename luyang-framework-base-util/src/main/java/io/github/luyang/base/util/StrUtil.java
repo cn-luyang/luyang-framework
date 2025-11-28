@@ -1,5 +1,6 @@
 package io.github.luyang.base.util;
 
+import io.github.luyang.base.util.text.StrFormatter;
 import io.github.luyang.base.util.text.StrPool;
 
 import java.util.ArrayList;
@@ -153,7 +154,7 @@ public final class StrUtil implements StrPool {
 	}
 
 	/**
-	 * 对象转字符串，null安全
+	 * 对象转字符串，null 安全
 	 *
 	 * @param obj 要转换的对象
 	 * @return 对象的字符串表示，null返回null
@@ -161,6 +162,18 @@ public final class StrUtil implements StrPool {
 	 */
 	public static String toStringOrNull(Object obj) {
 		return null == obj ? null : obj.toString();
+	}
+
+	/**
+	 * 对象转字符串，null 安全
+	 * 如果对象为 null，返回空字符串；否则返回对象的字符串表示
+	 *
+	 * @param obj 待转换的对象，可为 null
+	 * @return 对象的字符串表示或空字符串（永不返回 null）
+	 * @author yang.lu
+	 */
+	public static String toStringOrEmpty(Object obj) {
+		return null == obj ? EMPTY : obj.toString();
 	}
 
 	/**
@@ -226,6 +239,30 @@ public final class StrUtil implements StrPool {
 		}
 
 		return str.substring(start, end);
+	}
+
+	/**
+	 * 字符串格式化方法
+	 * 安全地格式化字符串，支持类似 SLF4J 的 {} 占位符替换
+	 *
+	 * @param str    模板字符串，支持 {} 占位符，可为 null
+	 * @param params 参数列表，按顺序替换占位符
+	 * @return 格式化后的字符串
+	 * @author yang.lu
+	 */
+	public static String format(CharSequence str, Object... params) {
+		// 处理 null 输入，返回 "null" 字符串
+		if (null == str) {
+			return NULL;
+		}
+
+		// 无参数或空模板时直接返回原字符串
+		if (ArrayUtil.isEmpty(params) || isBlank(str)) {
+			return str.toString();
+		}
+
+		// 委托给 StrFormatter 进行实际的格式化处理
+		return StrFormatter.format(str.toString(), params);
 	}
 
 	/**

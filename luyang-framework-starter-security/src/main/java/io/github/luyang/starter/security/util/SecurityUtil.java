@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.util;
 
-import cn.hutool.core.util.StrUtil;
+import io.github.luyang.base.util.StrUtil;
 import io.github.luyang.starter.security.common.constant.SecurityConstant;
 import io.github.luyang.starter.security.support.identity.AuthSubject;
 import jakarta.servlet.http.HttpServletRequest;

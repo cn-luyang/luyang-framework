@@ -1,8 +1,9 @@
 package io.github.luyang.starter.mybatis.support.type;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.text.StrPool;
-import cn.hutool.core.util.StrUtil;
+import io.github.luyang.base.util.CollUtil;
+import io.github.luyang.base.util.StrUtil;
+import io.github.luyang.base.util.text.CharPool;
+import io.github.luyang.base.util.text.StrPool;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
@@ -63,6 +64,6 @@ public class StringListTypeHandler implements TypeHandler<List<String>> {
         return StrUtil.isBlank(value)
             ? null
             // 拆分并去除空白
-            : StrUtil.splitTrim(value, StrPool.COMMA);
+            : StrUtil.split(value, CharPool.COMMA);
     }
 }

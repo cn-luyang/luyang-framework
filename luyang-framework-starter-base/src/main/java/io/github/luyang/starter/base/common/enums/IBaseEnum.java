@@ -1,6 +1,6 @@
 package io.github.luyang.starter.base.common.enums;
 
-import cn.hutool.core.util.ObjectUtil;
+import io.github.luyang.base.util.ObjectUtil;
 
 import java.io.Serializable;
 import java.util.Arrays;

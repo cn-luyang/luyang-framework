@@ -1,6 +1,6 @@
 package io.github.luyang.starter.dict.cache;
 
-import cn.hutool.core.collection.CollUtil;
+import io.github.luyang.base.util.CollUtil;
 import io.github.luyang.starter.dict.model.DictItem;
 import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;

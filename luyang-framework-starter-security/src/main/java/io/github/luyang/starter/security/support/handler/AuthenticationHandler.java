@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.support.handler;
 
-import cn.hutool.extra.servlet.JakartaServletUtil;
+import io.github.luyang.base.util.ServletUtil;
 import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.security.common.enums.error.SecurityError;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +24,6 @@ public class AuthenticationHandler implements AuthenticationEntryPoint {
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         String content = Result.failure(SecurityError.MISSING_ACCESS_TOKEN).toString();
-        JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        ServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
     }
 }
