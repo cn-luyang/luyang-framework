@@ -1,17 +1,12 @@
 package io.github.luyang.base.util.thread;
 
-import io.github.luyang.base.util.ObjectUtil;
 import io.github.luyang.base.util.exception.UtilException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +17,48 @@ import java.util.concurrent.TimeUnit;
  */
 public class GlobalThreadPool {
 
-	private static ExecutorService executor;
+	private static final Logger logger = LoggerFactory.getLogger(GlobalThreadPool.class);
+
+	private GlobalThreadPool() {
+	}
+
+	private static final int CPU = Runtime.getRuntime().availableProcessors();
+
+	static final ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(
+		// 核心线程数：CPU × 2 + 1
+		CPU * 2 + 1,
+		// 最大线程数
+		CPU * 4,
+		// 非核心线程30秒后回收
+		30L, TimeUnit.SECONDS,
+		// 大队列：1024，既防拒绝又防OOM
+		new LinkedBlockingQueue<>(1024),
+		// 自定义线程工厂（带命名 + 异常捕获）
+		new NamedThreadFactory("Global-", false),
+		// 最强拒绝策略：CallerRuns（自动限流，不丢任务）
+		new ThreadPoolExecutor.CallerRunsPolicy()
+	);
+
+	static {
+		// 允许核心线程也超时回收（低峰期内存归零）
+		EXECUTOR.allowCoreThreadTimeOut(true);
+		// 预启动所有核心线程，首次任务零延迟
+		EXECUTOR.prestartAllCoreThreads();
+		// JVM关闭时自动优雅关闭线程池
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			logger.info("正在关闭全局线程池...");
+			EXECUTOR.shutdown();
+			try {
+				if (!EXECUTOR.awaitTermination(10, TimeUnit.SECONDS)) {
+					logger.info("线程池未完全关闭，强制终止");
+					EXECUTOR.shutdownNow();
+				}
+			} catch (InterruptedException e) {
+				EXECUTOR.shutdownNow();
+				Thread.currentThread().interrupt();
+			}
+		}));
+	}
 
 	/**
 	 * 在全局线程池中执行任务
@@ -32,7 +68,7 @@ public class GlobalThreadPool {
 	 */
 	public static void execute(Runnable runnable) {
 		try {
-			executor.execute(runnable);
+			EXECUTOR.execute(runnable);
 		} catch (Exception e) {
 			throw new UtilException(e, "执行任务时发生异常");
 		}
@@ -49,7 +85,7 @@ public class GlobalThreadPool {
 	 * @author yang.lu
 	 */
 	public static <T> Future<T> submit(Callable<T> task) {
-		return executor.submit(task);
+		return EXECUTOR.submit(task);
 	}
 
 	/**
@@ -60,7 +96,7 @@ public class GlobalThreadPool {
 	 * @author yang.lu
 	 */
 	public static Future<?> submit(Runnable runnable) {
-		return executor.submit(runnable);
+		return EXECUTOR.submit(runnable);
 	}
 
 	/**
@@ -70,7 +106,7 @@ public class GlobalThreadPool {
 	 * @author yang.lu
 	 */
 	public static boolean isShutdown() {
-		return executor.isShutdown();
+		return EXECUTOR.isShutdown();
 	}
 
 	/**
@@ -80,12 +116,10 @@ public class GlobalThreadPool {
 	 * @author yang.lu
 	 */
 	public static synchronized void shutdown(boolean immediate) {
-		if (executor != null) {
-			if (immediate) {
-				executor.shutdownNow();
-			} else {
-				executor.shutdown();
-			}
+		if (immediate) {
+			EXECUTOR.shutdownNow();
+		} else {
+			EXECUTOR.shutdown();
 		}
 	}
 }
