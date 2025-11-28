@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.support.handler;
 
-import io.github.luyang.base.util.ServletUtil;
+import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.security.common.enums.error.SecurityError;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +24,6 @@ public class AuthorizationHandler implements AccessDeniedHandler {
 
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         String content = Result.failure(SecurityError.PERMISSION_DENIED).toString();
-        ServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
+		JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
     }
 }

@@ -1,7 +1,7 @@
 package io.github.luyang.starter.security.support.filter;
 
-import io.github.luyang.base.util.ServletUtil;
-import io.github.luyang.base.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.common.model.Result;
 import io.github.luyang.starter.base.common.model.ResultOps;
 import io.github.luyang.starter.security.common.enums.error.SecurityError;
@@ -184,6 +184,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		// 创建错误响应结果
 		Result<?> errorResult = Result.failure(SecurityError.VALIDATE_EXCEPTION_ACCESS_TOKEN);
 		// 将错误结果序列化为JSON并写入响应
-		ServletUtil.write(response, errorResult.toString(), MediaType.APPLICATION_JSON_UTF8_VALUE);
+		JakartaServletUtil.write(response, errorResult.toString(), MediaType.APPLICATION_JSON_UTF8_VALUE);
 	}
 }

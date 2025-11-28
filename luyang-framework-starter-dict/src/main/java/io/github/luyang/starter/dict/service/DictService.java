@@ -1,7 +1,7 @@
 package io.github.luyang.starter.dict.service;
 
-import io.github.luyang.base.util.CollUtil;
-import io.github.luyang.base.util.StrUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.dict.cache.DictCache;
 import io.github.luyang.starter.dict.model.Dict;
 import io.github.luyang.starter.dict.model.DictItem;

@@ -1,8 +1,8 @@
 package io.github.luyang.starter.web.context.initializer;
 
-import io.github.luyang.base.util.NetUtil;
-import io.github.luyang.base.util.StrUtil;
-import io.github.luyang.base.util.ThreadUtil;
+import cn.hutool.core.net.NetUtil;
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;

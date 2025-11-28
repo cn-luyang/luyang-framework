@@ -1,7 +1,7 @@
 package io.github.luyang.starter.web.support.filter;
 
-import io.github.luyang.base.util.IdUtil;
-import io.github.luyang.base.util.StrUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.web.common.constant.WebConstant;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
