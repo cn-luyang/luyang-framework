@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @author yang.lu
  */
-public class NumberUtil {
+public final class NumberUtil {
 
 	private NumberUtil() {
 	}

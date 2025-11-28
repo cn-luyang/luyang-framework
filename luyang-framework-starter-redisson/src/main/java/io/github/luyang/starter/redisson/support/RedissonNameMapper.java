@@ -37,7 +37,7 @@ public class RedissonNameMapper implements NameMapper {
     public String map(String name) {
         return Optional.ofNullable(name)
             .filter(StrUtil::isNotBlank)
-            .map(n -> StrUtil.startWith(n, prefix) ? n : prefix + n)
+            .map(n -> StrUtil.startsWith(n, prefix) ? n : prefix + n)
             .orElse(null);
     }
 

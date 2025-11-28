@@ -11,7 +11,9 @@ import java.io.IOException;
  *
  * @author yang.lu
  */
-public class ServletUtil {
+public final class ServletUtil {
+
+	private ServletUtil(){}
 
 	/**
 	 * 写入JSON格式响应

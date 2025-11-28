@@ -16,7 +16,9 @@ import java.util.LinkedHashSet;
  *
  * @author yang.lu
  */
-public class NetUtil {
+public final class NetUtil {
+
+	private NetUtil(){}
 
 	/**
 	 * 获取本地主机IP地址字符串

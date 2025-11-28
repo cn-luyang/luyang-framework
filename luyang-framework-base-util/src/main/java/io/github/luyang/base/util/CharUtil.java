@@ -5,7 +5,9 @@ package io.github.luyang.base.util;
  *
  * @author yang.lu
  */
-public class CharUtil {
+public final class CharUtil {
 
+	private CharUtil() {
 
+	}
 }

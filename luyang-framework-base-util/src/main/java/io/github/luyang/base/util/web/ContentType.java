@@ -3,12 +3,6 @@ package io.github.luyang.base.util.web;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Content-Type 常量类
- *
- * @author yang.lu
- */
-
-/**
  * Content-Type 常量与工具类
  * 提供常用 MIME 类型常量及便捷方法，支持带字符集和不带字符集的类型。
  *

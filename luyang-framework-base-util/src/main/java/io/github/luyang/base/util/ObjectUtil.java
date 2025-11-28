@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @author yang.lu
  */
-public class ObjectUtil {
+public final class ObjectUtil {
 
 	private ObjectUtil() {
 	}

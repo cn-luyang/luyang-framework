@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * @author yang.lu
  */
-public class ArrayUtil {
+public final class ArrayUtil {
 
 	/**
 	 * 空字符串数组常量

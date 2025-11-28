@@ -5,7 +5,7 @@ package io.github.luyang.base.util;
  *
  * @author yang.lu
  */
-public class CookieUtil {
+public final class CookieUtil {
 
 	private CookieUtil() {}
 }

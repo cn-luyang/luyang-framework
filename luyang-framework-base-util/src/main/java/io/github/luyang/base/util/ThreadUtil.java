@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
  *
  * @author yang.lu
  */
-public class ThreadUtil {
+public final class ThreadUtil {
+
+	private ThreadUtil(){}
 
     /**
      * 在全局线程池中执行任务

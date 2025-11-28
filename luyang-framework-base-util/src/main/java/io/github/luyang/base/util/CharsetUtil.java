@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
  *
  * @author yang.lu
  */
-public class CharsetUtil {
+public final class CharsetUtil {
 
     /**
      * UTF-8 字符集常量

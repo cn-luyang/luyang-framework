@@ -11,11 +11,10 @@ import java.util.List;
  *
  * @author yang.lu
  */
-public class StrUtil implements StrPool {
+public final class StrUtil implements StrPool {
 
-//	private StrUtil() {
-//		throw new UnsupportedOperationException("StrUtil is a utility class and cannot be instantiated");
-//	}
+	private StrUtil() {
+	}
 
 	public static String str(CharSequence cs) {
 		return null == cs ? null : cs.toString();

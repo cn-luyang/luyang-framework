@@ -7,7 +7,9 @@ import java.io.Closeable;
  *
  * @author yang.lu
  */
-public class IoUtil {
+public final class IoUtil {
+
+	private IoUtil() {}
 
 	/**
 	 * 静默安全关闭资源，自动处理空值和异常

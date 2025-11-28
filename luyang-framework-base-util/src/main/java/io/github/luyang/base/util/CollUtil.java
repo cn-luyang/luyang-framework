@@ -8,7 +8,7 @@ import java.util.Iterator;
  *
  * @author yang.lu
  */
-public class CollUtil {
+public final class CollUtil {
 
 	private CollUtil() {
 	}
