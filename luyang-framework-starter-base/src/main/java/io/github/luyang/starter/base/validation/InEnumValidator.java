@@ -9,12 +9,12 @@ import jakarta.validation.ConstraintValidatorContext;
  *
  * @author yang.lu
  */
-public class IsEnumValidator implements ConstraintValidator<IsEnum, String> {
+public class InEnumValidator implements ConstraintValidator<InEnum, String> {
 
-	private IsEnum annotation;
+	private InEnum annotation;
 
 	@Override
-	public void initialize(IsEnum constraintAnnotation) {
+	public void initialize(InEnum constraintAnnotation) {
 		this.annotation = constraintAnnotation;
 	}
 
