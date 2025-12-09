@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.remote;
 
-import io.github.luyang.starter.base.common.model.Result;
+import io.github.luyang.starter.base.model.Result;
 import io.github.luyang.starter.security.remote.dto.TokenValidationResponse;
 
 /**

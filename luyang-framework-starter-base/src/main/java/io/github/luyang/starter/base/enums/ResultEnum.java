@@ -1,4 +1,4 @@
-package io.github.luyang.starter.base.common.enums;
+package io.github.luyang.starter.base.enums;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

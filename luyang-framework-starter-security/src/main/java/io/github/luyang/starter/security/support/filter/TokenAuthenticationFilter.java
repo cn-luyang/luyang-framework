@@ -2,8 +2,8 @@ package io.github.luyang.starter.security.support.filter;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
-import io.github.luyang.starter.base.common.model.Result;
-import io.github.luyang.starter.base.common.model.ResultOps;
+import io.github.luyang.starter.base.model.Result;
+import io.github.luyang.starter.base.model.ResultOps;
 import io.github.luyang.starter.security.common.enums.error.SecurityError;
 import io.github.luyang.starter.security.remote.AuthTokenRemoteService;
 import io.github.luyang.starter.security.remote.dto.TokenValidationResponse;

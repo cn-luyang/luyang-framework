@@ -1,6 +1,6 @@
 package io.github.luyang.starter.security.support.context;
 
-import io.github.luyang.starter.base.common.context.CurrentUserAccessor;
+import io.github.luyang.starter.base.context.CurrentUserAccessor;
 import io.github.luyang.starter.security.support.identity.AuthSubject;
 import io.github.luyang.starter.security.util.SecurityUtil;
 

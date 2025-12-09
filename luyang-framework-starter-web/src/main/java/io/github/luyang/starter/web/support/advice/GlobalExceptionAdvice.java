@@ -1,8 +1,8 @@
 package io.github.luyang.starter.web.support.advice;
 
-import io.github.luyang.starter.base.common.enums.ResultEnum;
-import io.github.luyang.starter.base.common.exception.BusinessException;
-import io.github.luyang.starter.base.common.model.Result;
+import io.github.luyang.starter.base.enums.ResultEnum;
+import io.github.luyang.starter.base.exception.BusinessException;
+import io.github.luyang.starter.base.model.Result;
 import io.github.luyang.starter.web.common.constant.error.WebError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;

@@ -1,10 +1,10 @@
-package io.github.luyang.starter.base.common.exception;
+package io.github.luyang.starter.base.exception;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
-import io.github.luyang.starter.base.common.enums.IBaseEnum;
+import io.github.luyang.starter.base.enums.IBaseEnum;
 
 import java.util.Collection;
 import java.util.Optional;

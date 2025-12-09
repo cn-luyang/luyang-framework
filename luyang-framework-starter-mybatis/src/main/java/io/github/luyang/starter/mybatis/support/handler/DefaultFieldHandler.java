@@ -1,7 +1,7 @@
 package io.github.luyang.starter.mybatis.support.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import io.github.luyang.starter.base.common.context.CurrentUserAccessor;
+import io.github.luyang.starter.base.context.CurrentUserAccessor;
 import io.github.luyang.starter.mybatis.common.model.BaseEntity;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.beans.factory.ObjectProvider;

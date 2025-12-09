@@ -1,6 +1,6 @@
 package io.github.luyang.starter.dict.controller;
 
-import io.github.luyang.starter.base.common.model.Result;
+import io.github.luyang.starter.base.model.Result;
 import io.github.luyang.starter.dict.model.Dict;
 import io.github.luyang.starter.dict.model.DictItem;
 import io.github.luyang.starter.dict.service.DictService;
