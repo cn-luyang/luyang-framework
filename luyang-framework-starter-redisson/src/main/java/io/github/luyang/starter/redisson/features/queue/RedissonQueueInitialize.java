@@ -1,7 +1,7 @@
 package io.github.luyang.starter.redisson.features.queue;
 
-import io.github.luyang.base.util.MapUtil;
-import io.github.luyang.base.util.text.StrPool;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.text.StrPool;
 import org.redisson.RedissonShutdownException;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
@@ -140,7 +140,7 @@ public class RedissonQueueInitialize implements ApplicationContextAware {
         public Thread newThread(Runnable runnable) {
             // 使用虚拟线程，为线程命名
             return Thread.ofVirtual()
-                .name(namePrefix + StrPool.DASH + threadNumber.getAndIncrement())
+                .name(namePrefix + StrPool.DASHED + threadNumber.getAndIncrement())
                 .unstarted(runnable);
         }
     }

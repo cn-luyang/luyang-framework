@@ -1,6 +1,6 @@
 package io.github.luyang.starter.redisson.support;
 
-import io.github.luyang.base.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 import org.redisson.api.NameMapper;
 
 import java.util.Optional;
@@ -37,7 +37,7 @@ public class RedissonNameMapper implements NameMapper {
     public String map(String name) {
         return Optional.ofNullable(name)
             .filter(StrUtil::isNotBlank)
-            .map(n -> StrUtil.startsWith(n, prefix) ? n : prefix + n)
+            .map(n -> StrUtil.startWith(n, prefix) ? n : prefix + n)
             .orElse(null);
     }
 
