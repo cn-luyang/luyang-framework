@@ -54,11 +54,11 @@ public record DefaultFieldHandler(
 			.ifPresent(accessor -> {
 				if (isInsert) {
 					setIfNull(entity::getCreatedBy, entity::setCreatedBy, accessor.getOperatorId());
-					setIfNull(entity::getCreateOit, entity::setCreateOit, accessor.getOit());
+//					setIfNull(entity::getCreateOit, entity::setCreateOit, accessor.getOit());
 				}
 
 				setIfNull(entity::getUpdatedBy, entity::setUpdatedBy, accessor.getOperatorId());
-				setIfNull(entity::getUpdatedOit, entity::setUpdatedOit, accessor.getOit());
+//				setIfNull(entity::getUpdatedOit, entity::setUpdatedOit, accessor.getOit());
 			});
 	}
 
