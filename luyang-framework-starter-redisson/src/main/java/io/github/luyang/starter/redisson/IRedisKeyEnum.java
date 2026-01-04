@@ -19,7 +19,7 @@ public interface IRedisKeyEnum extends Serializable {
 	/**
 	 * 获取过期时间
 	 */
-	Duration getExpireSeconds();
+	Duration getTtl();
 
 	/**
 	 * 获取业务描述
