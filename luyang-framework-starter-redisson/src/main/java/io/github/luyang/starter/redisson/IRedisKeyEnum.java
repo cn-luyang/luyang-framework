@@ -13,17 +13,17 @@ public interface IRedisKeyEnum extends Serializable {
 	/**
 	 * 获取 Key 前缀
 	 */
-	String prefix();
+	String getPrefix();
 
 	/**
 	 * 获取过期时间（单位：秒）
 	 */
-	long expireSeconds();
+	long getExpireSeconds();
 
 	/**
 	 * 获取业务描述
 	 */
-	String getDescription();
+	String getDesc();
 
 	/**
 	 * 构建完整的 Redis Key
@@ -33,15 +33,15 @@ public interface IRedisKeyEnum extends Serializable {
 	 */
 	default String buildKey(Object... args) {
 		if (null == args || args.length == 0) {
-			return prefix();
+			return getPrefix();
 		}
 
 		if (args.length == 1) {
-			return prefix() + ":" + args[0];
+			return getPrefix() + ":" + args[0];
 		}
 
 		StringJoiner joiner = new StringJoiner(":");
-		joiner.add(prefix());
+		joiner.add(getPrefix());
 		for (Object arg : args) {
 			joiner.add(String.valueOf(arg));
 		}
