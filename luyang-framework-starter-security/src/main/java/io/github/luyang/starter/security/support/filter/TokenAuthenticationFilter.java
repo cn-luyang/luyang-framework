@@ -7,8 +7,7 @@ import io.github.luyang.starter.base.model.ResultOps;
 import io.github.luyang.starter.security.common.enums.error.SecurityError;
 import io.github.luyang.starter.security.remote.AuthTokenRemoteService;
 import io.github.luyang.starter.security.remote.dto.TokenValidationResponse;
-import io.github.luyang.starter.security.support.identity.AuthSubject;
-import io.github.luyang.starter.security.support.identity.IdentityConverter;
+import io.github.luyang.starter.security.support.identity.Identity;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -30,8 +29,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Token 认证过滤器
@@ -44,7 +45,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	private final static Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 
 	/**
-	 * 远程Token验证服务
+	 * 远程 Token 验证服务
 	 */
 	private final AuthTokenRemoteService authTokenRemoteService;
 
@@ -73,14 +74,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		}
 
 		try {
-			// 验证Token有效性
+			// 验证 Token 有效性
 			TokenValidationResponse tokenValidationResponse = validateToken(token);
-			// 转换身份主体
-			AuthSubject authSubject = IdentityConverter.convert(tokenValidationResponse);
-			// 设置认证信息到Security上下文
-			setupSecurityContext(request, authSubject);
-			// 填充认证信息到请求属性
-			populateRequestAttributes(request, authSubject);
+			// 设置认证信息到 Security 上下文
+			setupSecurityContext(request, tokenValidationResponse);
 			// 继续过滤器链
 			chain.doFilter(request, response);
 		} catch (AuthenticationException e) {
@@ -106,7 +103,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 			.ifFailure(r -> new AuthenticationServiceException("令牌验证失败: " + r.getMessage()))
 			.getOrThrow(() -> new UsernameNotFoundException("未获取到Token验证信息"));
 
-		if (!tokenValidationResponse.valid()) {
+		if (!tokenValidationResponse.isValid()) {
 			throw new BadCredentialsException("令牌无效或已过期");
 		}
 
@@ -118,52 +115,21 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	 * 创建 Authentication 对象并设置到 SecurityContextHolder
 	 *
 	 * @param request     HTTP请求
-	 * @param authSubject 认证主体
 	 * @author yang.lu
 	 */
-	private void setupSecurityContext(HttpServletRequest request, AuthSubject authSubject) {
-		// 将 scopes 转换为 GrantedAuthority
-		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+	private void setupSecurityContext(HttpServletRequest request, TokenValidationResponse resp) {
+		Identity identity = resp.getIdentity();
 
-		// 添加 Scope 权限
-//		if (authSubject.scopes() != null) {
-//			authSubject.scopes().forEach(scope ->
-//				authorities.add(new SimpleGrantedAuthority("SCOPE_" + scope))
-//			);
-//		}
+		// 转换权限集合
+		List<SimpleGrantedAuthority> authorities = Optional.ofNullable(resp.getAuthorities())
+			.orElse(Collections.emptySet())
+			.stream()
+			.map(SimpleGrantedAuthority::new)
+			.collect(Collectors.toList());
 
-		// 添加功能权限
-//		if (authSubject.authorities() != null) {
-//			authSubject.authorities().forEach(role ->
-//				authorities.add(new SimpleGrantedAuthority("ROLE_" + role))
-//			);
-//		}
-
-		// 创建认证令牌（无凭证，无权限）
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-			authSubject, null, authorities
-		);
-		// 设置Web认证详情（IP地址、Session ID等）
+		var authenticationToken = new UsernamePasswordAuthenticationToken(identity, null, authorities);
 		authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-		// 设置认证信息到安全上下文
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-	}
-
-	/**
-	 * 填充认证信息到请求属性
-	 * 将用户信息设置到请求属性中供业务层使用
-	 *
-	 * @param request         HTTP请求
-	 * @param authSubject 认证主体
-	 * @author yang.lu
-	 */
-	private void populateRequestAttributes(HttpServletRequest request, AuthSubject authSubject) {
-		// 根据主体类型设置特定属性
-//		if (authSubject.isUser()) {
-//			request.setAttribute(BaseConstant.ATTR_USER_ID, authSubject.getId());
-//		} else if (authSubject.isClient()) {
-//			request.setAttribute(BaseConstant.ATTR_CLIENT_ID, authSubject.getId());
-//		}
 	}
 
 	/**

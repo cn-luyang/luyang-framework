@@ -1,6 +1,7 @@
 package io.github.luyang.starter.redisson;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.StringJoiner;
 
 /**
@@ -16,9 +17,9 @@ public interface IRedisKeyEnum extends Serializable {
 	String getPrefix();
 
 	/**
-	 * 获取过期时间（单位：秒）
+	 * 获取过期时间
 	 */
-	long getExpireSeconds();
+	Duration getExpireSeconds();
 
 	/**
 	 * 获取业务描述
