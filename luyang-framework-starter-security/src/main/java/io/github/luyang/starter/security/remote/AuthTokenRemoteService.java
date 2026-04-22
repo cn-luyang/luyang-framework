@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author yang.lu
  */
-@FeignClient(name = "/platform-uaa")
+@FeignClient(name = "platform-uaa")
 public interface AuthTokenRemoteService {
 
 	/**

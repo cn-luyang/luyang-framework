@@ -5,6 +5,7 @@ import io.github.luyang.starter.security.support.context.SecurityCurrentUserAcce
 import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
 import io.github.luyang.starter.security.support.handler.AuthenticationHandler;
 import io.github.luyang.starter.security.support.handler.AuthorizationHandler;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @author yang.lu
  */
 @Configuration
+@EnableFeignClients(clients = AuthTokenRemoteService.class)
 public class SecurityBeanConfig {
 
     /**
