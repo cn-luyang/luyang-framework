@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.github.luyang.starter.base.util.jackson.databind.TimeModule;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -81,7 +80,7 @@ public class JacksonAutoConfig {
         builder.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         // 配置 Java 8 日期时间模块
-        builder.modulesToInstall(JavaTimeModule.class);
+        builder.modulesToInstall(TimeModule.class);
     }
 
     /**
