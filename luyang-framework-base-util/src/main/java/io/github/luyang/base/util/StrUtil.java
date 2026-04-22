@@ -6,6 +6,7 @@ import io.github.luyang.base.util.text.StrPool;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 字符串工具类
@@ -67,7 +68,16 @@ public final class StrUtil implements StrPool {
 	 * @author yang.lu
 	 */
 	public static boolean isBlank(CharSequence cs) {
-		return length(cs) == 0 || cs.chars().allMatch(Character::isWhitespace);
+		int length;
+		if (cs == null || (length = cs.length()) == 0) {
+			return true;
+		}
+		for (int i = 0; i < length; i++) {
+			if (!Character.isWhitespace(cs.charAt(i))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -798,5 +808,66 @@ public final class StrUtil implements StrPool {
 			}
 		}
 		return sb.toString();
+	}
+
+	public static void trim(String[] strs) {
+		if (null == strs) {
+			return;
+		}
+
+		for (int i = 0; i < strs.length; i++) {
+			String s = strs[i];
+			if (s != null) {
+				strs[i] = trim(s);
+			}
+		}
+	}
+
+	public static String trim(CharSequence str) {
+		return trim(str, 0);
+	}
+
+	public static String trim(CharSequence str, int mode) {
+		return trim(str, mode, CharUtil::isBlankChar);
+	}
+
+	public static String trim(CharSequence str, int mode, Predicate<Character> predicate) {
+		if (str == null) return null;
+
+		int len = str.length();
+		int start = 0;
+		int end = len;
+
+		// 扫描头部 (Left Trim)
+		if (mode <= 0) {
+			while (start < end && predicate.test(str.charAt(start))) {
+				start++;
+			}
+		}
+
+		// 扫描尾部 (Right Trim)
+		if (mode >= 0) {
+			while (end > start && predicate.test(str.charAt(end - 1))) {
+				end--;
+			}
+		}
+
+		// 结果输出优化
+		if (start == 0 && end == len) {
+			return str instanceof String s ? s : str.toString();
+		}
+
+		// 只有在真正截取时才调用 toString().substring()
+		return str.toString().substring(start, end);
+	}
+
+	public static boolean isWrap(CharSequence str, String prefix, String suffix) {
+		if (ArrayUtil.hasNull(str, prefix, suffix)) {
+			return false;
+		}
+
+		return str.length() >= prefix.length() + suffix.length()
+			&& startsWith(str, prefix)
+			&& endsWith(str, suffix);
 	}
 }

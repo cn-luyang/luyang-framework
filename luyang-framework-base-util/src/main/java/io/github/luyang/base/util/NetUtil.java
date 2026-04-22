@@ -10,6 +10,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 
 /**
  * 网络相关工具
@@ -27,8 +28,9 @@ public final class NetUtil {
 	 * @author yang.lu
 	 */
 	public static String getLocalhostStr() {
-		InetAddress localhost = getLocalhost();
-		return localhost != null ? localhost.getHostAddress() : null;
+		return Optional.ofNullable(getLocalhost())
+			.map(InetAddress::getHostAddress)
+			.orElse(null);
 	}
 
 	/**
@@ -38,12 +40,14 @@ public final class NetUtil {
 	 * @author yang.lu
 	 */
 	public static String getLocalHostName() {
-		InetAddress localhost = getLocalhost();
-		return localhost != null ? localhost.getHostName() : null;
+		return Optional.ofNullable(getLocalhost())
+			.map(InetAddress::getHostName)
+			.orElse(null);
 	}
 
 	/**
-	 * 获取最优的本地网络地址，优先选择非回环、IPv4、非站点本地的地址。
+	 * 获取最优的本地网络地址
+	 * 优先级：非回环 -> IPv4 -> 公网地址(非SiteLocal) -> 私网地址(SiteLocal)
 	 *
 	 * @return 本地网络地址，获取失败返回 null
 	 * @author yang.lu
@@ -109,10 +113,6 @@ public final class NetUtil {
 			networkInterfaces = NetworkInterface.getNetworkInterfaces();
 		} catch (SocketException e) {
 			throw new UtilException(e, "获取网络接口列表失败");
-		}
-
-		if (networkInterfaces == null) {
-			throw new UtilException("网络接口列表为空");
 		}
 
 		final LinkedHashSet<InetAddress> ipSet = new LinkedHashSet<>();

@@ -1,6 +1,6 @@
 package io.github.luyang.starter.base.validation;
 
-import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.base.util.jackson.JsonUtil;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -23,7 +23,7 @@ public class IsJsonValidator implements ConstraintValidator<IsJson, String> {
 	public boolean isValid(String jsonStr, ConstraintValidatorContext constraintValidatorContext) {
 
 		// 允许为空且值为null 则放行
-		if (annotation.allowEmpty() && CharSequenceUtil.isBlank(jsonStr)) {
+		if (annotation.allowEmpty() && StrUtil.isBlank(jsonStr)) {
 			return true;
 		}
 

@@ -4,10 +4,10 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import io.github.luyang.starter.base.model.Result;
 import io.github.luyang.starter.base.model.ResultOps;
+import io.github.luyang.starter.security.UserIdentity;
 import io.github.luyang.starter.security.common.enums.error.SecurityError;
 import io.github.luyang.starter.security.remote.AuthTokenRemoteService;
 import io.github.luyang.starter.security.remote.dto.TokenValidationResponse;
-import io.github.luyang.starter.security.support.identity.Identity;
 import io.github.luyang.starter.security.util.SecurityUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,7 +21,6 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -30,9 +29,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Token 认证过滤器
@@ -118,16 +114,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	 * @author yang.lu
 	 */
 	private void setupSecurityContext(HttpServletRequest request, TokenValidationResponse resp) {
-		Identity identity = resp.getIdentity();
 
-		// 转换权限集合
-		List<SimpleGrantedAuthority> authorities = Optional.ofNullable(resp.getAuthorities())
-			.orElse(Collections.emptySet())
-			.stream()
-			.map(SimpleGrantedAuthority::new)
-			.collect(Collectors.toList());
+		UserIdentity userIdentity = new UserIdentity();
+		userIdentity.setUserId(resp.getUserId());
+		userIdentity.setCnName(resp.getCnName());
+		userIdentity.setAccessTokenExpiresTime(resp.getAccessTokenExpiresTime());
 
-		var authenticationToken = new UsernamePasswordAuthenticationToken(identity, null, authorities);
+		var authenticationToken = new UsernamePasswordAuthenticationToken(userIdentity, null, Collections.emptyList());
 		authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 	}

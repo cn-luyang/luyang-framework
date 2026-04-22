@@ -51,6 +51,28 @@ public final class ArrayUtil {
 	}
 
 	/**
+	 * 检查数组中是否包含 null 元素
+	 *
+	 * @param <T>   数组元素类型
+	 * @param array 待检查的数组
+	 * @return 如果包含 null 元素或数组本身为 null 返回 true
+	 * @author yang.lu
+	 */
+	@SafeVarargs
+	public static <T> boolean hasNull(T... array) {
+		if (array == null) {
+			return true;
+		}
+
+		for (T element : array) {
+			if (null == element) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * 将数组转换为字符串表示形式
 	 *
 	 * @param obj 数组对象
@@ -63,15 +85,16 @@ public final class ArrayUtil {
 		}
 
 		return switch (obj) {
-			case long[] array -> Arrays.toString(array);
-			case int[] array -> Arrays.toString(array);
-			case short[] array -> Arrays.toString(array);
-			case char[] array -> Arrays.toString(array);
-			case byte[] array -> Arrays.toString(array);
-			case boolean[] array -> Arrays.toString(array);
-			case float[] array -> Arrays.toString(array);
-			case double[] array -> Arrays.toString(array);
-			case Object[] array -> Arrays.deepToString(array);
+			case long[] a -> Arrays.toString(a);
+			case int[] a -> Arrays.toString(a);
+			case short[] a -> Arrays.toString(a);
+			case char[] a -> Arrays.toString(a);
+			case byte[] a -> Arrays.toString(a);
+			case boolean[] a -> Arrays.toString(a);
+			case float[] a -> Arrays.toString(a);
+			case double[] a -> Arrays.toString(a);
+			case Object[] a -> Arrays.deepToString(a);
+			case String s -> s;
 			default -> obj.toString();
 		};
 	}

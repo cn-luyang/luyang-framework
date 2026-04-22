@@ -1,6 +1,5 @@
 package io.github.luyang.starter.base.exception;
 
-import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.base.enums.IBaseEnum;
 import io.github.luyang.starter.base.enums.ResultEnum;
@@ -21,7 +20,7 @@ public class BusinessException extends RuntimeException {
 	private Object[] args;
 
 	private BusinessException(String code, String message, Object[] args, Object data, Throwable cause) {
-		super(CharSequenceUtil.format(message, args), cause);
+		super(StrUtil.format(message, args), cause);
 		this.code = StrUtil.blankToDefault(code, ResultEnum.FAILURE.getCode());
 		this.args = args;
 		this.data = data;

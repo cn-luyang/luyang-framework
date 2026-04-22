@@ -1,9 +1,9 @@
 package io.github.luyang.starter.base.exception;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.luyang.starter.base.enums.IBaseEnum;
 
 import java.util.Collection;
@@ -103,7 +103,7 @@ public interface ExceptionAssert<T> extends IBaseEnum<T> {
 	 * @author yang.lu
 	 */
 	default void notBlank(String str, String... args) {
-		doThrow(CharSequenceUtil.isBlank(str), () -> fail(args));
+		doThrow(StrUtil.isBlank(str), () -> fail(args));
 	}
 
 	/**

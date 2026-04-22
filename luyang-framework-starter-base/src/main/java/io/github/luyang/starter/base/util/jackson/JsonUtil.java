@@ -3,7 +3,6 @@ package io.github.luyang.starter.base.util.jackson;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
@@ -14,6 +13,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.github.luyang.starter.base.util.SpringUtil;
 import io.github.luyang.starter.base.util.jackson.databind.TimeModule;
 import lombok.experimental.UtilityClass;
 import org.slf4j.Logger;
@@ -172,11 +172,11 @@ public class JsonUtil {
 	 * @author yang.lu
 	 */
 	public static boolean isJson(String text) {
-		if (CharSequenceUtil.isBlank(text)) {
+		if (StrUtil.isBlank(text)) {
 			return false;
 		}
 
-		String str = CharSequenceUtil.trim(text);
+		String str = StrUtil.trim(text);
 		return CharSequenceUtil.isWrap(str, '{', '}')
 			|| CharSequenceUtil.isWrap(str, '[', ']');
 	}

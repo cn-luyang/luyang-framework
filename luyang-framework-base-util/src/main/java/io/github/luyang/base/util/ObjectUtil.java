@@ -76,6 +76,18 @@ public final class ObjectUtil {
 	}
 
 	/**
+	 * 是否存在{@code null}对象，通过{@link ObjectUtil#isNull(Object)} 判断元素
+	 *
+	 * @param objs 被检查对象
+	 * @return 是否存在
+	 * @see ArrayUtil#hasNull(Object[])
+	 * @since 5.5.3
+	 */
+	public static boolean hasNull(Object... objs) {
+		return ArrayUtil.hasNull(objs);
+	}
+
+	/**
 	 * 将对象转换为字符串，如果为 null 返回空字符串。
 	 *
 	 * @param obj 对象
