@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>luyang-framework-starter-base</artifactId>
-    <name>luyang-framework-starter-base</name>
+    <name>Luyang Framework Starter Base</name>
 
     <dependencies>
         <dependency>

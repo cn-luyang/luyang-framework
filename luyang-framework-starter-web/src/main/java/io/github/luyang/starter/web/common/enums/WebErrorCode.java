@@ -1,4 +1,4 @@
-package io.github.luyang.starter.web.common.constant.error;
+package io.github.luyang.starter.web.common.enums;
 
 import io.github.luyang.starter.base.enums.IBaseEnum;
 import lombok.AccessLevel;
@@ -12,7 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public enum WebError implements IBaseEnum<String> {
+public enum WebErrorCode implements IBaseEnum<String> {
 
     BAD_REQUEST("400", "请求参数错误"),
     NOT_FOUND("404", "资源不存在"),

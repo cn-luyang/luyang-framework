@@ -57,7 +57,7 @@
     <properties>
         <skipTests>true</skipTests>
         <java.version>21</java.version>
-        <revision>2026.04.24.01</revision>
+        <revision>2026.04.24.02</revision>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -77,7 +77,7 @@
         <module>dependencies</module>
         <module>luyang-framework-base-util</module>
         <module>luyang-framework-starter-base</module>
-        <!--<module>luyang-framework-starter-demo</module>-->
+<!--        <module>luyang-framework-starter-demo</module>-->
         <module>luyang-framework-starter-dict</module>
         <module>luyang-framework-starter-dubbo</module>
         <module>luyang-framework-starter-feign</module>

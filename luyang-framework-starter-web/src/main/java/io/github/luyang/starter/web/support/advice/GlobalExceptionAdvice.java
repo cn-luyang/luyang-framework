@@ -3,7 +3,7 @@ package io.github.luyang.starter.web.support.advice;
 import io.github.luyang.starter.base.enums.ResultEnum;
 import io.github.luyang.starter.base.exception.BusinessException;
 import io.github.luyang.starter.base.model.Result;
-import io.github.luyang.starter.web.common.constant.error.WebError;
+import io.github.luyang.starter.web.common.enums.WebErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class GlobalExceptionAdvice {
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	public Result<?> handleError(MissingServletRequestParameterException e) {
 		String message = String.format("参数缺失: %s", e.getParameterName());
-		return Result.failure(WebError.BAD_REQUEST, message);
+		return Result.failure(WebErrorCode.BAD_REQUEST, message);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class GlobalExceptionAdvice {
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public Result<?> handleError(MethodArgumentTypeMismatchException e) {
 		String message = String.format("参数类型错误: %s", e.getName());
-		return Result.failure(WebError.BAD_REQUEST, message);
+		return Result.failure(WebErrorCode.BAD_REQUEST, message);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class GlobalExceptionAdvice {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Result<?> handleError(MethodArgumentNotValidException e) {
 		String message = this.handleError(e.getBindingResult());
-		return Result.failure(WebError.BAD_REQUEST, message);
+		return Result.failure(WebErrorCode.BAD_REQUEST, message);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class GlobalExceptionAdvice {
 	 */
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public Result<?> handleError(NoHandlerFoundException e) {
-		return Result.failure(WebError.NOT_FOUND, String.format("请求的资源不存在或已删除: %s", e.getRequestURL()));
+		return Result.failure(WebErrorCode.NOT_FOUND, String.format("请求的资源不存在或已删除: %s", e.getRequestURL()));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class GlobalExceptionAdvice {
 	 */
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public Result<?> handleError(HttpMessageNotReadableException e) {
-		return Result.failure(WebError.BAD_REQUEST, String.format("无法解析请求体: %s", e.getMessage()));
+		return Result.failure(WebErrorCode.BAD_REQUEST, String.format("无法解析请求体: %s", e.getMessage()));
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class GlobalExceptionAdvice {
 	 */
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public Result<?> handleError(HttpRequestMethodNotSupportedException e) {
-		return Result.failure(WebError.METHOD_NOT_ALLOWED, String.format("请求方法不被允许或不适用于请求的资源: %s", e.getMessage()));
+		return Result.failure(WebErrorCode.METHOD_NOT_ALLOWED, String.format("请求方法不被允许或不适用于请求的资源: %s", e.getMessage()));
 	}
 
 	/**
