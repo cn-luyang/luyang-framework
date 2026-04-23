@@ -14,11 +14,12 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum SecurityError implements IBaseEnum<String> {
 
-    VALIDATE_EXCEPTION_ACCESS_TOKEN("validate_exception_access_token", "访问令牌验证异常"),
-    MISSING_ACCESS_TOKEN("missing_access_token", "缺失访问令牌"),
-    EXPIRED_ACCESS_TOKEN("expired_access_token", "访问令牌已过期"),
-    PERMISSION_DENIED("permission_denied", "权限不足"),
-    ;
+	TOKEN_INVALID("token_invalid", "Token无效"),
+	TOKEN_MISSING("token_missing", "Token缺失"),
+	TOKEN_EXPIRED("token_expired", "Token已过期"),
+	TOKEN_AUTHENTICATION_FAILED("authentication_failed", "Token认证失败"),
+	PERMISSION_DENIED("permission_denied", "无权限访问"),
+	AUTH_SERVICE_UNAVAILABLE("auth_service_unavailable", "认证中心服务忙，请稍后再试");
 
     private final String code;
     private final String message;

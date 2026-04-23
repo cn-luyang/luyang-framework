@@ -1,17 +1,16 @@
-package io.github.luyang.starter.security.remote;
+package io.github.luyang.starter.security.support.remote;
 
 import io.github.luyang.starter.base.model.Result;
-import io.github.luyang.starter.security.remote.dto.TokenValidationResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * 认证令牌远程服务
+ * 认证远程服务
  *
  * @author yang.lu
  */
 @FeignClient(name = "platform-uaa")
-public interface AuthTokenRemoteService {
+public interface RemoteAuthClient {
 
 	/**
 	 * 校验访问令牌
@@ -23,3 +22,4 @@ public interface AuthTokenRemoteService {
 	@GetMapping("/auth/check")
 	Result<TokenValidationResponse> validateToken(String token);
 }
+

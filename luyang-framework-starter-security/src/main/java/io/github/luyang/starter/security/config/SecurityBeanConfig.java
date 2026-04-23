@@ -1,10 +1,9 @@
 package io.github.luyang.starter.security.config;
 
-import io.github.luyang.starter.security.remote.AuthTokenRemoteService;
-import io.github.luyang.starter.security.support.context.SecurityCurrentUserAccessor;
 import io.github.luyang.starter.security.support.filter.TokenAuthenticationFilter;
 import io.github.luyang.starter.security.support.handler.AuthenticationHandler;
 import io.github.luyang.starter.security.support.handler.AuthorizationHandler;
+import io.github.luyang.starter.security.support.remote.RemoteAuthClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @author yang.lu
  */
 @Configuration
-@EnableFeignClients(clients = AuthTokenRemoteService.class)
+@EnableFeignClients(clients = RemoteAuthClient.class)
 public class SecurityBeanConfig {
 
     /**
@@ -79,18 +78,7 @@ public class SecurityBeanConfig {
      * @author yang.lu
      */
     @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter(AuthTokenRemoteService authTokenRemoteService) {
-        return new TokenAuthenticationFilter(authTokenRemoteService);
+    public TokenAuthenticationFilter tokenAuthenticationFilter(RemoteAuthClient remoteAuthClient) {
+        return new TokenAuthenticationFilter(remoteAuthClient);
     }
-
-	/**
-	 * 配置Token认证过滤器
-	 *
-	 * @return TokenAuthenticationFilter 实例
-	 * @author yang.lu
-	 */
-	@Bean
-	public SecurityCurrentUserAccessor securityCurrentUserAccessor() {
-		return new SecurityCurrentUserAccessor();
-	}
 }

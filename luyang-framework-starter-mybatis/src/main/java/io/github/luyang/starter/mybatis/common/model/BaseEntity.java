@@ -25,18 +25,12 @@ public class BaseEntity implements Serializable {
     /** 创建人 */
     private String createdBy;
 
-	/** 创建人身份类型 ("USER" 或 "CLIENT") */
-//	private String createOit;
-
     /** 创建时间 */
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdTime;
 
     /** 最后更新人 */
     private String updatedBy;
-
-	/** 最后更新人身份类型 ("USER" 或 "CLIENT") */
-//	private String updatedOit;
 
     /** 更新时间 */
     @TableField(fill = FieldFill.INSERT_UPDATE)

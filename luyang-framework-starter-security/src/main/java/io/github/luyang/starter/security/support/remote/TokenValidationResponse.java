@@ -1,4 +1,4 @@
-package io.github.luyang.starter.security.remote.dto;
+package io.github.luyang.starter.security.support.remote;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class TokenValidationResponse implements Serializable{
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	private boolean valid;
+	private boolean expired;
 	private String userId;
 	private String cnName;
 	private LocalDateTime accessTokenExpiresTime;

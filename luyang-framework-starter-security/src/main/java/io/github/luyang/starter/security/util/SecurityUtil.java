@@ -1,10 +1,11 @@
 package io.github.luyang.starter.security.util;
 
 import cn.hutool.core.util.StrUtil;
+import io.github.luyang.starter.base.constant.BaseConstant;
 import io.github.luyang.starter.security.UserIdentity;
-import io.github.luyang.starter.security.common.constant.SecurityConstant;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -30,8 +31,8 @@ public class SecurityUtil {
 	public static String extractToken(HttpServletRequest request) {
 
 		String token = StrUtil.blankToDefault(
-			request.getHeader(SecurityConstant.X_ACCESS_TOKEN),
-			request.getParameter(SecurityConstant.X_ACCESS_TOKEN)
+			request.getHeader(HttpHeaders.AUTHORIZATION),
+			request.getParameter(BaseConstant.ACCESS_TOKEN_PARAM)
 		);
 
 		return StrUtil.isNotBlank(token) ? StrUtil.removePrefix(token, "Bearer ") : null;

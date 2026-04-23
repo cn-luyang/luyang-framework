@@ -5,12 +5,18 @@ package io.github.luyang.starter.base.constant;
  */
 public interface BaseConstant {
 
-    /** HttpServletRequest 中存储用户ID的属性名 */
-    String ATTR_USER_ID = "auth.user-id";
+	/**
+	 * 用于在 HTTP 请求头（Header）中传递访问令牌的字段名
+	 */
+//	String AUTHORIZATION_HEADER = "Authorization";
 
-    /** HttpServletRequest 中存储客户端ID的属性名 */
-    String ATTR_CLIENT_ID = "auth.client-id";
+	/**
+	 * 用于在 URL 查询参数（Query Parameter）中传递刷新令牌的字段名
+	 */
+	String ACCESS_TOKEN_PARAM = "token";
 
-    /** HttpServletRequest 中存储当前登录主体类型的属性名 */
-    String ATTR_PRINCIPAL_TYPE = "auth.principal-type";
+	/**
+	 * 用户ID的字段名
+	 */
+	String USER_ID = "userId";
 }
