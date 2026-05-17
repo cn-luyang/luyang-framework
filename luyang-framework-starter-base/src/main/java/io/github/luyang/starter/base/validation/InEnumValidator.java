@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 /**
- * 有效枚举验证器
+ * {@link InEnum} 注解的验证器实现
  *
  * @author yang.lu
  */
@@ -27,9 +27,13 @@ public class InEnumValidator implements ConstraintValidator<InEnum, String> {
 		}
 
 		IBaseEnum<?>[] enumConstants = annotation.value().getEnumConstants();
-		for (IBaseEnum<?> iEnum : enumConstants) {
-			if (iEnum.equals(val)) {
-				return true;
+		if (null != enumConstants) {
+			for (IBaseEnum<?> iEnum : enumConstants) {
+				if (null != iEnum && null != iEnum.getCode()) {
+					if (iEnum.equals(val)) {
+						return true;
+					}
+				}
 			}
 		}
 

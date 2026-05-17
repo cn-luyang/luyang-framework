@@ -10,7 +10,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 包含固定值校验注解
+ * 固定字符串值包含校验注解
+ * 用于验证属性值是否在给定的字符串明细列表中，@InValues(values = {"PC", "APP", "MINI"}, message = "终端类型不正确")
  *
  * @author yang.lu
  */

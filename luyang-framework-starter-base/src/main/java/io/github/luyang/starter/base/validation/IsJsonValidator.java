@@ -12,19 +12,19 @@ import jakarta.validation.ConstraintValidatorContext;
  */
 public class IsJsonValidator implements ConstraintValidator<IsJson, String> {
 
-	private IsJson annotation;
+	private boolean allowEmpty;
 
 	@Override
 	public void initialize(IsJson constraintAnnotation) {
-		this.annotation = constraintAnnotation;
+		this.allowEmpty = constraintAnnotation.allowEmpty();
 	}
 
 	@Override
 	public boolean isValid(String jsonStr, ConstraintValidatorContext constraintValidatorContext) {
 
 		// 允许为空且值为null 则放行
-		if (annotation.allowEmpty() && StrUtil.isBlank(jsonStr)) {
-			return true;
+		if (StrUtil.isBlank(jsonStr)) {
+			return allowEmpty;
 		}
 
 		return JsonUtil.isJson(jsonStr);

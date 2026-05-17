@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 /**
- * 固定值包含验证器
+ * {@link InValues} 注解的验证器实现
  *
  * @author yang.lu
  */
