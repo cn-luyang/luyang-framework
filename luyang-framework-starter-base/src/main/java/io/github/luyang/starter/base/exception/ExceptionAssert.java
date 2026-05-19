@@ -25,8 +25,12 @@ public interface ExceptionAssert<T> extends IBaseEnum<T> {
 	 * @return BusinessException 实例
 	 * @author yang.lu
 	 */
-	default BusinessException fail(String... args) {
+	private BusinessException fail(String... args) {
 		return BusinessException.of(this, args);
+	}
+
+	default void exception(String... args) {
+		throw fail(args);
 	}
 
 	/**
