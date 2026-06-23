@@ -57,7 +57,7 @@ public record RedissonHelper(RedissonClient redissonClient) {
 	 * @param value    值
 	 * @param duration 过期时间
 	 * @return 异步操作结果
-	 * @author wangjixin
+	 * @author yang.lu
 	 */
 	public RFuture<Void> setStringAsync(String key, Object value, Duration duration) {
 		RBucket<Object> bucket = redissonClient.getBucket(key);

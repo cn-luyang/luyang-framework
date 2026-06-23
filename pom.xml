@@ -143,6 +143,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <encoding>UTF-8</encoding>
                     <!-- 单独进程编译 -->
                     <fork>true</fork>
                     <!-- 源码版本 -->

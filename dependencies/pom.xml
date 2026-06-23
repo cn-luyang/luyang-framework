@@ -60,7 +60,7 @@
         <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
 
         <!-- SpringBoot SpringCloud SpringCloudAlibaba 版本 https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.511d1d28E6mG9S -->
-        <spring-boot-dependencies.version>3.5.0</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>4.1.0</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2025.0.0</spring-cloud-dependencies.version>
         <!-- Nacos官网 https://nacos.io/?spm=5238cd80.5e8a737d.0.0.3e5d7e84StoDVK -->
         <spring-cloud-alibaba-dependencies.version>2023.0.3.3</spring-cloud-alibaba-dependencies.version>
